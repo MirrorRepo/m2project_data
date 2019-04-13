@@ -1,0 +1,26 @@
+step 1: https://accounts.zoho.com/developerconsole
+add domain , client name and call back url
+
+Client ID: 1000.L7V8Z6NZL6TK22840XI7DPF1KJEK6N
+Client Secret: d65741a9c586dc7f8e8a71a072b8e46817d9178324
+
+----------------------------------------------------------------------------------------------------------------------------------------
+step 2:
+Browser method to call access token
+https://accounts.zoho.com/apiauthtoken/nb/create?SCOPE=ZohoCRM.modules.ALL,ZohoCRM.settings.all&EMAIL_ID=kushagra@relfor.com&PASSWORD=Relfor1!
+Response: AUTHTOKEN=6db03b3fc6cdda75ca81da3e5e2c6f02
+RESULT=TRUE
+
+----------------------------------------------------------------------------------------------------------------------------------------
+step 3:
+
+http://127.0.0.1/magento2.2/auth/login	
+----------------------------------------------------------------------------------------------------------------------------------------
+max_input_vars
+----------------------------------------------------------------------------------------------------------------------------------------
+created custom  field in zoho ->zoho login crm->go to to module->edit form ->add field (is_seller)
+
+is_seller get save when admin approve to seller.
+----------------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------

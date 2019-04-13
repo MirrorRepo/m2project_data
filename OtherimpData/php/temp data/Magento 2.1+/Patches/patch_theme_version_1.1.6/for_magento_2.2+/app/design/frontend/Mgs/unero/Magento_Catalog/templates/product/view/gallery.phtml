@@ -1,0 +1,272 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ * @overwirte $block \MGS\Mpanel\Block\Catalog\Product\View
+ */
+?>
+
+<?php $themeHelper = $this->helper('MGS\Mpanel\Helper\Data'); ?>
+<?php $_product = $block->getProduct(); ?>
+<?php $galleryImages = $block->getGalleryImages() ?>
+
+<?php // Image 360 ?>
+<?php $rotateImage = $_product->getData('mgs_j360') ?>
+<?php $rotateImages = [] ?>
+<?php if($rotateImage): ?>
+	<?php $rotateImages = $themeHelper->getRotateImages($_product->getId()) ?>
+<?php endif ?>
+
+<div class="product-info-media">
+    <div class="product media">
+        <?php if(count($galleryImages) > 1): ?>
+            <div class="vertical-gallery vertical-thumbnail">
+                <div id="vertical-thumbnail-wrapper" class="parent__gallery-thumbnail">
+                    <div id="vertical-thumbnail" class="product-gallery-carousel gallery-thumbnail slick-thumbnail">
+                        <?php $i = 0; foreach($galleryImages as $image): ?>
+                            <?php $lbImage = $image->getLabel() ? $image->getLabel() : $image->getLabelDefault(); ?>
+                            <div class="image-item item-thumb<?php if($i == 0): ?> active<?php endif ?><?php if($image->getMediaType() == 'external-video'): ?> video-gallery-button<?php endif ?>" data-owl="<?php echo $i ?>">
+                                <img class="img-responsive" src="<?php echo $image->getSmallImageUrl(); ?>" alt="<?php echo $lbImage ?>"/>
+                                <?php if($image->getMediaType() == 'external-video'): ?>
+                                    <a target="_blank" class="popup-youtube" href="<?php echo $image->getVideoUrl(); ?>"></a>
+                                <?php endif ?>
+                            </div>
+                            <?php $i++; ?>
+                        <?php endforeach ?>
+                    </div>
+                </div>
+                <div class="product-main-media-product">
+                    <div id="owl-carousel-gallery" class="product-gallery-base-carousel owl-carousel gallery-vertical">
+                        <?php foreach($galleryImages as $image): ?>
+                            <?php $lbImage = $image->getLabel() ? $image->getLabel() : $image->getLabelDefault(); ?>
+                            <div class="product item-image">
+                                <?php if($image->getMediaType() != 'external-video'): ?>
+                                    <a class="lb" href="<?php echo $image->getImageZoom(); ?>"><img class="img-responsive" src="<?php echo $image->getLargeImageUrl(); ?>" alt="<?php echo $lbImage ?>"/></a>
+                                <?php else: ?>
+                                    <a class="lb video-link" href="<?php echo $image->getVideoUrl(); ?>"><img class="img-responsive" src="<?php echo $image->getLargeImageUrl(); ?>" alt="<?php echo $lbImage ?>"/></a>
+                                <?php endif ?>
+                            </div>
+                        <?php endforeach ?>
+                    </div>
+                </div>
+            </div>
+        <?php elseif(count($galleryImages) == 1): ?>
+            <?php foreach($galleryImages as $image): ?>
+                <?php $lbImage = $image->getLabel() ? $image->getLabel() : $image->getLabelDefault(); ?>
+                <div class="product single-image item-image base-image">
+                    <?php if($image->getMediaType() != 'external-video'): ?>
+                        <a class="lb" href="<?php echo $image->getImageZoom(); ?>"><img class="img-responsive" src="<?php echo $image->getLargeImageUrl(); ?>" alt="<?php echo $lbImage ?>"/></a>
+                    <?php else: ?>
+                        <a class="lb video-link" href="<?php echo $image->getVideoUrl(); ?>"><img class="img-responsive" src="<?php echo $image->getLargeImageUrl(); ?>" alt="<?php echo $lbImage ?>"/></a>
+                    <?php endif ?>
+                </div>
+            <?php endforeach ?>
+        <?php else: ?>
+            <?php // Product no image ?>
+            <?php $_imagehelper = $this->helper('Magento\Catalog\Helper\Image'); ?>
+            <?php $noImage = $_imagehelper->init($_product, 'product_page_image_large')->getUrl() ?>
+            <div class="product item-image base-image">
+                <img class="img-responsive" src="<?php echo $noImage; ?>" alt=""/>
+            </div>
+        <?php endif ?>
+    </div>
+    <?php if($rotateImage && (count($rotateImages)>0)): ?>
+        <a class="rotate-image" href="#" onclick="rotate360(); return false"></a>
+    <?php endif ?>
+</div>
+<?php // Image 360 ?>
+<?php if($rotateImage && (count($rotateImages)>0)): ?>
+    <script type="text/javascript">
+        function rotate360(){
+            require([
+                'jquery',
+                "mage/translate",
+                'rotateImage'
+            ], function ($) {
+                $.ajax({
+                    url: '<?php echo $this->getUrl('mpanel/index/rotate') ?>',
+                    data: ('&product=<?php echo $_product->getId() ?>'),
+                    type: 'get',
+                    dataType: 'json',
+                    cache: true,
+                    showLoader: true
+                }).done(function (response) {
+                    $('.loading-mask').append(response.html);
+                    $('.loading-mask').addClass('j360-container');
+                    setTimeout(initImageRotate, 1);
+                    
+                }).fail(function (error) {
+                    alert($.mage.__('Sorry, something went wrong. Please try again later.'));
+                });
+            });
+        }
+        
+        function initImageRotate(){
+            require([
+                'jquery',
+                "mage/translate",
+                'rotateImage'
+            ], function ($) {
+                $('.loading-mask').show();
+                $('#mgs_j360').j360();
+            });
+        }
+        
+        function closeRotateContainer(){
+            require([
+                'jquery',
+                "mage/translate",
+                'rotateImage'
+            ], function ($) {
+                $('.rotate-image-container').remove();
+                $('.loading-mask').removeClass('j360-container');
+                $('.loading-mask').hide();
+                $('.preload_img').parent().remove();
+            });
+        }
+    </script>
+<?php endif ?>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'magnificPopup'
+    ], function(jQuery){
+        (function($) {
+            $(document).ready(function() {
+                $('.popup-youtube, .popup-vimeo, .popup-gmaps, .video-link').magnificPopup({
+                    type: 'iframe',
+                    preloader: false,
+                    mainClass: 'mfp-img-gallery',
+                    fixedContentPos: true
+                });
+                $('.product.media').magnificPopup({
+                    delegate: '.imgzoom .lb',
+                    type: 'image',
+                    tLoading: 'Loading image #%curr%...',
+                    mainClass: 'mfp-img-gallery',
+                    fixedContentPos: true,
+                    gallery: {
+                        enabled: true,
+                        navigateByImgClick: true,
+                        preload: [0,1]
+                    },
+                    iframe: {
+                        markup: '<div class="mfp-iframe-scaler">'+
+                                '<div class="mfp-close"></div>'+
+                                '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+                                '<div class="mfp-bottom-bar">'+
+                                  '<div class="mfp-title"></div>'+
+                                  '<div class="mfp-counter"></div>'+
+                                '</div>'+
+                                '</div>'
+                    },
+                    image: {
+                        tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    },
+                    callbacks: {
+                        elementParse: function(item) {
+                            if(item.el.context.className == 'lb video-link') {
+                                item.type = 'iframe';
+                            } else {
+                                item.type = 'image';
+                            }
+                        }
+                    }
+                });
+            });
+        })(jQuery);
+    });
+</script>
+<script type="text/javascript">
+    require([ 'jquery', 'mgs/slick', 'mgs/owlcarousel' ], function ($) {
+        
+        $('#owl-carousel-gallery').on('initialized.owl.carousel', function(event) {
+            var hs = $('#owl-carousel-gallery').height();
+            $('.product.media').height(hs);
+        });
+        
+        $('#owl-carousel-gallery').owlCarousel({
+            items: 1,
+            autoplay: false,
+            lazyLoad: false,
+            nav: true,
+            dots: false,
+            navText: ["<i class='pe-7s-angle-left'></i>","<i class='pe-7s-angle-right'></i>"],
+            rtl: RTL
+        });
+    
+        $('#vertical-thumbnail').slick({
+            dots: false,
+            arrows: true,
+            vertical: true,
+            slidesToShow: 5,
+            slidesToScroll: 5,
+            verticalSwiping: true,
+            prevArrow: '<span class="pe-7s-angle-up"></span>',
+            nextArrow: '<span class="pe-7s-angle-down"></span>',
+            responsive: [
+                {
+                    breakpoint: 1199,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 991,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 360,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+        
+        $('#owl-carousel-gallery').on('changed.owl.carousel', function(event) {
+            var index = event.item.index;
+            $('#vertical-thumbnail .item-thumb').removeClass('active');
+            $('#vertical-thumbnail .item-thumb[data-owl='+index+']').addClass('active');
+            var wdw = $(window).width();
+            var ci = <?php echo count($galleryImages); ?>;
+            if(wdw >= 1199 && ci > 3) {
+                $('#vertical-thumbnail').slick('slickGoTo', index);
+            }else if(wdw < 1199 && wdw >= 768 && ci > 2){
+                $('#vertical-thumbnail').slick('slickGoTo', index);
+            }else if(wdw < 768 && wdw >= 600 && ci > 3){
+                $('#vertical-thumbnail').slick('slickGoTo', index);
+            }else if(wdw < 768 && wdw >= 600 && ci > 2){
+                $('#vertical-thumbnail').slick('slickGoTo', index);
+            }else if(wdw < 360){
+                $('#vertical-thumbnail').slick('slickGoTo', index);
+            }
+        });
+        
+        $('#owl-carousel-gallery').on('resized.owl.carousel', function(event) {
+            var hs = $('#owl-carousel-gallery').height();
+            $('.product.media').height(hs);
+        });
+        
+        $('#vertical-thumbnail .item-thumb').click(function(){
+            $('#vertical-thumbnail .item-thumb').removeClass('active');
+            var position = $(this).attr('data-owl');
+            $('#owl-carousel-gallery').trigger('to.owl.carousel', position);
+            $(this).addClass('active');
+        });
+    });
+</script>

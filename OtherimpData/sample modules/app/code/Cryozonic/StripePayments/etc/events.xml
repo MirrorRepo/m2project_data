@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright © Cryozonic Ltd. All rights reserved.
+ *
+ * @package    Cryozonic_StripePayments
+ * @copyright  Copyright © Cryozonic Ltd (http://cryozonic.com)
+ * @license    Commercial (See http://cryozonic.com/licenses/stripe.html for details)
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="payment_method_assign_data">
+        <observer name="cryozonic_stripe_data_assign" instance="Cryozonic\StripePayments\Observer\DataAssignObserver" />
+    </event>
+    <event name="sales_order_place_after">
+        <observer name="cryozonic_stripe_place_order" instance="Cryozonic\StripePayments\Observer\OrderObserver" />
+    </event>
+
+    <!-- Webhooks -->
+    <event name="cryozonic_stripe_webhook_source_chargeable_three_d_secure">
+        <observer name="cryozonic_stripe_webhook_source_chargeable_three_d_secure_observer"
+            instance="Cryozonic\StripePayments\Observer\WebhooksObserver" />
+    </event>
+    <event name="cryozonic_stripe_webhook_source_canceled_three_d_secure">
+        <observer name="cryozonic_stripe_webhook_source_canceled_three_d_secure_observer"
+            instance="Cryozonic\StripePayments\Observer\WebhooksObserver" />
+    </event>
+    <event name="cryozonic_stripe_webhook_source_failed_three_d_secure">
+        <observer name="cryozonic_stripe_webhook_source_failed_three_d_secure_observer"
+            instance="Cryozonic\StripePayments\Observer\WebhooksObserver" />
+    </event>
+    <event name="cryozonic_stripe_webhook_charge_failed_three_d_secure">
+        <observer name="cryozonic_stripe_webhook_charge_failed_three_d_secure_observer"
+            instance="Cryozonic\StripePayments\Observer\WebhooksObserver" />
+    </event>
+    <event name="cryozonic_stripe_webhook_charge_refunded_card">
+        <observer name="cryozonic_stripe_webhook_charge_refunded_card_observer"
+            instance="Cryozonic\StripePayments\Observer\WebhooksObserver" />
+    </event>
+</config>

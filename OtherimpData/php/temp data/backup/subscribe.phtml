@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $helper = $this->helper('MGS\Mpanel\Helper\Data') ?>
+<?php $canUsePanel = $helper->acceptToUsePanel() ?>
+<?php $footerAboveText = $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('above_input_box_footer')->setCanUsePanel($canUsePanel)->toHtml();?>
+<?php $footerBelowText = $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('below_input_box_footer')->setCanUsePanel($canUsePanel)->toHtml();?>
+<div class="block newsletter">
+    <div class="content">
+    <ul class="list-unstyled">
+              <li style="margin-top: 5px;"><?php echo $footerAboveText;?></li>
+                  </ul>
+        <form class="form subscribe"
+            novalidate
+            action="<?php /* @escapeNotVerified */ echo $block->getFormActionUrl() ?>"
+            method="post"
+            data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+            id="newsletter-validate-detail">
+            <div class="field form-group newsletter">
+                <div class="control">
+                    <input name="email" type="email" id="newsletter"
+                                placeholder="<?php /* @escapeNotVerified */ echo __('Enter your email address') ?>"
+                                data-validate="{required:true, 'validate-email':true}"/>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="action subscribe" title="<?php /* @escapeNotVerified */ echo __('Subscribe') ?>" type="submit">
+                    <span class="fa fa-long-arrow-right"></span>
+                </button>
+            </div>
+        </form>
+
+  <ul class="list-unstyled" style="clear: both; padding-top: 5px;">
+              <li style="margin-top: 5px;"><?php echo $footerBelowText;?></li>
+                  </ul>
+    </div>
+</div>

@@ -1,0 +1,297 @@
+<install>
+	<static_block>
+		<item>
+			<title>Header free ship</title>
+			<identifier>header_free_ship</identifier>
+			<content><![CDATA[<p><span>Free Shipping On The World For All Orders Over $99!</span></p>]]></content>
+		</item>
+		<item>
+			<title>Default Custom Sidebar Block</title>
+			<identifier>mpanel_default_sidebar_block</identifier>
+			<content><![CDATA[<div><img class="img-responsive" style="min-width: 100%;" src="{{media url="wysiwyg/sidebar.jpg"}}" alt="" /></div>]]></content>
+		</item>
+		<item>
+			<title>Default Footer About Us</title>
+			<identifier>footer_about_us</identifier>
+			<content><![CDATA[<p style="margin-bottom: 20px;"><img class="img-responsive logo-footer" src="{{media url="wysiwyg/magento-logo.png"}}" alt="" /></p>
+<p>Nulla facilisi. Aliquam dictum in as tempor libero, ac iaculis arcu accumsan at eros vel nibh.</p>
+<p>Integer ultricies a mattis. Etiam venenatis lorem in purus susci pit, id blandit dignissim. Sem at purus ultrices vehicula.</p>]]></content>
+		</item>
+		<item>
+			<title>Default Footer Link Customer Services</title>
+			<identifier>footer_links_block</identifier>
+			<content><![CDATA[<h4 class="title">Customer Services</h4>
+<ul class="links">
+<li><a href="#">Help &amp; Contact</a></li>
+<li><a href="#">Shipping &amp; Taxes</a></li>
+<li><a href="#">Return Policy</a></li>
+<li><a href="#">Careers</a></li>
+<li><a href="#">Affiliates</a></li>
+<li><a href="#">Legal Notice</a></li>
+</ul>]]></content>
+		</item>
+		<item>
+			<title>Default Footer Link Information</title>
+			<identifier>footer_links_block3</identifier>
+			<content><![CDATA[<h4 class="title">Information</h4>
+<ul class="links">
+<li><a href="#">About Us</a></li>
+<li><a href="#">Our History</a></li>
+<li><a href="#">Our Stories</a></li>
+<li><a href="#">Hot Line</a></li>
+<li><a href="#">Delivery Information</a></li>
+<li><a href="#">Terms &amp; Conditions</a></li>
+</ul>]]></content>
+		</item>
+		<item>
+			<title>Default Footer Link My Account</title>
+			<identifier>footer_links_block2</identifier>
+			<content><![CDATA[<h4 class="title">My Account</h4>
+<ul class="links">
+<li><a href="#">My Account</a></li>
+<li><a href="#">Personal Information</a></li>
+<li><a href="#">Addresses</a></li>
+<li><a href="#">Discount</a></li>
+<li><a href="#">Order History</a></li>
+<li><a href="#">Your Vouchers</a></li>
+</ul>]]></content>
+		</item>
+		<item>
+			<title>Footer Services</title>
+			<identifier>footer_services</identifier>
+			<content><![CDATA[<ul class="block">
+<li><a href="#">Policy</a></li>
+<li><a href="#">Term &amp; Conditions</a></li>
+<li><a href="#">Help</a></li>
+</ul>]]></content>
+		</item>
+		<item>
+			<title>Footer 1 Logo</title>
+			<identifier>footer_logo</identifier>
+			<content><![CDATA[<div><img src="{{media url="wysiwyg/logo.png"}}" alt="" /></div>]]></content>
+		</item>
+		<item>
+			<title>Footer Information</title>
+			<identifier>footer_information</identifier>
+			<content><![CDATA[<ul class="block">
+<li><a href="#">FAQs</a></li>
+<li><a href="#">Career</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">Contact</a></li>
+</ul>]]></content>
+		</item>
+		<item>
+			<title>Mpanel Product Detail Static Block Top</title>
+			<identifier>mpanel_product_detail_top_block</identifier>
+			<content><![CDATA[<div class="h4">Custom Static Block Top</div>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>]]></content>
+		</item>
+		<item>
+			<title>Static Block On Product Detail Tab</title>
+			<identifier>product_detail_tab</identifier>
+			<content><![CDATA[<div class="text-center"><img src="{{media url="wysiwyg/care-icon.png"}}" alt="" />
+<p class="margin-top20">LT01: 70% wool, 15% polyester, 10% polyamide, 5% acrylic 900 Grms/mt</p>
+</div>]]></content>
+		</item>
+		<item>
+			<title>Unero Contact Page Custom Block</title>
+			<identifier>contact_page_custom_block</identifier>
+			<content><![CDATA[<div class="breadcrumbs">
+<div class="page-title-wrapper">
+<h1 class="page-header"><span>We&rsquo;d love to hear from you.</span></h1>
+</div>
+</div>
+<div class="text-center padding-top70">If you need any help, please contact us or send us an email or go to our forum. We are sure that<br /> you can receive our reply as soon as possible.</div>
+<div class="row margin-top60 margin-bottom30 padding-bottom60">
+<div class="col-sm-4 col-xs-12 margin-bottom30">
+<div class="contact-box-wrapper">
+<div class="icon"><span class="fa fa-phone">&nbsp;</span></div>
+<div class="title">Phone</div>
+<div class="content">
+<p>Phone 01: (0091) 8547 632521<br /> Phone 02: (084) 965 4788</p>
+</div>
+</div>
+</div>
+<div class="col-sm-4 col-xs-12 margin-bottom30">
+<div class="contact-box-wrapper">
+<div class="icon"><span class="fa fa-map-marker">&nbsp;</span></div>
+<div class="title">Address</div>
+<div class="content">
+<p>69 Halsey St, New York, Ny 10002,<br /> United States.</p>
+</div>
+</div>
+</div>
+<div class="col-sm-4 col-xs-12 margin-bottom30">
+<div class="contact-box-wrapper">
+<div class="icon"><span class="fa fa-envelope">&nbsp;</span></div>
+<div class="title">Email</div>
+<div class="content">
+<p>support.center@unero.co<br /> hello@unero.co</p>
+</div>
+</div>
+</div>
+</div>]]></content>
+		</item>
+		<item>
+			<title>Unero Footer 1 Menu Bottom</title>
+			<identifier>footer_bottom_menu</identifier>
+			<content><![CDATA[<ul class="menu">
+<li><a href="http://demo2.drfuri.com/unero/privacy-policy/">Policy</a></li>
+<li><a href="http://demo2.drfuri.com/unero/term-conditions/">Term &amp; Conditions</a></li>
+<li><a href="http://demo2.drfuri.com/unero/faq/">Help</a></li>
+</ul>]]></content>
+		</item>
+		<item>
+			<title>Unero Footer Newsletter</title>
+			<identifier>footer_newsletter</identifier>
+			<content><![CDATA[<div>{{block class="Magento\\Newsletter\\Block\\Subscribe" template="Magento_Newsletter::subscribe.phtml"}}</div>]]></content>
+		</item>
+		<item>
+			<title>Unero Footer Social Link</title>
+			<identifier>footer_social_link</identifier>
+			<content><![CDATA[<div class="socials"><a href="#" target="_blank"><i class="fa fa-facebook">&nbsp;</i></a><a href="#" target="_blank"><i class="fa fa-twitter">&nbsp;</i></a><a href="#" target="_blank"><i class="fa fa-google-plus">&nbsp;</i></a></div>]]></content>
+		</item>
+		<item>
+			<title>Unero Header Contact Us</title>
+			<identifier>header_contact_us</identifier>
+			<content><![CDATA[<div class="contact-us">
+<h4>Contact Us</h4>
+<ul class="list-icon">
+<li>184 Main Rd E, St Albans VIC 3021, Australia</li>
+<li><a href="mailto:contact@company.com">contact@company.com</a></li>
+<li><a href="tel:+0012233456">+001 2233 456</a></li>
+</ul>
+</div>]]></content>
+		</item>
+		<item>
+			<title>Unero Header Social Link</title>
+			<identifier>header_social_link</identifier>
+			<content><![CDATA[<div class="socials">
+<h4>Follow Us On Social</h4>
+<a href="#" target="_blank"><i class="fa fa-facebook">&nbsp;</i></a><a href="#" target="_blank"><i class="fa fa-twitter">&nbsp;</i></a><a href="#" target="_blank"><i class="fa fa-google-plus">&nbsp;</i></a> <a href="#" target="_blank"><i class="fa fa-youtube-play">&nbsp;</i></a><a href="#" target="_blank"><i class="fa fa-instagram">&nbsp;</i></a></div>]]></content>
+		</item>
+		<item>
+			<title>Unero Instagram On Product Detail</title>
+			<identifier>mpanel_product_detail_bottom_block</identifier>
+			<content><![CDATA[<div style="margin-top: 100px;">{{block class="MGS\Social\Block\Panel\Widget" mgs_panel_title="See It Styled On Instagram" mgs_panel_note="" limit="12" resolution="low_resolution" link="1" perrow="6" use_slider="1" like="1" comment="1" autoplay="1" stop_auto="1" navigation="1" pagination="0" number_row="1" template="widget/instagram.phtml"}}</div>]]></content>
+		</item>
+    </static_block>
+	
+	<cms_page>
+		<item>
+			<title>Unero 404 Not Found</title>
+			<identifier>unero-no-route</identifier>
+			<content_heading><![CDATA[Whoops, our bad...]]></content_heading>
+			<page_layout>1column</page_layout>
+			<content><![CDATA[<div class="page-content text-center col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+<h3 class="page-title"><span class="pe-7s-plug">&nbsp;</span> ohh! page not found</h3>
+<p>It seems we can't find what you're looking for. Perhaps searching can help or go back to <a href="{{store url=""}}">Homepage</a></p>
+<div>{{block class="Magento\Framework\View\Element\Template" name="search.no.advanced" template="Magento_Search::form.no.advance.phtml"}}</div>
+</div>]]></content>
+		</item>
+		<item>
+			<title>Unero Sale Off</title>
+			<identifier>unero-sale-off</identifier>
+			<content_heading><![CDATA[Sale Off]]></content_heading>
+			<page_layout>1column</page_layout>
+			<content><![CDATA[<div>{{block class="MGS\Mpanel\Block\Products\Saleoff" template="products/saleoff.phtml"}}</div>]]></content>
+		</item>
+		<item>
+			<title>Unero About us</title>
+			<identifier>unero-about-us</identifier>
+			<content_heading><![CDATA[About us]]></content_heading>
+			<page_layout>1column</page_layout>
+			<content><![CDATA[<div class="about-us">
+<h2 class="title">We Create Artworks, Concepts, Interiors &amp; Brand Design</h2>
+<div><img class="img-responsive" src="{{media url="wysiwyg/about-us-1.jpg"}}" alt="about-us" /></div>
+<div class="block-text">
+<div>
+<h3>Services</h3>
+<h4>It was a big, round room with a high arched roof, and the walls and ceiling and floor were covered with large emeralds set closely together.</h4>
+<p>In a word, the whale was seized and sold, and his Grace the Duke of Wellington received the money. Thinking that viewed in some particular lights, the case might by a bare possibility in some small degree be deemed, under the circumstances, a rather hard one, an honest clergyman of the town addressed a note to his Grace.</p>
+<table class="table">
+<tbody>
+<tr>
+<td>Art Direction</td>
+<td>Information architecture</td>
+<td>SEO</td>
+</tr>
+<tr>
+<td>Branding &amp; Identity</td>
+<td>User interphase design ( UI )</td>
+<td>PPC/SEM</td>
+</tr>
+<tr>
+<td>Digital Marketing</td>
+<td>User Experience Design (UX)</td>
+<td>Web Analytics</td>
+</tr>
+<tr>
+<td>Project Management</td>
+<td>Usability analysis</td>
+<td>Online Marketing</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>Our Office</h3>
+<p>It was shaped like a chair and sparkled with gems, as did everything else. In the center of the chair was an enormous Head, without a body to support it or any arms or legs whatever.</p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-12 margin-bottom30"><img class="img-responsive" src="{{media url="wysiwyg/about-us-2.jpg"}}" alt="about-us" /></div>
+<div class="col-md-6 col-sm-6 col-xs-12 margin-bottom30"><img class="img-responsive" src="{{media url="wysiwyg/about-us-3.jpg"}}" alt="about-us" /></div>
+<div class="col-md-12 col-sm-12 col-xs-12"><img class="img-responsive" src="{{media url="wysiwyg/about-us-4.jpg"}}" alt="about-us" /></div>
+</div>
+<div class="block-text">
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-12">
+<h4>Melbourne</h4>
+<ul>
+<li>258 New Design St, VIC 10000, Austria</li>
+<li><a href="#">+0900 8618 3725 69</a></li>
+<li><a href="#">hello@unero.co</a></li>
+</ul>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+<h4>Newyork</h4>
+<ul>
+<li>3rd Floor, 692 Orchard St, NY 10000, Newyork</li>
+<li><a href="#">+04200 4739 6899 6880</a></li>
+<li><a href="#">office@unero.co</a></li>
+</ul>
+</div>
+</div>
+<div>
+<h3>We Love Our Clients</h3>
+<p>It was shaped like a chair and sparkled with gems, as did everything else. In the center of the chair was an enormous Head, without a body to support it or any arms or legs whatever.</p>
+</div>
+</div>
+<div class="container">{{block class="MGS\Brand\Block\Widget\Home" mgs_panel_title="" mgs_panel_note="" limit="10" perrow="5" use_slider="1" brand_by="all" template="widget/home.phtml" autoplay="0" stop_auto="0" navigation="0" pagination="0"}}</div>
+</div>]]></content>
+		</item>
+    </cms_page>
+	<theme_setting>
+		<general>
+			<width>width1200</width>
+			<layout>wide</layout>
+			<header>header_2</header>
+			<footer>footer_1</footer>
+			<sticky_menu>1</sticky_menu>
+			<back_to_top>1</back_to_top>
+		</general>
+		<fonts>
+			<default_font><![CDATA[Poppins]]></default_font>
+			<h1><![CDATA[Poppins]]></h1>
+			<h2><![CDATA[Poppins]]></h2>
+			<h3><![CDATA[Poppins]]></h3>
+			<h4><![CDATA[Poppins]]></h4>
+			<h5><![CDATA[Poppins]]></h5>
+			<h6><![CDATA[Poppins]]></h6>
+			<price><![CDATA[Poppins]]></price>
+			<menu><![CDATA[Poppins]]></menu>
+			<btn><![CDATA[Poppins]]></btn>
+		</fonts>
+	</theme_setting>
+</install>

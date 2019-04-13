@@ -1,0 +1,73 @@
+
+<style type="text/css">
+	
+	.agency-area-of-operation  .control .input{ width: 100% }
+</style>
+<?php 
+$allAoo = $block->getSelectedAoo();
+$allAooExplode = explode(",",$allAoo);
+
+?>
+
+<form class="form agency-area-of-operation" action="<?php echo $this->getUrl('marketplace/agency/operationsave/'); ?>" method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off">
+    <?php /* @noEscape */ echo $block->getBlockHtml('formkey'); ?>
+    
+<div class="field agency address">
+      
+        <div class="control">
+
+            <input type="checkbox" 
+               <?php if(in_array('Western Cape', $allAooExplode)){
+                 echo 'checked';
+                }?>
+                 name="age_area_of_pro[]" id="wc" value="Western Cape"/><label for="wc">Western Cape</label>
+            <br>
+            <input type="checkbox" <?php if(in_array('Eastern Cape', $allAooExplode)){
+                 echo 'checked';
+                }?>
+                name="age_area_of_pro[]" id="ec" value="Eastern Cape"/><label for="ec">Eastern Cape</label>
+            <br>
+            <input type="checkbox" <?php if(in_array('Northern Cape', $allAooExplode)){
+                 echo 'checked';
+                }?>
+                name="age_area_of_pro[]" id="nc" value="Northern Cape"/><label for="nc">Northern Cape</label>
+            <br>
+            <input type="checkbox" <?php if(in_array('North West', $allAooExplode)){
+                 echo 'checked';
+                }?>
+                name="age_area_of_pro[]" id="nw" value="North West"/><label for="nw">North West</label>
+            <br>
+            <input type="checkbox" <?php if(in_array('WFree State', $allAooExplode)){
+                 echo 'checked';
+                }?>
+                name="age_area_of_pro[]" id="fs" value="Free State"/><label for="fs">Free State</label>
+            <br>
+            <input type="checkbox" <?php if(in_array('KwaZulu-Natal', $allAooExplode)){
+                 echo 'checked';
+                }?>
+                name="age_area_of_pro[]" id="kn" value="KwaZulu-Natal"/><label for="kn">KwaZulu-Natal</label>
+            <br>
+            <input type="checkbox" <?php if(in_array('Gauteng', $allAooExplode)){
+                 echo 'checked';
+                }?>
+                name="age_area_of_pro[]" id="ga" value="Gauteng"/><label for="ga">Gauteng</label>
+            <br>
+            <input type="checkbox" <?php if(in_array('Limpopo', $allAooExplode)){
+                 echo 'checked';
+                }?>
+                name="age_area_of_pro[]" id="im" value="Limpopo"/><label for="im">Limpopo</label>
+            <br>
+            <input type="checkbox" <?php if(in_array('Mpumalanga', $allAooExplode)){
+                 echo 'checked';
+                }?>
+                name="age_area_of_pro[]" id="mp" value="Mpumalanga"/><label for="mp">Mpumal</label>anga</label>
+
+
+        </div>
+
+        <div class="primary" style="margin-top:20px;">
+            <button type="submit" class="action submit primary" title="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('Submit')) ?>"><span><?php echo $block->escapeHtml(__('Submit')) ?></span></button>
+        </div>
+       
+    </div>
+</form>

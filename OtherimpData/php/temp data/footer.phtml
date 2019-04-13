@@ -1,0 +1,342 @@
+<style type="text/css">
+.products-grid .product-item-details .product-detail-content {
+    padding-top: 206px !important;
+}
+.products-grid .product-item{margin-bottom: 12px !important;}
+.footer4  .block{font-size: 14px;line-height:23px;}
+.footer4  .row h5{line-height:24px;}
+#footer-accordion #eNewsForm1.form-block{padding: 0px;}
+#footer-accordion #eNewsForm1.form-block fieldset {
+    margin-top: 5px;
+}.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}.form-block .form-block-group {
+    overflow: hidden;
+}#footer-accordion form.validate input[type="text"] {
+    border: 1px solid #000000;
+}
+@media (max-width: 991px)
+.footer footer4 {
+    margin-top:48px !important; position: inherit !important;
+}
+
+.product-info-main-content .product-info-main .product-data-items-menu {
+    display: table;
+    margin: 0px 0px 1px 0px !important;
+    padding-top: 24px !important;
+}
+
+.product-info-main-content .product-info-main .product-data-items-menu .data.item.title {
+    padding: 0 22px 13px 0px !important;
+    display: table-cell;
+    vertical-align: middle;
+}
+.product-info-main .product-social-links .sharethis-inline-share-buttons{ float: none !important }
+.product-detail-infomation .product.info.detailed{margin-top: 64px !important;}
+
+
+</style>
+<?php $helper = $this->helper('MGS\Mpanel\Helper\Data') ?>
+<?php $canUsePanel = $helper->acceptToUsePanel() ?>
+<?php $footer = $helper->getStoreConfig('mgstheme/general/footer') ?>
+<?php $ftParallax = $helper->getStoreConfig('mgstheme/general/footer_parallax') ?>
+
+<?php $logo = $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_logo')->setCanUsePanel($canUsePanel)->toHtml();?>
+<?php $newletter = $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_newsletter')->setCanUsePanel($canUsePanel)->toHtml();?>
+<?php $social = $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_social_link')->setCanUsePanel($canUsePanel)->toHtml();?>
+<?php $services = $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_services')->setCanUsePanel($canUsePanel)->toHtml();?>
+<?php $information = $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_information')->setCanUsePanel($canUsePanel)->toHtml();?>
+
+<?php $footerThird = $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footerThird')->setCanUsePanel($canUsePanel)->toHtml();?>
+
+<?php $menu = $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_bottom_menu')->setCanUsePanel($canUsePanel)->toHtml();?>
+<?php $copyright = '<address>'.$block->getCopyright().'</address>';?>
+
+
+
+<?php if($footer == 'footer' || $footer == 'footer_1'): ?>
+	<div class="footer-container">
+		<div class="middle-footer">
+			<div class="container">
+				<div class="row">
+					<div class="cl-md-ft col-md-4 col-sm-12 col-xs-12 logo">
+						<?php echo $logo ?>
+					</div>
+					<div class="cl-md-ft col-md-5 col-sm-12 col-xs-12 col-right">
+						<?php echo $newletter ?>
+					</div>
+					<div class="cl-md-ft col-md-3 col-sm-12 col-xs-12">
+						<?php echo $social ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom-footer">
+			<div class="container">
+				<div class="footer-separator"></div>
+				<div class="row">
+					<div class="col-md-6 col-xs-12 footer-copyright">
+						<?php echo $copyright ?>
+					</div>
+					<div class="col-md-6 col-xs-12">
+						<?php echo $menu ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif;?>
+<?php if($footer == 'footer_2'): ?>
+	<div class="footer-container">
+		<div class="middle-footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-3 col-sm-12 col-xs-12 logo">
+						<h5><?php echo "LIVE BY VERVE"; ?></h5>
+						<?php echo $services ?>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-12 copyright">
+					<h5><?php echo "CUSTOMER SERVICE"; ?></h5>
+						<?php echo $information; ?>
+					</div>
+					<div class="col-md-3 col-sm-4 col-xs-12">
+					<h5><?php echo "INFORMATION"; ?></h5>
+						<?php echo $footerThird; ?>
+					</div>
+
+					<div class="col-md-4 col-sm-12 col-xs-12">
+					<h5><?php echo "CONTACT US"; ?></h5>
+							<?php echo $newletter ?>
+							<?php echo $social ?>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div class="bottom-footer">
+			<div class="container">
+				<div class="footer-separator"></div>
+				<div class="row">
+					<div class="col-md-6 col-xs-12 footer-copyright">
+						<?php echo $copyright ?>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif;?>
+<?php if($footer == 'footer_3'): ?>
+	<div class="footer-container">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<?php echo $services ?>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12 logo">
+					<?php echo $logo ?>
+					<?php echo $copyright ?>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12 block-socials">
+					<?php echo __('Follow Us On Social') ?>
+					<?php echo $social ?>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif;?>
+<?php if($footer == 'footer_4'): ?>
+
+
+<div>
+		<div class="middle-footer" style="padding-top:  48px !important">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-3 col-sm-12 col-xs-12 logo">
+						<h5><?php echo "LIVE BY VERVE"; ?></h5>
+						<?php echo $services ?>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-12 copyright">
+					<h5><?php echo "CUSTOMER SERVICE"; ?></h5>
+						<?php echo $information; ?>
+					</div>
+					<div class="col-md-3 col-sm-4 col-xs-12">
+					<h5><?php echo "INFORMATION"; ?></h5>
+						<?php echo $footerThird; ?>
+					</div>
+
+					<div class="col-md-4 col-sm-12 col-xs-12">
+					<h5><?php echo "CONTACT US"; ?></h5>
+							<?php echo $newletter ?>
+							<?php echo $social ?>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div class="bottom-footer">
+			<div class="container">
+				<div class="footer-separator"></div>
+				<div class="row">
+					<div class="col-md-6 col-xs-12 footer-copyright" style="text-align: left">
+						<?php echo $copyright ?>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div class="footer-container">
+		<div class="container">
+			<div><p class="title"><?php echo __('Follow us on Social')?></p><?php echo $social?></div>
+			<div><?php echo $copyright ?></div>
+		</div>
+	</div> -->
+<?php endif;?>
+<?php if($footer == 'footer_5'): ?>
+	<div class="footer-container">
+		<div class="containerfluid">
+			<div class="row">
+				<div class="col-md-2 col-sm-12 col-xs-12 logo">
+					<?php echo $logo ?>
+				</div>
+				<div class="col-md-5 col-sm-12 col-xs-12 copyright">
+					<?php echo $copyright ?>
+				</div>
+				<div class="col-md-5 col-sm-12 col-xs-12 text-right">
+					<?php echo $social ?>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>
+
+
+
+<?php /*if($footer == 'footer' || $footer == 'footer_1'): ?>
+	<div class="footer-container">
+		<div class="middle-footer">
+			<div class="container">
+				<div class="row">
+					<div class="cl-md-ft col-md-4 col-sm-12 col-xs-12 logo">
+						<?php echo $logo ?>
+					</div>
+					<div class="cl-md-ft col-md-5 col-sm-12 col-xs-12 col-right">
+						<?php echo $newletter ?>
+					</div>
+					<div class="cl-md-ft col-md-3 col-sm-12 col-xs-12">
+						<?php echo $social ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom-footer">
+			<div class="container">
+				<div class="footer-separator"></div>
+				<div class="row">
+					<div class="col-md-6 col-xs-12 footer-copyright">
+						<?php echo $copyright ?>
+					</div>
+					<div class="col-md-6 col-xs-12">
+						<?php echo $menu ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif;?>
+<?php if($footer == 'footer_2'): ?>
+	<div class="footer-container">
+		<div class="middle-footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-2 col-sm-12 col-xs-12 logo">
+						<?php echo $logo ?>
+					</div>
+					<div class="col-md-3 col-sm-4 col-xs-12 copyright">
+						<?php echo $copyright ?>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-12">
+						<?php echo $services ?>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-12">
+						<?php echo $information ?>
+					</div>
+					<div class="col-md-3 col-sm-12 col-xs-12 block-socials">
+						<?php echo __('Follow Us On Social') ?>
+						<?php echo $social ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif;?>
+<?php if($footer == 'footer_3'): ?>
+	<div class="footer-container">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<?php echo $services ?>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12 logo">
+					<?php echo $logo ?>
+					<?php echo $copyright ?>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12 block-socials">
+					<?php echo __('Follow Us On Social') ?>
+					<?php echo $social ?>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif;?>
+<?php if($footer == 'footer_4'): ?>
+	<div class="footer-container">
+		<div class="container">
+			<div><p class="title"><?php echo __('Follow us on Social')?></p><?php echo $social?></div>
+			<div><?php echo $copyright ?></div>
+		</div>
+	</div>
+<?php endif;?>
+<?php if($footer == 'footer_5'): ?>
+	<div class="footer-container">
+		<div class="containerfluid">
+			<div class="row">
+				<div class="col-md-2 col-sm-12 col-xs-12 logo">
+					<?php echo $logo ?>
+				</div>
+				<div class="col-md-5 col-sm-12 col-xs-12 copyright">
+					<?php echo $copyright ?>
+				</div>
+				<div class="col-md-5 col-sm-12 col-xs-12 text-right">
+					<?php echo $social ?>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif; */?>
+
+<?php 	if($ftParallax): ?>
+    <script type="text/javascript">
+        require([
+            'jquery'
+        ], function(jQuery){
+            (function($) {
+                jQuery(document).ready(function(){
+                    var footerHeight = jQuery('footer').height();
+                    jQuery('body').css('padding-bottom', footerHeight);
+                });
+                jQuery(window).resize(function(){
+                    var footerHeight = jQuery('footer').height();
+                    jQuery('body').css('padding-bottom', footerHeight);
+                });
+            })(jQuery);
+        });
+    </script>
+<?php endif ?>

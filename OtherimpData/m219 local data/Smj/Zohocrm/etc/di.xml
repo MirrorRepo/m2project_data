@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * Copyright © 2015 Smj. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ *
+ * Smj_Zohocrm extension
+ * NOTICE OF LICENSE
+ *
+ * @category  Smj
+ * @package   Smj_Zohocrm
+ * @author Mukund
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Smj\Zohocrm\Model\ResourceModel\Map\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">smj_zohocrm_map</argument>
+            <argument name="resourceModel" xsi:type="string">Smj\Zohocrm\Model\ResourceModel\Map</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Smj\Zohocrm\Model\ResourceModel\Report\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">smj_zohocrm_report</argument>
+            <argument name="resourceModel" xsi:type="string">Smj\Zohocrm\Model\ResourceModel\Report</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Smj\Zohocrm\Model\ResourceModel\Queue\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">smj_zohocrm_queue</argument>
+            <argument name="resourceModel" xsi:type="string">Smj\Zohocrm\Model\ResourceModel\Queue</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="zohocrm_map_listing_data_source" xsi:type="string">Smj\Zohocrm\Model\ResourceModel\Map\Grid\Collection</item>
+                <item name="zohocrm_report_listing_data_source" xsi:type="string">Smj\Zohocrm\Model\ResourceModel\Report\Grid\Collection</item>
+                <item name="zohocrm_queue_listing_data_source" xsi:type="string">Smj\Zohocrm\Model\ResourceModel\Queue\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

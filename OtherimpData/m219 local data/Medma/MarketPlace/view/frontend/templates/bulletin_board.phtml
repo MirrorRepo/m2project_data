@@ -1,0 +1,114 @@
+<?php
+
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $cateHelper = $objectManager->create('\Magento\Catalog\Helper\Category');
+    $categories = $cateHelper->getStoreCategories();
+    $catList = $objectManager->get('\Magento\Catalog\Model\CategoryRepository'); 
+?>
+  <form class="form bulletin-board-form" action="<?php echo $this->getUrl('marketplace/vendor/savebulletinboard') ?>" method="post" id="bulletin-board-form" enctype="multipart/form-data" autocomplete="off">
+    <?php /* @noEscape */ echo $block->getBlockHtml('formkey'); ?>
+
+
+<fieldset class="fieldset create info">
+        <legend class="legend"><span>Personal Information</span></legend><br>
+        
+
+        <div class="field title required">
+            <label class="label" for="title"><span>Product Name</span></label>
+            <div class="control">
+                <input type="text" id="title" name="title" title="Title" class="input-text required-entry" data-validate="{required:true}" aria-required="true">
+            </div>
+        </div>
+        
+        <div class="field lastname">
+            <label class="label" for="lastname"><span>Product Category</span></label>
+            <div class="control">
+               <select name="product_cats" id="vendor_industry"> 
+                    <?php
+
+            foreach($categories as $category) {
+
+                        if($category->getId() == 20):
+
+                        $categoryObj = $catList->get($category->getId());
+                        $subcategories = $categoryObj->getChildrenCategories();
+                        foreach($subcategories as $subcategorie) { ?>
+                         <option value="<?php echo $subcategorie->getId()?>"><?php echo $subcategorie->getName()?></option>
+                     <?php    }
+                        endif;
+                        }
+                     ?>
+              
+               </select>
+           </div>
+        </div>
+    
+        <div class="field">
+            <label for="volume" class="label"><span>Volume</span></label>
+            <div class="control">
+                <input type="text" name="volume" id="volume"  title="volume" class="input-text"  aria-required="true">
+            </div>
+        </div>
+        
+        
+        <div class="field field-name-lastname required">
+            <label class="label" for="requirement"><span>Requirement</span></label>
+            <div class="control">
+                
+                <textarea   id="requirement" name="requirement"  class="input-text required-entry"></textarea>
+                <div class="note" id="shop_namepromptmsg"></div>
+            </div>
+        </div>
+        
+        <div class="field field-name-lastname">
+            <label class="label" for="ldos"><span>Last Date of Submission</span></label>
+            <div class="control">
+           
+
+                    <input type="text" class="input-text" id="ldos" name="ldos"   aria-required="true" >
+
+
+            </div>
+        </div>
+
+          <div class="field field-name-lastname required">
+            <label class="label" for="upia"><span>Upload Product image/ Attachment</span></label>
+            <div class="control">
+              <input type="file" class="input-text required-entry" id="upia" name="upia" aria-required="true" >
+
+             </div>
+        </div>
+
+
+     
+
+          <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action submit primary" title="Save"><span>Save</span></button>
+        </div>
+        <div class="secondary">
+            <a class="action back" href="http://local.m219.com/"><span>Back</span></a>
+        </div>
+    </div>
+
+      </fieldset>
+</form>
+
+<script type="text/x-magento-init">
+    {
+        "#bulletin-board-form": {
+            "validation": {}
+        }
+    }
+</script>
+
+<script>
+     require([
+          "jquery",
+          "mage/calendar"
+     ], function($){
+         $("#ldos").calendar({
+              buttonText:"<?php echo __('Select Date') ?>",
+         });
+       });
+</script>

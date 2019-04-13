@@ -1,0 +1,2 @@
+"Sales Order ID","SO Number","Subject","Accounts ID","Accounts","Carrier","Status","Sub Total","Tax","Adjustment","Grand Total","Billing Street","Shipping Street","Billing City","Shipping City","Billing State","Shipping State","Billing Code","Shipping Code","Billing Country","Shipping Country","Product Details","Terms and Conditions","Description","Discount"
+"bakeway_1450000",1450000,"Sample Sales Order 1","Zcrm_2854753000000540002","testzoho@gmail.com","FedEX","Delivered",100,0,0,100,,,,,,,,,,,,,,0

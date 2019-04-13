@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Smj. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ *
+ * Smj_ZohoCrm extension
+ * NOTICE OF LICENSE
+ *
+ * @category  Smj
+ * @package   Smj_ZohoCrm
+ * @author Mukund
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="zohocrm" frontName="zohocrm">
+            <module name="Smj_Zohocrm" before="Magento_Backend"/>
+        </route>
+    </router>
+</config>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Smj. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ *
+ * Smj_Zohocrm extension
+ * NOTICE OF LICENSE
+ *
+ * @category  Smj
+ * @package   Smj_Zohocrm
+ * @author Mukund
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="smj_zohocrm::zohocrm" title="Zoho Crm Configuration" module="Smj_Zohocrm" sortOrder="60" resource="Smj_Zohocrm::zohocrm"/>
+        <add id="smj_zohocrm::mapping" title="Field Mapping" module="Smj_Zohocrm" sortOrder="10" parent="smj_zohocrm::zohocrm" action="zohocrm/map/index" resource="Smj_Zohocrm::mapping"/>
+         <add id="smj_zohocrm::mapping1" title="Field Mapping1" module="Smj_Zohocrm" sortOrder="10" parent="smj_zohocrm::zohocrm" action="zohocrm/map/index1" resource="Smj_Zohocrm::mapping1"/>
+
+        <add id="smj_zohocrm::report" title="View Report" module="Smj_Zohocrm" sortOrder="20" parent="smj_zohocrm::zohocrm" action="zohocrm/report/index" resource="Smj_Zohocrm::report"/>
+        <add id="smj_zohocrm::queue" title="Queue" module="Smj_Zohocrm" sortOrder="30" parent="smj_zohocrm::zohocrm" action="zohocrm/queue/index" resource="Smj_Zohocrm::queue"/>
+        <add id="smj_zohocrm::config" title="Configuration" module="Smj_Zohocrm" sortOrder="40" parent="smj_zohocrm::zohocrm" action="adminhtml/system_config/edit/section/zohocrm" resource="Smj_Zohocrm::config"/>
+    </menu>
+</config>

@@ -1,0 +1,17 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="uicompo_uc_index_data_source" xsi:type="string">Bakeway\CommissionLog\Model\ResourceModel\CommissionLog\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Bakeway\CommissionLog\Model\ResourceModel\CommissionLog\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bakeway_commissionlog</argument>
+            <argument name="eventPrefix" xsi:type="string">bakeway_commissionlog_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">commissionlog_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Bakeway\CommissionLog\Model\ResourceModel\CommissionLog</argument>
+        </arguments>
+    </type>
+</config>

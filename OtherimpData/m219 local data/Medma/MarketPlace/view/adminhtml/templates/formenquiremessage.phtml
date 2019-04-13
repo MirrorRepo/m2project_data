@@ -1,0 +1,366 @@
+<style type="text/css">
+	.format-table{border: 1px solid #878787; width: 80%; margin-left: auto; margin-right: auto;}
+	.format-table td{padding: 20px}
+</style>
+<div id="messages" style="display:none"><div class="messages">
+		<div class="message message-success success"><div data-ui-id="messages-message-success">Data Updated successfully</div></div></div></div>
+<?php
+$msgs = $block->getMessages();
+$id = $this->getRequest()->getParam('id');
+$data = $block->getCreatedDate();
+$date = $data['created_at'];
+$msg_id = $block->getFirstMsgid();
+$mesgs = $block->getChildmessages();
+$singleRecord = $block->getSinglemessages();
+$sellerMsgdata  = $block->getMessageData($id);
+
+
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+$storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface');
+$currentStore = $storeManager->getStore();
+$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+$helper = $this->helper('Medma\MarketPlace\Helper\Data');
+$proModel = $_objectManager->create('\Magento\Catalog\Model\Product');
+
+$checkProduct = $proModel->getCollection()
+	->addAttributeToFilter('sku',$sellerMsgdata['product_sku']);
+
+$proModel = $_objectManager->create('\Magento\Catalog\Api\ProductRepositoryInterface');
+$check = false;
+if(count($checkProduct) > 0){
+
+	$check = true;
+}
+$adminuserData ['firstname'] = $adminuserData ['lastname'] = "";
+$currentAdminuserId = $helper->getLoggedInAdminUserId();
+$adminuserData = $helper->getUser($currentAdminuserId);
+$currency = $storeManager->getStore()->getCurrentCurrencyCode();
+$currency = $_objectManager->create('Magento\Directory\Model\CurrencyFactory')->create()->load($currency);
+$currencySymbol = $currency->getCurrencySymbol();
+?>
+
+<div class="vendor_reply">
+	<?php
+	if(!empty($msg_id)) {
+		$msg_id = $msg_id;
+	} else {
+	}
+ if($check === true):
+	$productDetails = $proModel->get($sellerMsgdata['product_sku']);
+
+	?>
+    <button class="sellerreplypopup" ><span>Reply Quote</span></button>
+	<div class="sellerreply">
+		<table class="customer_message" style="width:60%;border:1px solid">
+          <tr>
+			  <th>Price</th>
+			  <th>Quantity</th>
+			  <th>Attachment</th>
+		  </tr>
+			<tr>
+				<th><?php echo $sellerMsgdata['price'];?></th>
+				<th><?php echo $sellerMsgdata['quantity'];?></th>
+
+				<th><a target="_blank" href="<?php echo $mediaUrl."quotefile/".$sellerMsgdata['attchment'];?>"><?php echo $sellerMsgdata['attchment'];?></a></th>
+			</tr>
+
+		</table>
+   </div>
+	<div class="reply_popup_content" style="display:none">
+		<form id="seller-quote-data" method="post"  enctype="multipart/form-data">
+
+		<fieldset class="fieldset admin__fieldset " id="page_base_fieldset">
+
+
+			<div class="admin__field field field-username  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-username">
+				<label class="label admin__field-label" for="page_username" data-ui-id="vendor-edit-tab-s	tripe-fieldset-element-text-username-label"><span>Quote No.</span></label>
+				<div class="admin__field-control control">
+					<input id="quote_no" name="quote_no" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-username"  title="User Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">                            </div>
+			</div>
+
+			<div class="admin__field field field-username  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-username">
+				<label class="label admin__field-label" for="page_username" data-ui-id="vendor-edit-tab-s	tripe-fieldset-element-text-username-label"><span>Date</span></label>
+				<div class="admin__field-control control">
+						<input  type="date" name="date" value="<?php echo date("Y-m-d");?>">
+					</div>
+			</div>
+			<div class="admin__field field field-username  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-username">
+				<label class="label admin__field-label" for="page_username" data-ui-id="vendor-edit-tab-s	tripe-fieldset-element-text-username-label"><span>Vendor Name</span></label>
+				<div class="admin__field-control control">
+					<input readonly id="vendor_name" name="vendor_name" value="<?php echo $adminuserData ['firstname']." ".$adminuserData ['lastname']?>" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-username"  title="User Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">                            </div>
+			</div>
+
+			<div class="admin__field field field-username  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-username">
+				<label class="label admin__field-label" for="page_username" data-ui-id="vendor-edit-tab-s	tripe-fieldset-element-text-username-label"><span>Price</span></label>
+				<div class="admin__field-control control">
+					<input id="price" name="price" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-username"  title="User Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">                            </div>
+			</div>
+			<div class="admin__field field field-username  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-username">
+
+			<table class="format-table">
+			<thead>
+			<td>Sr No.</td>
+			<td>Product Name</td>
+			<td>Sku</td>
+			<td>Numbers</td>
+			<td>Price</td>
+			</thead>
+
+				<tbody>
+				<tr><td><?php echo 1;?></td>
+				<td><?php echo $productDetails->getName() ;?></td>
+				<td><?php echo $productDetails->getSku() ;?></td>
+				<td><input  style="width: 58px; " id="quantity" onblur="pricecalculation(this)" name="quantity" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-firstname"  title="First Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">
+			<select name="op-measure" id="option-measurement" style="padding: 5px;width: 17%">
+				<?php $options = $helper->getAvailableMeasurement();?>
+				<?php foreach ($options as $options1):?>
+					<option val="<?php echo $options1['value']?>"><?php echo $options1['label'] ?></option>
+				<?php endforeach;?>
+			</select></td>
+					<td><span id="finalprice"><?php
+						$price = $productDetails->getPrice();
+						if($productDetails->getSpecialPrice()){
+							$price = $productDetails->getSpecialPrice();
+						}
+						echo $price;
+						?></span?</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td colspan="3" style="text-align: right">
+						Vat
+					</td>
+					<td colspan="3s">
+						<input  style="width: 58px; "   id="vat" name="vat" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-firstname"  title="First Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align: right">
+						Transportation
+					</td>
+					<td colspan="3">
+						<input   onblur="pricecalculation1(this)" style="width: 58px; "   id="trans" name="trans" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-firstname"  title="First Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">
+					</td>
+
+				</tr>
+
+				<tr>
+					<td colspan="4" style="text-align: right">
+						Total
+					</td>
+					<td  colspan="3" style="text-align: left">
+						<?php echo $currencySymbol;?>  <span   id="grandtotal"></span>
+					</td>
+
+				</tr>
+				</tbody>
+
+			</table>
+			</div>
+
+
+	
+
+			<div class="admin__field field field-lastname  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-lastname">
+				<label class="label admin__field-label" for="page_lastname" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-lastname-label"><span>Terms & Conditions</span></label>
+				<div class="admin__field-control control">
+		          <textarea name="municipality" cols="60" rows="6"></textarea>
+				</div>
+			</div>
+
+
+
+			<input type="hidden" id="entity_id" name="entity_id" value="<?php echo $sellerMsgdata['entity_id'];?>"/>
+
+			<div class="admin__field field field-lastname " data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-lastname">
+				<label class="label admin__field-label" for="page_lastname" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-lastname-label"><span>Attachment</span></label>
+				<div class="admin__field-control control">
+					<input id="media" name="quotefile" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-lastname" title="file" type="file" class=" input-text" aria-required="true">                            </div>
+			</div>
+
+			
+			<?php echo $block->getBlockHtml('formkey'); ?>
+            <button type="submit" name="submit" class="button" id="submit_btn">Submit</button>
+
+			<img id="addloader1" style="display:none;width:30px;" src="<?php echo $block->getViewFileUrl('Medma_MarketPlace::images/35.gif');?>">
+		</fieldset>
+		</form>
+	</div>
+<?php else:?>
+	 Sorry , No Product Found
+	<?php endif;?>
+
+<input type="hidden" value="<?php echo $id;?>" id="vendor_id">
+    <input type="hidden" value="<?php echo $id ;?>" id="msg_id">
+
+    <!--
+        <input type="hidden" name="form_key" value="<?php //echo $block->getFormKey();?>">
+    -->
+	  <div>
+	    <textarea  style="width:600px;height:100px;" id="reply"></textarea>
+	    <input type="hidden" value="" name="reply" id="htmltext">
+	 </div>
+
+		<button onclick="convertTohtml()" type="button"><span><?php echo __('Reply');?></span></button>
+		 <img id="addloader" style="display:none;width:30px;" src="<?php echo $block->getViewFileUrl('Medma_MarketPlace::images/35.gif');?>">
+</div>
+
+<?php
+
+if(!empty($mesgs)):
+	?>
+	<?php foreach($mesgs as $msg):
+	?>
+	<div class="customer_message">
+		<div class="msg"><?php echo $msg['msg_string'];?>
+			<p class="date"><?php echo $msg['created_at']  ;?></p>
+		</div>
+	</div>
+<?php endforeach;
+else:?>
+	<div class="customer_message">
+		<div class="msg"><?php  echo $singleRecord['msg'];?>
+			<p class="date"><?php  echo $singleRecord['created_at'] ;?></p>
+		</div>
+	</div>
+	<?php
+endif;
+?>
+<style>
+.sellerreplypopup,.sellerreply{margin-bottom:20px}
+</style>
+<script>
+	var priceval = qtyval = vatval =transval =  "";
+	function  pricecalculation() {
+		var priceval = document.getElementById('price').value;
+
+		var qtyval = document.getElementById('quantity').value;
+		var finalCal = document.getElementById('finalprice').innerHTML = priceval * qtyval;
+
+		var vatval = document.getElementById('vat').value;
+		var transval = document.getElementById('trans').value;
+
+
+	}
+
+	function  pricecalculation1() {
+
+		var priceval = document.getElementById('price').value;
+
+		var qtyval = document.getElementById('quantity').value;
+		var trans = document.getElementById('trans').value;
+
+		var finalCal = document.getElementById('finalprice').innerHTML = priceval * qtyval;
+		var vat = document.getElementById('vat').value;
+;		document.getElementById('grandtotal').innerHTML = parseInt(finalCal) + parseInt(vat) + parseInt(trans);
+	}
+
+
+require([
+	'jquery',
+	'mage/mage',
+	"mage/calendar"
+], function($){
+jQuery("#submit_btn").click(function() {
+	var price = document.getElementById("price").value;
+	if(price === ""){
+		alert("Price is required Field");
+		return false;
+	}
+	var quantity = document.getElementById("quantity").value;
+	if(quantity === ""){
+		alert("Quantity is required Field");
+		return false;
+	}
+	var form_data = new FormData(document.getElementById("seller-quote-data"));
+	form_data.append("label", "WEBUPLOAD");
+	jQuery('#addloader1').css('display','block');
+	jQuery.ajax({
+		url: "<?php echo $this->getUrl('admin_marketplace/vendor/sellerquotesave');?>",
+		type: "POST",
+		data: form_data,
+		processData: false,  // tell jQuery not to process the data
+		contentType: false   // tell jQuery not to set contentType
+	}).done(function( data ) {
+		jQuery('#addloader1').css('display','none');
+		jQuery('.messages').css('display','block');
+		location.reload();
+		//Perform ANy action after successfuly post data
+
+	});
+	return false;
+});
+
+});
+
+
+function convertTohtml()
+{
+	jQuery('#addloader').css('display','block');
+	var vendorid = document.getElementById('vendor_id').value;
+    var msg_id = document.getElementById('msg_id').value;
+	//alert(vendorid);
+	var input = document.getElementById('reply');
+    var lines = input.value.split('\n');
+    var html = '';
+    for( var i=0; i<lines.length; i++ ) {
+
+        if( lines[i].indexOf('/')==-1 ) {
+            var models = lines[i].split('/');
+            html += '<p>' + models.join('</p></br>') ;
+        }
+    }
+    console.log(html);
+    //document.getElementById('htmltext').innerHtml=html;
+    jQuery.ajax({
+	method:'post',
+	data:{
+		'id':vendorid,
+		'reply':html,'msg_id':msg_id},
+    url: "<?php echo $this->getUrl('admin_marketplace/vendor/reply');?>"+'id/'+vendorid,
+    success:function(data) {
+	    jQuery('#addloader').css('display','none');
+	location.reload();
+	//alert('success');
+      },
+  });
+}
+</script>
+
+
+
+
+<script>
+	require(
+		[
+			'jquery',
+			'Magento_Ui/js/modal/modal'
+		],
+		function(
+			$,
+			modal
+		) {
+			var options = {
+				type: 'popup',
+				responsive: true,
+				innerScroll: true,
+				title: 'Quote Form',
+				buttons: [{
+					text: $.mage.__('Continue'),
+					class: '',
+					click: function () {
+						this.closeModal();
+					}
+				}]
+			};
+
+			var popup = modal(options, $('.reply_popup_content'));
+			$('.modal-footer').hide();
+			$(".sellerreplypopup").on('click',function(){
+				$(".reply_popup_content").modal("openModal");
+			});
+
+		}
+	);
+</script>

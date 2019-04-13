@@ -1,0 +1,14 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+$redirect = $objectManager->get('\Magento\Framework\App\Response\Http');
+
+if($customerSession->isLoggedIn()) {
+
+?><?php echo $redirect->setRedirect('marketplace/vendor/requirements/');?>
+<?php // echo $redirect->setRedirect('marketplace/vendor/requirements/');?>
+<?php } else { 
+	?>
+<?php echo $redirect->setRedirect('customer/account/login');?>
+<?php } ?>

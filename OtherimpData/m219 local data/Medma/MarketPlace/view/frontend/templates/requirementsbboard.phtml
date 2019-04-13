@@ -1,0 +1,60 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+$redirect = $objectManager->get('\Magento\Framework\App\Response\Http');
+
+if($customerSession->isLoggedIn()) {
+?>
+<?php // echo $redirect->setRedirect('marketplace/vendor/requirements/');?>
+
+<?php 
+$dataCollection = $block->getRequirementsCollection()->getData();
+
+if(count($dataCollection) > 0 ){
+
+
+?>
+sss
+<table class="customer_message" style="width:100%;margin-bottom: 50px">
+<tr>
+			<th><?php echo __('Title')?></th>
+			<th><?php echo __('Product Category')?></th>
+			<th><?php echo __('Customer Name')?></th>
+			<th><?php echo __('Customer Email')?></th>
+			<th><?php echo __('Last Date Of Submission')?></th>
+</tr>
+<?php 
+foreach ($dataCollection as $value) {
+	$customer = 	$block->getCustomerDetails($value['customer_id']);
+?>
+<tr> 
+    <td><?php echo $value['title']?></td>
+    <td><?php echo $value['product_cat']?></td>
+    <td><?php echo $customer['firstname']." ".$customer['lastname']?></td>
+    <td><?php echo $customer['email']?></td>
+    <td><?php echo $value['ldos']?></td>
+    <td><a href="<?php echo $block->getUrl('marketplace/vendor/requirementsview'). "?id=". $value['entity_id']?>""><?php echo __('view')?></a></td>
+</tr>
+
+	
+<?php 
+}
+?>
+</table>
+
+
+<?php
+
+}else{
+
+
+}
+
+?>
+
+
+<?php } else { 
+	?>
+<?php echo $redirect->setRedirect('customer/account/login');?>
+<?php } ?>

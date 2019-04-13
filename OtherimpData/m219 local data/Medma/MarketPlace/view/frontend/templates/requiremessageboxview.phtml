@@ -1,0 +1,311 @@
+<?php
+$id = $this->getRequest()->getParam('msg_id');
+$id = str_replace("/","",$id);
+$mesgs = $block->getMessageRecord($id)->getData();
+$data = $block->getMessageData($id)->getData();
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+$storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface');
+$currentStore = $storeManager->getStore();
+$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+$helper = $this->helper('Medma\MarketPlace\Helper\Data');
+$customerData = $helper->getProfile($data['seller_id']);
+$sellerData = $helper->getUser($data['seller_id']);
+$firstmessage = $block->getSellerMessageData($data['seller_id'])->getData();
+$getQuoteData = $block->getQuoteData($id);
+$statusflag = false;
+if(isset($getQuoteData['quote_status']))
+{
+	$statusflag = true;
+}
+?>
+<style>
+
+.new_msg{width: 100%}
+table tr.second th{
+	font-weight:normal;}	.
+</style>
+
+<div class="msg-top-main">
+	<h1><?php echo __('Send Message');?></h1>
+
+
+
+	<div class="">
+	<!--
+<form method="post" action="<?php //echo $this->getUrl('marketplace/vendor/send')?>">
+-->
+	<input type="hidden" value="<?php echo $id ?>" id="msg_id">
+	<!--
+	<div class="title">
+	<label for="title"><?php //echo __('Title');?></label>
+	<input type="text" name="title">
+	</div>
+-->
+
+		<div class="customer_message sellerreply" style="width: 100%">
+
+
+			<div class="sellerreply">
+				<table>
+					<tr>
+						<th>Email</th>
+						<th>Phone Number</th>
+						<th>Address</th>
+						<!--<th>Municipality</th>
+						<th>Provience</th>-->
+						<th>Message Details</th>
+						<th>Date Of Enquiry</th>
+						<th>View Quotation from Seller</th>
+					</tr>
+
+					<tr class="second">
+						<th><?php echo $sellerData['email'];?></th>
+						<th><?php echo $customerData['contact_number'];?></th>
+						<th><?php echo $customerData['message'];?></th>
+						<!--<th><?php echo $customerData['longitude'];?></th>
+						<th><?php echo $customerData['latitude'];?></th>-->
+						<th><?php echo $firstmessage['msg'];?></th>
+						<th><?php echo $firstmessage['created_at'];?></th>
+						<th><button class="sellerviewpopup" name="view-buyer-quo"><span>View Quotation</span></button></th>
+					</tr>
+
+				</table>
+			</div>
+        </div>
+
+	<div class="content" style="clear:both">
+		<h4><label for="message"><?php echo __('Write Your Message Here');?></label></h4>
+		<div class="admin__field-control control" style="width: 20% !important;" >
+			<select name="quote_status" id="quote_status" style="padding: 5px;">
+				<?php $options = $helper->getAvailableStatuses();?>
+				<?php foreach ($options as $options1):?>
+					<option <?php if($statusflag === true){ if ($getQuoteData['quote_status'] ===  $options1['value']) { ?>selected = selected<?php } }?> value="<?php echo $options1['value']?>"><?php echo $options1['label'] ?></option>
+				<?php endforeach;?>
+			</select>
+			</div>
+		<br>
+		<textarea name="message" id="message" style="border-radius:6px; margin-bottom:10px"></textarea>
+		<button type="button" onclick="convertTohtml()" class="button primary action"><span><?php echo __('Send');?></span></button>
+		<img id="addloader" style="display:none;width:30px;" src="<?php echo $block->getViewFileUrl('Medma_MarketPlace::images/35.gif');?>">
+	</div>
+  <div class="sellerquoteview">
+
+	  <div class="reply_popup_content">
+		  <form id="seller-quote-data" method="post"  enctype="multipart/form-data">
+
+			  <fieldset class="fieldset admin__fieldset " id="page_base_fieldset">
+
+
+				  <div class="admin__field field field-username  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-username">
+					  <label class="label admin__field-label" for="page_username" data-ui-id="vendor-edit-tab-s	tripe-fieldset-element-text-username-label"><span>Quote No.</span></label>
+					  <div class="admin__field-control control">
+						  <?php if(isset($getQuoteData['quote_no'])){?>
+						  <input readonly value="<?php echo $getQuoteData['quote_no']?>" id="quote_no" name="quote_no" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-username"  title="User Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">                            </div>
+				          <?php } ?>
+				  </div>
+
+				  <div class="admin__field field field-username  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-username">
+					  <label class="label admin__field-label" for="page_username" data-ui-id="vendor-edit-tab-s	tripe-fieldset-element-text-username-label"><span>Date</span></label>
+					  <div class="admin__field-control control">
+						  <?php if(isset($getQuoteData['created_at'])){?>
+						  <input readonly value="<?php echo $getQuoteData['created_at']?>"  type="text" name="date">
+						  <?php } ?>
+					  </div>
+				  </div>
+				  <div class="admin__field field field-username  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-username">
+					  <label class="label admin__field-label" for="page_username" data-ui-id="vendor-edit-tab-s	tripe-fieldset-element-text-username-label"><span>Vendor Name</span></label>
+					  <div class="admin__field-control control">
+						  <?php if(isset($getQuoteData['vendor_name'])){?>
+						  <input readonly value="<?php echo $getQuoteData['vendor_name']?>"  id="vendor_name" name="vendor_name" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-username"  title="User Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">                            </div>
+					  <?php } ?>
+				  </div>
+
+				  <div class="admin__field field field-username  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-username">
+					  <label class="label admin__field-label" for="page_username" data-ui-id="vendor-edit-tab-s	tripe-fieldset-element-text-username-label"><span>Price</span></label>
+					  <div class="admin__field-control control">
+						  <?php if(isset($getQuoteData['price'])){?>
+						  <input readonly   value="<?php echo $getQuoteData['price']?>" id="price" name="price" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-username"  title="User Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">                            </div>
+					  <?php } ?>
+				  </div>
+				  <div class="admin__field field field-username  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-username">
+
+					  <table class="format-table">
+						  <thead>
+						  <td>Sr No.</td>
+						  <td>Product Name</td>
+						  <td>Sku</td>
+						  <td>Numbers</td>
+						  <td>Price</td>
+						  </thead>
+
+						  <tbody>
+						  <tr><td><?php echo 1;?></td>
+							  <td><?php if(isset($getQuoteData['name'])){?>
+
+								  <?php echo $getQuoteData->getName() ;?> <?php } ?>
+							  </td>
+							  <td><?php if(isset($getQuoteData['sku'])){?>
+
+								  <?php echo $getQuoteData->getSku() ;?> <?php } ?>
+							  </td>
+							  <td><?php if(isset($getQuoteData['quantity'])){?>
+								  <input  style="width: 90px; "  value="<?php echo $getQuoteData['quantity']?>"  id="quantity" name="quantity" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-firstname"  title="First Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">
+								  <?php } ?>
+							  </td>
+							  <td></td>
+						  </tr>
+						  <tr></tr>
+						  <tr>
+							  <td colspan="3" style="text-align: right">
+								  Vat
+							  </td>
+							  <td colspan="3s">
+								  <?php if(isset($getQuoteData['vat'])){?>
+								  <input readonly  style="width: 58px; "   value="<?php echo $getQuoteData['vat']?>"  id="vat" name="vat" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-firstname"  title="First Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">
+								  <?php } ?>
+							  </td>
+
+						  </tr>
+						  <tr>
+							  <td colspan="3" style="text-align: right">
+								  Transportation
+							  </td>
+							  <?php if(isset($getQuoteData['trans'])){?>
+							  <td colspan="3">
+								  <input readonly  style="width: 58px; "   value="<?php echo $getQuoteData['trans']?>"   id="trans" name="trans" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-firstname"  title="First Name" type="text" class=" input-text admin__control-text required-entry _required" aria-required="true">
+							  </td>
+							  <?php } ?>
+						  </tr>
+						  </tbody>
+
+					  </table>
+				  </div>
+
+
+
+
+				  <div class="admin__field field field-lastname  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-lastname">
+					  <label class="label admin__field-label" for="page_lastname" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-lastname-label"><span>Terms & Conditions</span></label>
+					  <div class="admin__field-control control">
+						  <input readonly checked  id="checkbox" name="termsandcondition" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-lastname" title="checkbox" type="checkbox" aria-required="true">                            </div>
+				  </div>
+
+
+
+				  <input type="hidden" id="entity_id" name="entity_id" value="<?php //echo $sellerMsgdata['entity_id'];?>"/>
+
+				  <div class="admin__field field field-lastname  required _required" data-ui-id="vendor-edit-tab-stripe-fieldset-element-form-field-lastname">
+					  <label class="label admin__field-label" for="page_lastname" data-ui-id="vendor-edit-tab-stripe-fieldset-element-text-lastname-label"><span>Attachment</span></label>
+					  <div class="admin__field-control control">
+						  <?php if(isset($getQuoteData['attchment'])){?>
+						  <img  src="<?php echo $mediaUrl."quotefile/".$getQuoteData['attchment'];?>" />
+						  <?php } ?>
+					  </div>
+
+
+				  <?php echo $block->getBlockHtml('formkey'); ?>
+
+				  <img id="addloader1" style="display:none;width:30px;" src="<?php echo $block->getViewFileUrl('Medma_MarketPlace::images/35.gif');?>">
+			  </fieldset>
+		  </form>
+	  </div>
+  </div>
+	<!--
+    </form>
+    -->
+</div>
+	<?php
+	if(!empty($mesgs)):
+		?>
+		<?php foreach($mesgs as $msg):
+		?>
+		<div class="customer_message" style="width: 100%">
+			<div class="msg" style="width: 100%"><?php echo $msg['msg_string'];?>
+
+			</div>
+			<p class="date"><?php echo $msg['created_at']  ;?></p>
+		</div>
+	<?php endforeach;
+		?>
+
+		<?php
+	endif;
+	?>
+</div>
+<style>
+	.new_msg
+	{
+		margin-top: 20px;
+		width: 50%;
+		float: left; 
+		margin-bottom: 20px;
+	}
+	.customer_message{margin-bottom: 20px;}
+	.sellerreply span{width:100%;float:left;}
+	.page-title-wrapper h1.page-title{display: none !important; }
+</style>
+<script>
+	function convertTohtml()
+	{
+		jQuery('#addloader').css('display','block');
+		var msg_id = document.getElementById('msg_id').value;
+		//alert(vendorid);
+		var input = document.getElementById('message');
+		var quote_status = document.getElementById('quote_status');
+		var sta_value = quote_status.options[quote_status.selectedIndex].value;
+		var lines = input.value.split('\n');
+		var html = '';
+		for( var i=0; i<lines.length; i++ ) {
+
+			var models = lines[i].split('\n');
+			html += '<p>' + models.join('</p></br>') ;
+
+		}
+
+		console.log(msg_id);
+		console.log(html);
+		//document.getElementById('htmltext').innerHtml=html;
+		jQuery.ajax({
+			method:'post',
+			data:{'message':html,'msg_id':msg_id,'quote_status':sta_value},
+			url: "<?php echo $this->getUrl('marketplace/vendor/sendrequiremsg');?>",
+			success:function(data) {
+				jQuery('#addloader').css('display','none');
+			 	window.location.href="<?php echo $this->getUrl('marketplace/customer/requiremessageboxview').'?msg_id=';?>"+msg_id;
+			},
+		});
+	}
+</script>
+<script>
+	require(
+		[
+			'jquery',
+			'Magento_Ui/js/modal/modal'
+		],
+		function(
+			$,
+			modal
+		) {
+			var options = {
+				type: 'popup',
+				responsive: true,
+				innerScroll: true,
+				title: 'Quote Details',
+				buttons: [{
+					text: $.mage.__('Continue'),
+					class: '',
+					click: function () {
+						this.closeModal();
+					}
+				}]
+			};
+
+			var popup = modal(options, $('.sellerquoteview'));
+			$('.modal-footer').hide();
+			$(".sellerviewpopup").on('click',function(){
+				$(".sellerquoteview").modal("openModal");
+			});
+
+		}
+	);
+</script>

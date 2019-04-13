@@ -1,0 +1,20 @@
+/* For desktop: */
+.cust-col-1 {width: 8.33%;}
+.cust-col-2 {width: 16.66%;}
+.cust-col-3 {width: 25%;}
+.cust-col-4 {width: 33.33%;}
+.cust-col-5 {width: 41.66%;}
+.cust-col-6 {width: 50%;}
+.cust-col-7 {width: 58.33%;}
+.cust-col-8 {width: 66.66%;}
+.cust-col-9 {width: 75%;}
+.cust-col-10 {width: 83.33%;}
+.cust-col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
+  }
+}

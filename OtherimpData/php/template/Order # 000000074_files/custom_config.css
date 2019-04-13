@@ -1,0 +1,93 @@
+@import url('//fonts.googleapis.com/css?family=FuturaPT:300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,900,900italic');@import url('//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,900,900italic');        @font-face {
+            font-family: 'FuturaPT';
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Light.eot'); /* IE9 Compat Modes */
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Light.woff2') format('woff2'), /* Super Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Light.woff') format('woff'), /* Pretty Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Light.svg#svgFontName') format('svg'); /* Legacy iOS */
+            font-weight: 300;
+        }
+        @font-face {
+            font-family: 'FuturaPT';
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Book.eot'); /* IE9 Compat Modes */
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Book.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Book.woff2') format('woff2'), /* Super Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Book.woff') format('woff'), /* Pretty Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Book.ttf')  format('truetype'), /* Safari, Android, iOS */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Book.svg#svgFontName') format('svg'); /* Legacy iOS */
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'FuturaPT';
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Medium.eot'); /* IE9 Compat Modes */
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Medium.woff2') format('woff2'), /* Super Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Medium.woff') format('woff'), /* Pretty Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Medium.svg#svgFontName') format('svg'); /* Legacy iOS */
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'FuturaPT';
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Heavy.eot'); /* IE9 Compat Modes */
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Heavy.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Heavy.woff2') format('woff2'), /* Super Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Heavy.woff') format('woff'), /* Pretty Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Heavy.ttf')  format('truetype'), /* Safari, Android, iOS */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Heavy.svg#svgFontName') format('svg'); /* Legacy iOS */
+            font-weight: 600;
+        }
+        @font-face {
+            font-family: 'FuturaPT';
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Bold.eot'); /* IE9 Compat Modes */
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-Bold.svg#svgFontName') format('svg'); /* Legacy iOS */
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'FuturaPT';
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-ExtraBold.eot'); /* IE9 Compat Modes */
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-ExtraBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-ExtraBold.woff2') format('woff2'), /* Super Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-ExtraBold.woff') format('woff'), /* Pretty Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-ExtraBold.ttf')  format('truetype'), /* Safari, Android, iOS */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/FuturaPT-ExtraBold.svg#svgFontName') format('svg'); /* Legacy iOS */
+            font-weight: 900;
+        }
+        // Genath
+        @font-face {
+            font-family: 'Genath';
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Regular.eot'); /* IE9 Compat Modes */
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'Genath';
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Bold.eot'); /* IE9 Compat Modes */
+            src: url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+            url('https://www.livebyverve.com/magento230/pub/static/frontend/Mgs/unero/en_US/MGS_Mpanel/fonts/Genath-Bold.svg#svgFontName') format('svg'); /* Legacy iOS */
+            font-weight: 700;
+        }body{font-family: "FuturaPT", arial, tahoma, sans-serif;font-weight: normal;}.navigation li.level0 a.level-top, .navigation ul.container .level0 > a{font-family: "FuturaPT";}
+				h1{font-family: "Roboto";}
+				h2{font-family: "Roboto";}
+				h3{font-family: "Roboto";}
+				h4{font-family: "Roboto";}
+				h5{font-family: "Roboto";}
+				h6{font-family: "Roboto";}
+				.price, .price-box .price{font-family: "Roboto";}
+				.btn{font-family: "FuturaPT";}
+				.landing-desc{font-family: "FuturaPT";}
+				.cms-index-index #placeholder-header{display: none !important}
+.cms-index-index .header .header-placeholder .header-content{background: none}
+.cms-index-index .header .header-placeholder.active-sticky .header-content{background: #fff}

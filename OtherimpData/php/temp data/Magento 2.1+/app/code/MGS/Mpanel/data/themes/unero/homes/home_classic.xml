@@ -1,0 +1,429 @@
+<home>
+	<section>
+		<name><![CDATA[block48]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[]]></class>
+		<background><![CDATA[]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[1]]></fullwidth>
+		<padding_top><![CDATA[]]></padding_top>
+		<padding_bottom><![CDATA[]]></padding_bottom>
+		<block_position><![CDATA[0]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block49]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[]]></class>
+		<background><![CDATA[#ebebeb]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[1]]></fullwidth>
+		<padding_top><![CDATA[]]></padding_top>
+		<padding_bottom><![CDATA[]]></padding_bottom>
+		<block_position><![CDATA[2]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block50]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[column-padding-5]]></class>
+		<background><![CDATA[]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[0]]></fullwidth>
+		<padding_top><![CDATA[70]]></padding_top>
+		<padding_bottom><![CDATA[70]]></padding_bottom>
+		<block_position><![CDATA[3]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block51]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[]]></class>
+		<background><![CDATA[#ebebeb]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[0]]></fullwidth>
+		<padding_top><![CDATA[64]]></padding_top>
+		<padding_bottom><![CDATA[60]]></padding_bottom>
+		<block_position><![CDATA[4]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block52]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[]]></class>
+		<background><![CDATA[]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[0]]></fullwidth>
+		<padding_top><![CDATA[56]]></padding_top>
+		<padding_bottom><![CDATA[]]></padding_bottom>
+		<block_position><![CDATA[6]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block58]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[]]></class>
+		<background><![CDATA[]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[0]]></fullwidth>
+		<padding_top><![CDATA[57]]></padding_top>
+		<padding_bottom><![CDATA[73]]></padding_bottom>
+		<block_position><![CDATA[7]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block59]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[]]></class>
+		<background><![CDATA[#ebebeb]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[1]]></fullwidth>
+		<padding_top><![CDATA[]]></padding_top>
+		<padding_bottom><![CDATA[]]></padding_bottom>
+		<block_position><![CDATA[5]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block60]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[]]></class>
+		<background><![CDATA[#ebebeb]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[0]]></fullwidth>
+		<padding_top><![CDATA[64]]></padding_top>
+		<padding_bottom><![CDATA[60]]></padding_bottom>
+		<block_position><![CDATA[1]]></block_position>
+	</section>
+	<block>
+		<block_name><![CDATA[block49-0]]></block_name>
+		<type><![CDATA[attribute_products]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"title":"","additional_content":"","animation":"","animation_delay":"","attribute":"is_featured_product","limit":"8","perrow":"4","numbercol":"1","percol":"","template":"grid.phtml","ratio":"1","number_row":"1","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","use_slider":0,"autoplay":0,"stop_auto":0,"navigation":0,"pagination":0,"use_tabs":0,"loadmore":0}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[classic-product]]></class>
+		<block_content><![CDATA[{{block class="MGS\Mpanel\Block\Products\Attributes" mgs_panel_title="" mgs_panel_note="" limit="8" ratio="1" category_ids="" attribute="is_featured_product" use_slider="0" loadmore="0" template="products/attribute/grid.phtml" perrow="4"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block48-0]]></block_name>
+		<type><![CDATA[owl_banner]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":"","links":["","","","","","","","","","","","","",""],"html":["","",""],"images":["slider_simple_01.jpg","slider_simple_02.jpg","slider_simple_03.jpg"],"fullscreen":"1","effect":"1","autoplay":"1","speed":"6000","navigation":"1","pagination":"1","loop":"1","stop_auto":0,"rtl":0,"parallax":0}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[{{block class="MGS\Mpanel\Block\Widget\OwlCarousel" images="slider_simple_01.jpg,slider_simple_02.jpg,slider_simple_03.jpg" links=",,,,,,,,,,,,," fullscreen="1" autoplay="1" stop_auto="0" navigation="1" parallax="0" pagination="1" loop="1" rtl="0" speed="6000" effect="1" template="widget/owl_slider.phtml"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block50-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="content-heading">
+<h3 class="title">Featured Collections</h3>
+<div class="block-note">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br />Excepteur sint occaecat cupidatat non proident..</div>
+</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block50-0]]></block_name>
+		<type><![CDATA[promo_banner]]></type>
+		<position><![CDATA[2]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":"","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","banner_id":"unero_modern_short_tshirts_banner"}]]></setting>
+		<col><![CDATA[8]]></col>
+		<class><![CDATA[col-xs-12 margin-bottom10]]></class>
+		<block_content><![CDATA[{{widget type="MGS\Promobanners\Block\Widget\Banner" banner_id="unero_modern_short_tshirts_banner" template="banner.phtml"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block50-0]]></block_name>
+		<type><![CDATA[promo_banner]]></type>
+		<position><![CDATA[3]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":"","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","banner_id":"unero_modern_basic_backoacks_banner"}]]></setting>
+		<col><![CDATA[4]]></col>
+		<class><![CDATA[col-sm-6 col-xs-12 margin-bottom10]]></class>
+		<block_content><![CDATA[{{widget type="MGS\Promobanners\Block\Widget\Banner" banner_id="unero_modern_basic_backoacks_banner" template="banner.phtml"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block50-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[4]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[clearfix visible-lg visible-md col-xs-12]]></class>
+		<block_content><![CDATA[<div class="no-display">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block50-0]]></block_name>
+		<type><![CDATA[promo_banner]]></type>
+		<position><![CDATA[5]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":"","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","banner_id":"unero_modern_leather_sneaker_banner"}]]></setting>
+		<col><![CDATA[4]]></col>
+		<class><![CDATA[col-sm-6 col-xs-12 margin-bottom10]]></class>
+		<block_content><![CDATA[{{widget type="MGS\Promobanners\Block\Widget\Banner" banner_id="unero_modern_leather_sneaker_banner" template="banner.phtml"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block50-0]]></block_name>
+		<type><![CDATA[promo_banner]]></type>
+		<position><![CDATA[6]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":"","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","banner_id":"unero_modern_simple_snapbacks_banner"}]]></setting>
+		<col><![CDATA[8]]></col>
+		<class><![CDATA[col-xs-12 margin-bottom10]]></class>
+		<block_content><![CDATA[{{widget type="MGS\Promobanners\Block\Widget\Banner" banner_id="unero_modern_simple_snapbacks_banner" template="banner.phtml"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block52-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="text-center">
+<div class="margin-bottom30"><span style="color: #000; font-size: 36px;">All Order Over $75 Ship Free</span></div>
+<p class="remove-br-xs" style="font-size: 18px;">“Designed by LoganCee, Unero is a minimalist design that emphasises speed and efficiency over<br>unnecessary features. The goal was to design something that offers all the features you need without the added bloat that is<br>usually associated with WooCommerce designs. “</p>
+</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block58-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[]]></class>
+		<block_content><![CDATA[<div class="text-center"><span style="font-size: 20px; color: #000000;">SUBSCRIBE TO OUR NEWSLETTER</span></div>
+<div class="newsletter-home-v3">{{block class="Magento\\Newsletter\\Block\\Subscribe" template="Magento_Newsletter::subscribe.phtml"}}</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block51-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="classic-title"><span class="h1" style="font-weight: 400;">Best Seller Products</span> <a href="#">View All Product</a></div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block59-0]]></block_name>
+		<type><![CDATA[attribute_products]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"title":"","additional_content":"","animation":"","animation_delay":"","attribute":"is_bestseller_product","limit":"4","perrow":"4","numbercol":"1","percol":"","template":"grid.phtml","ratio":"1","number_row":"1","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","use_slider":0,"autoplay":0,"stop_auto":0,"navigation":0,"pagination":0,"use_tabs":0,"loadmore":0}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12 classic-product]]></class>
+		<block_content><![CDATA[{{block class="MGS\Mpanel\Block\Products\Attributes" mgs_panel_title="" mgs_panel_note="" limit="4" ratio="1" category_ids="" attribute="is_bestseller_product" use_slider="0" loadmore="0" template="products/attribute/grid.phtml" perrow="4"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block60-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="classic-title">
+<span class="h1" style="font-weight: 400;">Popular Products</span>
+<a href="#">View All Product</a>
+</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block50-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[7]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="hidden-xs" style="height: 70px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block50-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[0]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="hidden-xs" style="height: 73px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block58-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[2]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="hidden-xs" style="height: 100px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block52-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[0]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="hidden-xs" style="height: 100px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block49-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[2]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="hidden-xs" style="height: 120px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block59-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[2]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="hidden-xs" style="height: 120px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block60-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[0]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="hidden-xs" style="height: 70px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block51-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[0]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="hidden-xs" style="height: 70px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block60-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[2]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="hidden-xs" style="height: 60px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block51-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[2]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="hidden-xs" style="height: 60px;">&nbsp;</div>]]></block_content>
+	</block>
+	<promo_banner>
+		<item>
+			<title><![CDATA[Unero Modern Short T-Shirts Banner]]></title>
+			<filename><![CDATA[/m/-/m-cat1.jpg]]></filename>
+			<url><![CDATA[]]></url>
+			<button><![CDATA[]]></button>
+			<text_align><![CDATA[top-left]]></text_align>
+			<content><![CDATA[<h3>Short T-Shirts</h3>
+<a href="#">Shop Now</a>]]></content>
+			<effect><![CDATA[mist-text]]></effect>
+			<custom_class><![CDATA[]]></custom_class>
+			<status><![CDATA[1]]></status>
+			<identifier><![CDATA[unero_modern_short_tshirts_banner]]></identifier>
+		</item>
+		<item>
+			<title><![CDATA[Unero Modern Basic Backpacks Banner]]></title>
+			<filename><![CDATA[/m/-/m-cat2.jpg]]></filename>
+			<url><![CDATA[]]></url>
+			<button><![CDATA[]]></button>
+			<text_align><![CDATA[top-left]]></text_align>
+			<content><![CDATA[<h3>Basic Backpacks</h3>
+<a href="#">Shop Now</a>]]></content>
+			<effect><![CDATA[mist-text]]></effect>
+			<custom_class><![CDATA[]]></custom_class>
+			<status><![CDATA[1]]></status>
+			<identifier><![CDATA[unero_modern_basic_backoacks_banner]]></identifier>
+		</item>
+		<item>
+			<title><![CDATA[Unero Modern Leather Sneaker Banner]]></title>
+			<filename><![CDATA[/m/-/m-cat3.jpg]]></filename>
+			<url><![CDATA[]]></url>
+			<button><![CDATA[]]></button>
+			<text_align><![CDATA[top-left]]></text_align>
+			<content><![CDATA[<h3>Leather Sneaker</h3>
+<a href="#">Shop Now</a>]]></content>
+			<effect><![CDATA[mist-text]]></effect>
+			<custom_class><![CDATA[]]></custom_class>
+			<status><![CDATA[1]]></status>
+			<identifier><![CDATA[unero_modern_leather_sneaker_banner]]></identifier>
+		</item>
+		<item>
+			<title><![CDATA[Unero Modern Simple Snapbacks Banner]]></title>
+			<filename><![CDATA[/m/-/m-cat4.jpg]]></filename>
+			<url><![CDATA[]]></url>
+			<button><![CDATA[]]></button>
+			<text_align><![CDATA[top-left]]></text_align>
+			<content><![CDATA[<h3>Simple Snapbacks</h3>
+<a href="#">Shop Now</a>]]></content>
+			<effect><![CDATA[mist-text]]></effect>
+			<custom_class><![CDATA[]]></custom_class>
+			<status><![CDATA[1]]></status>
+			<identifier><![CDATA[unero_modern_simple_snapbacks_banner]]></identifier>
+		</item>
+	</promo_banner>
+	<theme_setting>
+		<general>
+			<footer>footer_3</footer>
+			<header>header_3</header>
+		</general>
+		<custom_style>
+			<style>.header .nav-main-menu li.link-colour-red a{color:#ff0000}
+.catalog-product-view .rotate-image{display: none}
+.cms-index-index  #placeholder-header {display: none !important;}</style>
+		</custom_style>
+	</theme_setting>
+
+</home>

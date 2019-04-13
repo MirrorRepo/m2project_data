@@ -1,0 +1,132 @@
+<?php $themeHelper = $this->helper('MGS\Mpanel\Helper\Data'); ?>
+
+<?php // Scroll To Top Function ?>
+<?php if($themeHelper->getStoreConfig('mgstheme/general/back_to_top')): ?>
+	<a href="" class="scroll-to-top"><i class="pe-7s-angle-up"></i></a>
+	<script type="text/javascript">
+		require([
+			'jquery'
+		], function(jQuery){
+			(function($) {
+				$(window).scroll(function(){
+					if ($(this).scrollTop() > 1) {
+						$('.scroll-to-top').css({bottom:"50px"});
+					} else {
+						$('.scroll-to-top').css({bottom:"-100px"});
+					}
+				});
+
+				$('.scroll-to-top').click(function(){
+					$('html, body').animate({scrollTop: '0px'}, 800);
+					return false;
+				});
+			})(jQuery);
+		});
+	</script>
+<?php endif ?>
+
+<?php // Loadmore Function ?>
+<script type="text/javascript">
+require([
+	'jquery', 'mgs_quickview', 'mgs/owlcarousel'
+], function(jQuery){
+	(function($) {
+		$(document).ready(function(){
+			$('.btn-loadmore').click(function(){
+				var el = $(this);
+				el.find('span').addClass('loading');
+				url = $(this).attr('href');
+				$.ajax({
+					url: url,
+					success: function(data,textStatus,jqXHR ){
+						var result = $.parseJSON(data);
+						if(result.content!=''){
+							$('#'+result.element_id).append(result.content);
+							$('.mgs-quickview').bind('click', function () {
+								var prodUrl = $(this).attr('data-quickview-url');
+								if (prodUrl.length) {
+									reInitQuickview($,prodUrl);
+								}
+							});
+						}
+						if(result.url){
+							el.attr('href', result.url);
+						}else{
+							el.remove();
+						}
+						
+						el.find('span').removeClass('loading');
+						
+					}
+				});
+				return false;
+			});
+		});
+		
+	})(jQuery);
+});
+</script>
+
+<?php //Ajax cart ?>
+<?php if (!$themeHelper->getStoreConfig('checkout/cart/redirect_to_cart')) : ?>
+	<script type="text/x-magento-init">
+	{
+		"[data-role=tocart-form], .form.map.checkout": {
+			"catalogAddToCart": {}
+		}
+	}
+	</script>
+<?php endif; ?>	
+
+<div class="mfp-loading-fullscreen" id="mgs-ajax-loading" style="display: none;"></div>
+
+<?php // Product Gallery ?>
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function ($) {
+        $(document).on("click",".parent__gallery-thumbnail .image-item",function(e){
+            $('.parent__gallery-thumbnail .image-item.active').removeClass('active');
+            var dataMove  = $(this).data('owlmove');
+            $('.product-gallery-base-carousel').trigger('to.owl.carousel', dataMove);
+            $(this).addClass('active');
+            
+        });
+    });
+</script>
+
+<?php // Header clone ?>
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function ($) {
+        $(document).ready(function(){
+			$('#switcher-language').clone().appendTo('.language');
+			$('#switcher-currency').clone().appendTo('.currency');
+			$('header .search-form').clone().appendTo('.top-search');
+			$('#main-Menucontent').clone().appendTo('.megamenu-clone');
+		});
+		
+		/* Custom dropdown */
+		$('.custom-toggle').click(function(){
+			if($(this).hasClass('open')){
+				$(this).removeClass('open');
+				 if($(window).width() < 1200){
+					 $('.dropdown-custom').slideUp();
+				 }else{
+					$(this).parent().find('> .dropdown-custom').removeClass('open');
+				}
+			}else{
+				 if($(window).width() < 1200){
+					 $('.custom-toggle').removeClass('open');
+					 $('.dropdown-custom').slideUp();
+					 $(this).addClass('open');
+					 $(this).parent().find('> .dropdown-custom').slideDown();
+				 }else{
+					$(this).addClass('open');
+					$(this).parent().find('> .dropdown-custom').addClass('open');
+				}
+			}
+		});
+    });
+</script>

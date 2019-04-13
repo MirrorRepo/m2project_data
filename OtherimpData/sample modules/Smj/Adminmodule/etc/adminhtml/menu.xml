@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Smj. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Smj_Adminmodule::smj_smj_index" title="Smj" module="Smj_Adminmodule"  sortOrder="20" dependsOnModule="Smj_Adminmodule" action="adminmodule/smj/index" resource="Smj_Adminmodule::smj_smj_index"/>
+<!--AddMenu-->
+    </menu>
+</config>

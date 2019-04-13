@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright © Cryozonic Ltd. All rights reserved.
+ *
+ * @package    Cryozonic_StripePayments
+ * @copyright  Copyright © Cryozonic Ltd (http://cryozonic.com)
+ * @license    Commercial (See http://cryozonic.com/licenses/stripe.html for details)
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="cryozonic_stripe" frontName="cryozonic-stripe">
+            <module name="Cryozonic_StripePayments" />
+        </route>
+    </router>
+</config>

@@ -1,0 +1,56 @@
+<?php
+$_productCollection = $block->getFeaturedProductCollection();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$objectManager =  \Magento\Framework\App\ObjectManager::getInstance();
+$proObj = $objectManager->create("\Magento\Catalog\Api\ProductRepositoryInterface");
+
+$_imageHelper = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Catalog\Helper\Image');
+
+if(count($_productCollection) > 0){
+?>
+<?php foreach ($_productCollection as $_product): ?>
+
+<?php 
+$product = $proObj->getById($_product['entity_id']);
+
+$prodImage  = $_imageHelper->init($product, 'image', ['type'=>'image'])->keepAspectRatio(true)->resize('220','293')->getUrl();
+?>
+<div class="col-32">
+<div class="asidex">
+<div class="cardx"><img style="width: 100%;" src="<?php echo $prodImage;?>" alt="<?php echo $prodImage;?>">
+<div class="container" style="color: black;">
+<h5><?php echo $product->getName();?></h5>
+<p>$ <?php echo $product->getFinalPrice()?></p>
+<p>
+<a  href="<?php echo $product->getProductUrl();?>">
+<button type="submit" title="Send enquiry" class="action tocart primary">
+
+<span style="font-size: 12px;font-weight: bold;"><?php echo __("Send enquiry")?></span>
+</button>
+</a>
+<!-- <?php
+
+  $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
+
+  $addToCartUrl =  $listBlock->getAddToCartUrl($product); 
+?>
+
+<form data-role="tocart-form" action="<?php echo $addToCartUrl; ?>" method="post"> 
+
+<?php echo $block->getBlockHtml('formkey')?>
+
+<button type="submit" title="Add to Cart" class="action tocart primary">
+
+<span style="font-size: 12px;font-weight: bold;"><?php echo __("Add to Cart")?></span>
+</button>
+</form>
+ --></p>
+</div>
+</div>
+</div>
+</div>
+
+<?php endforeach;?>
+<?php } else {?>
+<?php echo "No Record Found..";?>
+<?php } ?>

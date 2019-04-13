@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright © Cryozonic Ltd. All rights reserved.
+ *
+ * @package    Cryozonic_StripePayments
+ * @copyright  Copyright © Cryozonic Ltd (http://cryozonic.com)
+ * @license    Commercial (See http://cryozonic.com/licenses/stripe.html for details)
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/cryozonic/stripepayments/service" method="GET">
+        <service class="Cryozonic\StripePayments\Api\ServiceInterface" method="redirect_url"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

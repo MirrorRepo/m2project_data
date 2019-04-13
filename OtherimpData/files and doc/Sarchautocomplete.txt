@@ -1,0 +1,18 @@
+
+-categories
+    -first position
+    -radias condition
+
+-Flavours
+    -20(limits)
+    -radias condition
+
+-if there are no categories and flavours comes in searchind
+    result would empty
+
+-error message in response
+
+-when search cakes and do entered result will list of area cake
+
+
+

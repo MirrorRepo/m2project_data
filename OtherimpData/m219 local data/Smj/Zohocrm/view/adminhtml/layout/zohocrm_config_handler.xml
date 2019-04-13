@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Smj. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ *
+ * Smj_ZohoCrm extension
+ * NOTICE OF LICENSE
+ *
+ * @category  Smj
+ * @package   Smj_ZohoCrm
+ * @author Mukund
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="js">
+            <block class="Smj\Zohocrm\Block\Adminhtml\System\Config\GetAuth" template="Smj_Zohocrm::system/config/getauth.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

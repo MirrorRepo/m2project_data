@@ -1,0 +1,249 @@
+<?php
+$productcollections  = $block->getProductCollection();
+$helper = $this->helper('Medma\MarketPlace\Helper\Data');
+?>
+<div class="vendor_list">
+	<?php foreach($productcollections as $productcollection):?>
+		<?php
+			$product = $block->getProduct($productcollection->getId());
+			if($product->getVendor())
+			{
+				$product->getVendor();
+				$user = $block->getUser($product->getVendor());
+				$profile = $block->getProfile($product->getVendor());
+
+			}
+		?>
+ 		<?php if($product->getVendor()!= NULL):?>
+ 		<?php  if($user->getIsActive()): ?>
+ 		<?php  if($user->getIsActive()  == '1'):?>
+ 		<?php if($profile->getId() != NULL):?>
+ 		<div class="vendor-description">
+		<input type="hidden" value="<?php echo $product->getId();?>" id="product_id">
+       <h3 class="vendor_name"><b><a href="<?php echo $this->getUrl("marketplace/vendor/profile/id/".$profile->getId()."/"); ?>"><?php echo $user->getName() ?></a></b></h3>
+		<div style="float:left;padding-left: 10px;"> 
+			<div class="product_price"><a href="<?php echo $product->getProductUrl()?>"><?php echo $product->getName();?></a></div>
+		</div>		
+		<div  style="float:left;padding-left: 10px;">		
+		  <div class="product_price"><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($product->getFinalPrice());?></div>
+		</div> 
+        <div class="short_description"><p><?php echo $product->getShortDescription();?></p>
+        <?php if(isset($profile['agency_rating'])) { ?>
+		<p style="color:#006bb4;"><?php echo __('Seller Rating ')?><?php echo $profile['agency_rating'];?> </p>
+		<?php } ?>
+        </div>
+
+        <div style="width:50%;float:right;margin-bottom: 5px;">
+            
+       
+			<div class="custom_addtocart">
+				<?php $url = $this->getUrl("marketplace/vendor/enquire_submit");  ?>
+					<button type="button" title="<?php echo __('Send Enquiry') ?>" class="action primary tocart enquire_popup" onclick="buynowPopup()">
+						<span><?php echo __('Send Enquiry') ?></span>
+					 </button>	
+					 <img id="addloader_<?php echo $product->getId();?>" style="display:none;width:30px;float:right" src="<?php echo $block->getViewFileUrl('Medma_MarketPlace::images/35.gif');?>">
+            </div>  
+        </div>
+        </div>
+						<?php
+						$check_guest = $customerId  = '';
+						$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+						$customerSession =  $objectManager->get('Magento\Customer\Model\Session');
+						if($customerSession->isLoggedIn()) {
+							$customerId = $customerSession->getCustomer()->getId();
+						}else{
+                            $check_guest = 1;
+						}
+
+						?>
+						<div  style="display:none" id="enquire_popup_content">
+							<form method="post" id="enquire-form" action="<?php echo $this->getUrl('marketplace/vendor/enquirysend');?>" enctype="multipart/form-data" autocomplete="off">
+
+								<input type="hidden" value="<?php echo $check_guest;?>" name="check_guest" id="check_guest"/>
+								<input type="hidden" value="<?php echo $user->getUserId();?>" name="seller_Id" id="seller_Id"/>
+								<input type="hidden" value="<?php echo $user->getFirstName()." ".$user->getLastName();?>" name="seller_name" id="seller_name"/>
+                                <input type="hidden" value="<?php echo $customerId;?>" name="customer_Id" id="customer_Id"/>
+								<input type="hidden" value="<?php echo $product->getName();?>" name="product_name" id="product_name">
+								<input type="hidden" value="<?php echo $product->getSku();?>" name="product_sku" id="product_sku">
+									<fieldset class="fieldset">
+
+										<div class="field name required">
+											<label class="label" for="product_sku"><span><?php /* @escapeNotVerified */ echo __('SKU')?></span></label>
+											<div class="control">
+												<input readonly name="product_sku" id="product_sku" value="<?php echo $product->getSku();?>" title="<?php /* @escapeNotVerified */ echo __('Quantity') ?>"  class="input-text" type="text" data-validate="{required:true}"/>
+											</div>
+										</div>
+										<div class="field name required">
+											<label class="label" for="price"><span><?php /* @escapeNotVerified */ echo __('Price')?></span></label>
+											<div class="control">
+												<input readonly name="price"  id="price" value="<?php echo number_format($product->getPrice(),2);?>" title="<?php /* @escapeNotVerified */ echo __('price') ?>"  class="input-text" type="text" data-validate="{required:true}"/>
+
+											</div>
+										</div>
+
+
+										<div class="field name required">
+											<label class="label" for="quantity"><span><?php /* @escapeNotVerified */ echo __('Quantity')?></span></label>
+											<div class="control">
+												<input style="width:10%;"  name="quantity" id="quantity"  title="<?php /* @escapeNotVerified */ echo __('Quantity') ?>"  class="input-text" type="text" data-validate="{required:true}"/>
+												<select name="op-measure" id="option-measurement" style="padding: 5px;width: 8%;">
+													<?php $options = $helper->getAvailableMeasurement();?>
+													<?php foreach ($options as $options1):?>
+														<option val="<?php echo $options1['value']?>"><?php echo $options1['label'] ?></option>
+													<?php endforeach;?>
+												</select>
+											</div>
+										</div>
+
+
+										<div class="field name required">
+											<label class="label" for="name"><span><?php /* @escapeNotVerified */ echo __('Name') ?></span></label>
+											<div class="control">
+												<input name="name" id="name" title="<?php /* @escapeNotVerified */ echo __('Name') ?>"  class="input-text" type="text" data-validate="{required:true}"/>
+											</div>
+										</div>
+
+
+										<div class="field email required">
+										<label class="label" for="email"><span><?php /* @escapeNotVerified */ echo __('Email') ?></span></label>
+										<div class="control">
+											<input name="email" id="email" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"/>
+										</div>
+									</div>
+
+									<div class="field comment required">
+										<label class="label" for="msg"><span><?php /* @escapeNotVerified */ echo __('Enquiry') ?></span></label>
+										<div class="control">
+											<textarea name="msg" id="msg" title="<?php /* @escapeNotVerified */ echo __('Enquiry') ?>"  class="input-text" cols="5" rows="3" data-validate="{required:true}"></textarea>
+										</div>
+									</div>
+								</fieldset>
+								<div class="actions-toolbar">
+									<div class="primary">
+										<button type="submit" title="<?php /* @escapeNotVerified */ echo __('Submit') ?>" class="submit-enquiry action submit primary">
+											<span><?php /* @escapeNotVerified */ echo __('Submit') ?></span>
+										</button>
+										<img id="addloader" style="display:none;width:30px;" src="<?php echo $block->getViewFileUrl('Medma_MarketPlace::images/35.gif');?>">
+
+									</div>
+								</div>
+                              </form>
+
+						</div>
+
+<script type="text/x-magento-init">
+{
+"#enquire-form": {
+"validation": {}
+}
+}
+</script>
+
+						<style>
+.vendor-description
+{
+	width:100%;float:left;border:1px solid #ccc;opacity: 0.9;margin-bottom: 10px;
+	}	
+.price-wrapper
+{
+	float:left;padding-left: 10px;
+	}
+.vendor_name
+{
+	padding-left: 10px;
+}	
+.product_price
+{
+    font-weight: bold;
+    font-size: 15px;
+}
+.sellerimage
+{
+	width:100px;
+}
+.custom_addtocart
+{
+	margin-left:20px;
+    width: 50%;
+    float: right;
+    margin-top:-5px;
+}
+.custom_qty
+{
+	float: left;
+}
+.short_description
+{
+	float:left;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.qty-wrapper
+{
+	width:50%;float:right;margin-bottom: 5px;
+	}
+</style>
+        <?php endif; ?>
+        <?php endif;?>
+        <?php endif; ?>
+        <?php endif; ?>
+	<?php endforeach;?>
+</div>
+
+<style>
+.modal-popup .modal-footer
+{
+	display:block;
+	}
+	.box-tocart{display:none !important}
+</style>
+
+
+<script type="text/javascript">
+	function buynowPopup() {
+		require(
+			[
+				'jquery',
+				'Magento_Ui/js/modal/modal'
+			],
+			function ($,
+					  modal) {
+				var options = {
+					type: 'popup',
+					responsive: true,
+					innerScroll: true,
+					title: 'Enquiry',
+
+				};
+
+				var popup = modal(options, $('#enquire_popup_content'));
+
+				$('#enquire_popup_content').modal(options).modal('openModal');
+				$('.modal-footer').hide();
+
+			}
+		);
+	}
+
+	/*require(['jquery', 'jquery/ui'], function($)
+	{var name = jQuery("#name").val();
+	var email = jQuery("#email").val();
+	var message = jQuery("#msg").val();
+	var seller_id = jQuery("#seller_id").val();
+	var customer_id = jQuery("#customer_id").val();
+	jQuery(".submit-enquiry").click(function() {
+		jQuery('#addloader').css('display','block');
+		jQuery.ajax({
+			type: 'post',
+			data: {'name':name,'email': email,'message': message,'seller_id': seller_id,'customer_id': customer_id},
+			url: "<?php echo $this->getUrl('marketplace/vendor/enquirysend');?>",
+			success: function (data) {
+				jQuery('#addloader').css('display', 'none');
+				window.location.href="<?php echo $this->getUrl('marketplace/vendor/enquirysend');?>";
+			},
+		});
+	 });
+
+		
+	});*/
+</script>

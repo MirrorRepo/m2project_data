@@ -1,0 +1,107 @@
+<?php
+$currentId= $_GET['id'];
+$value = $block->getRequirementView($currentId);
+?>
+<style type="text/css">
+	.customer_message tr  td {width: 50%}
+
+</style>
+
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+$customerRepository = $objectManager->get('\Magento\Customer\Api\CustomerRepositoryInterface');
+$customer = $customerRepository->getById(2);
+
+            echo "<pre>";
+            print_r($customer->__toArray());
+
+
+
+            ?>
+<table class="customer_message" style="width:100%">
+
+<tr>
+			 <td ><?php echo __('Title')?></td>
+			 <td><?php echo $value['title']?></td>
+</tr>
+
+<tr>
+			<td><?php echo __('Volume')?></td>
+			 <td><?php echo $value['volume']?></td>
+</tr>
+
+<tr>
+			<td><?php echo __('Product Category')?></td>
+			<td><?php echo $value['product_cat']?></td>
+</tr>
+
+<tr>
+			<td><?php echo __('Requirements')?></td>
+			<td><?php echo $value['requirements']?></td>
+</tr>
+
+<tr>
+			<td><?php echo __('Last date of submission')?></td>
+			<td><?php echo $value['ldos']?></td>
+</tr>
+
+
+<tr>
+			<td><?php  echo __('Image / Attachment')?></td>
+			  <td><a  target="_blank" href="<?php  echo $this->getUrl() .'media/smj/pathofdoc/'.$value['image_upload']?>"><?php echo $value['image_upload']?></a></td>
+</tr>
+
+
+</table>
+
+<br>
+
+<div id="contact_now_popup_content">
+ <table class="customer_message" style="width:100%">
+
+           
+
+ </table>
+</div>
+
+
+<form action="<?php echo $block->getUrl('marketplace/vendor/requirementemail')?>" method="post"> 
+<div class="actions">
+<input type="hidden" value="<?php echo  $currentId;?>" name="cust_id" />
+                <button  class="action contactnow primary" title="Contact Now" type="submit" style="margin-top: 35px">
+                    <span>Contact Now</span>
+                </button>
+            </div>
+</form>
+
+<script type="text/javascript">
+	require(
+			[
+				'jquery',
+				'Magento_Ui/js/modal/modal'
+			],
+			function ($,
+					  modal) {
+				var options = {
+					type: 'popup',
+					responsive: true,
+					innerScroll: true,
+					title: 's',
+
+				};
+
+				var popup = modal(options, $('#contact_now_popup_content'));
+
+
+				 $(".contactnow").on('click',function(){
+                   $("#contact_now_popup_content").modal("openModal");
+                });
+				$('.modal-footer').hide();
+
+		
+			}
+		);
+
+</script>

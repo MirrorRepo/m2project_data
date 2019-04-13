@@ -1,0 +1,77 @@
+<?php  
+$vendors = $block->getCollection();
+$text = $this->getRequest()->getParam('key');
+?>
+
+<style>
+.vendor_list
+{
+	margin-top:20px;
+}
+.vendor_list #profile_wrapper {
+    width: 100%;
+    float: left;
+    margin-top:10px;
+}
+</style>
+
+
+    <?php
+    $objectManager =  \Magento\Framework\App\ObjectManager::getInstance();
+    $msgs = $objectManager->create("Medma\MarketPlace\Model\Enquirymessage")
+            ->getCollection();
+    $msgs->addFieldToFilter(array('product_sku','municipality','province','product_name','seller_name'
+                ),
+        array(
+               array('like'=>'%'.$text.'%'),
+               array('like'=>'%'.$text.'%'),
+               array('like'=>'%'.$text.'%'),
+               array('like'=>'%'.$text.'%'),
+               array('like'=>'%'.$text.'%')
+           ));
+    if(count($msgs) > 0):
+        $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+        $mediaUrl =  $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+        ?>
+        <table class="customer_message" style="width:100%">
+            <tr>
+                <th><?php echo __('Sr. No.')?></th>
+                <th><?php echo __('Product Name')?></th>
+                <th><?php echo __('Product Sku')?></th>
+                <th><?php echo __('Product Image') ?></th></th>
+                <th><?php echo __('Quanity') ?></th>
+                <th><?php echo __('Price')?></th>
+
+                <th><?php echo __('View')?></th>
+            </tr>
+            <?php
+            $i = 1;
+            foreach($msgs as $msg):
+                $productDetails = $block->getProductDetails($msg['product_sku']);
+                $price = $productDetails->getPrice();
+                if($productDetails->getSpecialPrice()){
+                    $price = $productDetails->getSpecialPrice();
+                }
+                ?>
+                <tr class="message-tr">
+                    <th><?php echo $i;?></th>
+                    <th><?php echo $productDetails->getName()?></th>
+                    <th><?php echo $msg['product_sku'];?></th>
+                    <th style="width: 12%"><img  src="<?php echo $mediaUrl."catalog/product/".$productDetails['small_image'];?>" /></th>
+                    <th><?php echo $msg['quantity'];?></th>
+                    <th><?php echo $price;?></th>
+                    <th><?php echo $msg['msg'];?></th>
+
+                    <th><a href="<?php echo $this->getUrl('marketplace/customer/requiremessageboxview?msg_id='.$msg['entity_id'])?>"><?php echo 'View More';?></a></th>
+                </tr>
+                <?php $i++;endforeach;?>
+        </table>
+    <?php else:?>
+    <span><?php echo __('No Record found !!!!')?></span>
+   <?php endif;
+    ?>
+    <style>
+        .customer_message tr.message-tr th {font-weight:normal !important}
+    </style>
+
+

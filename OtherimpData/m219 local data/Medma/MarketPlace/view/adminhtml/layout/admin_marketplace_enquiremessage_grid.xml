@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Evince
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Evince.com license that is
+ * available through the world-wide-web at this URL:
+ *   
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Evince
+ * @package     Evince_Mainslider
+ * @copyright   Copyright (c) 2015-2016 Evince Development Pvt. Ltd (http://www.evincedev.com/)
+ *   
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <update handle="formkey"/>
+    <container name="root">
+        <block class="Medma\MarketPlace\Block\Adminhtml\Enquiremessage\Grid" name="admin.block.slider.grid"/>
+    </container>
+</layout>

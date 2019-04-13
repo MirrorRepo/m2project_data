@@ -1,0 +1,3 @@
+$oAuthClient = ZohoOAuth::getClientInstance();
+$grantToken = "{1000.f1b26ba7f3c4f40236c4e0240b7eb8e2.b2a02a04f78f711507db36c4d06b8b99}";
+$oAuthTokens = $oAuthClient->generateAccessToken($grantToken);

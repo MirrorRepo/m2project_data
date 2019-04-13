@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Bakeway_Uc::uicompo" title="Ui Component" module="Bakeway_Uc" sortOrder="19" resource="Bakeway_Uc::uicompo"/>
+        <add id="Bakeway_Uc::uicompogrid" title="Ui Component Grid" module="Bakeway_Uc" sortOrder="10" parent="Bakeway_Uc::uicompo" action="uicompo/uc/index" resource="Bakeway_Uc::uicompogrid"/>
+    </menu>
+</config>

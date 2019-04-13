@@ -1,0 +1,190 @@
+<!-- 
+session based api called  program sarted
+-->
+
+
+<!-- 
+session based api called  program ended
+-->
+
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$block = $objectManager->get('Medma\MarketPlace\Block\Requirements');
+$dataCollection = $block->getRequirementsCollection()->getData();
+$customerId = [];
+if(count($dataCollection) > 0 ){
+          foreach($dataCollection as $dataDetails)
+             {
+               $customerId[] =   $dataDetails['customer_id'];
+             }
+}
+?>
+
+
+<!-- 
+search result
+-->
+<?php 
+$bulletinDataresult = $this->getBulletinCollection();
+
+$customerColl = $objectManager->create('Magento\Customer\Model\Customer')->getCollection();
+
+$customerColl->getSelect()->joinLeft(
+                        ['cbb' => $customerColl->getTable('smj_bulletin_board')], 'e.entity_id=cbb.customer_id', ['title','product_cat','ldos', 'customer_id', 'approve']
+                ); 
+$customerColl->getSelect()->where("cbb.approve =?",1);
+?>
+
+
+
+
+ <?php 
+ if(count($customerColl) > 0 && empty($bulletinDataresult) ){ ?>
+
+<div class="bbresult-main-block">
+<table class="customer_message" style="width:100%;margin-bottom: 50px">
+<tr>
+      <th><?php echo __('Title')?></th>
+      <th><?php echo __('Product Category')?></th>
+      <th><?php echo __('Buyer Name')?></th>
+      <th><?php echo __('Buyer Email')?></th>
+      <th><?php echo __('Last Date Of Submission')?></th>
+</tr>
+<?php 
+foreach ($customerColl->getData() as $value) {
+
+
+?>
+<tr> 
+    <td><?php echo $value['title']?></td>
+    <td><?php echo $value['product_cat']?></td>
+    <td><?php echo $value['firstname']." ".$value['lastname']?></td>
+    <td><?php echo $value['email']?></td>
+    <td><?php echo $value['ldos']?></td>
+    <td><a href="<?php echo $block->getUrl('marketplace/vendor/requirementsview'). "?id=". $value['entity_id']?>""><?php echo __('view')?></a></td>
+</tr>
+
+  
+<?php 
+} 
+?>
+</table>
+</div>
+
+
+ <?php }   ?>
+
+
+<?php
+if(!empty($bulletinDataresult)){ 
+
+?>
+  
+<div class="bbresult-main-block">
+<table class="customer_message" style="width:100%;margin-bottom: 50px">
+<tr>
+      <th><?php echo __('Title')?></th>
+      <th><?php echo __('Product Category')?></th>
+      <th><?php echo __('Buyer Name')?></th>
+      <th><?php echo __('Buyer Email')?></th>
+      <th><?php echo __('Last Date Of Submission')?></th>
+</tr>
+<?php 
+foreach ($bulletinDataresult as $value) {
+  $customer =   $block->getCustomerDetails($value['entity_id']);
+  $custId = $value['entity_id'];
+  $custData =  $block->getBulletinDetails($custId);
+if(in_array($custId,$customerId)) 
+  {
+?>
+<tr> 
+    <td><?php echo $value['title']?></td>
+    <td><?php echo $value['product_cat']?></td>
+    <td><?php echo $customer['firstname']." ".$customer['lastname']?></td>
+    <td><?php echo $customer['email']?></td>
+    <td><?php echo $value['ldos']?></td>
+    <td><a href="<?php echo $block->getUrl('marketplace/vendor/requirementsview'). "?id=". $value['customer_id']?>""><?php echo __('view')?></a></td>
+</tr>
+
+  
+<?php 
+}  }
+
+}
+?>
+</table>
+
+
+
+<div class="col-s-12">
+<form class="form-requirement-search" action="<?php echo $this->getUrl('marketplace/vendor/searchrequirement')?>" method="post" 
+  id="form-requirement-search" novalidate="novalidate">
+<fieldset class="fieldset">
+<h3><strong>Search For Tenders</strong></h3>
+        <div class="cust-col-3 menu">
+          <div class="field name">
+                <label class="label" for="name">
+                    <span>Product Name</span>
+                </label>
+                <div class="control">
+                                <input type="text" name="name" id="name" value="" title="Product Name" class="input-text validate-length maximum-length-255" maxlength="128">
+                 </div>
+           </div>
+
+  <div class="field field-name-longitude required">
+        <label class="label" for="location"><span><?php echo __('Location'); ?></span></label>
+        <div class="control">
+            <?php $getAllProvinces =  $this->helper("Medma\MarketPlace\Helper\Data")->getAllMunicipalities();?>
+            <select class="input-text validate-length maximum-length-255"  name="location" id="location"> 
+            <?php foreach($getAllProvinces  as $key => $val) {
+                         echo "<option val=".$key.">".$val."</option>"; 
+
+            }?>
+            </select>
+         </div>
+
+      
+    </div>
+  <br>
+
+    <div class="field field-name-longitude required">
+        <label class="label" for="scorecard_level"><span><?php echo __('Scorecard Level'); ?></span></label>
+        <div class="control">
+            <?php $getAllProvinces =  $this->helper("Medma\MarketPlace\Helper\Data")->getAllMunicipalities();?>
+            <select name="scorecard_level" id="scorecard_level"> 
+            <?php foreach($getAllProvinces  as $key => $val) {
+                         echo "<option val=".$key.">".$val."</option>"; 
+
+            }?>
+            </select>
+         </div>
+
+      
+    </div>
+  <br>
+
+    <div class="field field-name-longitude required">
+        <label class="label" for="industry"><span><?php echo __('Industry'); ?></span></label>
+        <div class="control">
+            <?php $getAllProvinces =  $this->helper("Medma\MarketPlace\Helper\Data")->getAllMunicipalities();?>
+            <select name="industry" id="industry"> 
+            <?php foreach($getAllProvinces  as $key => $val) {
+                         echo "<option val=".$key.">".$val."</option>"; 
+
+            }?>
+            </select>
+         </div>
+
+      
+    </div>
+              
+    </fieldset>
+<div class="actions-toolbar">
+  <div class="primary">
+    <button type="submit" class="action search primary" title="Search">
+        <span>Search</span>
+    </button>
+  </div>
+</div>
+</form>
+ </div>

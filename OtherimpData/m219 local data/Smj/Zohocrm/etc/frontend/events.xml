@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Smj. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ *
+ * Smj_ZohoCrm extension
+ * NOTICE OF LICENSE
+ *
+ * @category  Smj
+ * @package   Smj_ZohoCrm
+ * @author Mukund
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success">
+        <observer name="zohocrm_register" instance="Smj\Zohocrm\Observer\Customer\Register"/>
+    </event>
+    <event name="customer_address_save_commit_after">
+        <observer name="zohocrm_updateCustomer" instance="Zohocrm\ZohoCrm\Observer\Customer\Update"/>
+    </event>
+    <event name="sales_order_save_commit_after">
+        <observer name="zohocrm_syncOrder" instance="Smj\Zohocrm\Observer\SalesOrder\Create"/>
+    </event>
+    <event name="sales_order_invoice_save_commit_after">
+        <observer name="zohocrm_syncInvoice" instance="Smj\Zohocrm\Observer\Invoice\Create"/>
+    </event>
+    <event name="controller_action_predispatch_newsletter">
+        <observer name="zohocrm_syncSubscriber" instance="Smj\Zohocrm\Observer\Customer\Subscriber"/>
+    </event>
+</config>

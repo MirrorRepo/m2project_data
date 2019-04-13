@@ -1,0 +1,77 @@
+<?php
+
+$msgs = $block->getCollection();
+$text = $this->getRequest()->getParam('key');
+
+if(is_object($msgs)):
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+	$mediaUrl =  $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+	?>
+	<form action="<?php echo $this->getUrl('marketplace/customer/searchresult')?>" method="get" onsubmit="return checksearch()">
+		<input type="text" name="key" value="<?php if($text){echo $text;}?>" id="searchtext" placeholder="Search By Sku / Municipality / Province / Product Name / Seller Name....." style="width:80%;">
+		<!--<input type="text" name="keymunicipality" value="<?php if($text){echo $text;}?>" id="searchtext" placeholder="Search By Municipality....." style="width:20%;">
+
+		<input type="text" name="keyprovince" value="<?php if($text){echo $text;}?>" id="searchtext" placeholder="Search By Province....." style="width:20%;">
+
+		<br><br>
+		<input type="text" name="keyproductname" value="<?php if($text){echo $text;}?>" id="searchtext" placeholder="Search By Product Name....." style="width:20%;">
+
+
+		<input type="text" name="keysellername" value="<?php if($text){echo $text;}?>" id="searchtext" placeholder="Search By Seller Name...." style="width:20%;">
+-->
+		<button id="submit"><span>Submit</span></button>
+	</form>
+	<table class="customer_message" style="width:100%">
+		<tr>
+			<th><?php echo __('Sr. No.')?></th>
+			<th><?php echo __('Product Name')?></th>
+			<th><?php echo __('Product Sku')?></th>
+			<th><?php echo __('Product Image') ?></th></th>
+			<th><?php echo __('Quanity') ?></th>
+			<th><?php echo __('Price')?></th>
+
+			<th><?php echo __('View')?></th>
+		</tr>
+		<?php
+		  $i = 1;
+		  foreach($msgs as $msg):
+			$productDetails = $block->getProductDetails($msg['product_sku']);
+            $price = $productDetails->getPrice();
+			if($productDetails->getSpecialPrice()){
+				$price = $productDetails->getSpecialPrice();
+			}
+			?>
+			<tr class="message-tr">
+				<th><?php echo $i;?></th>
+				<th><?php echo $productDetails->getName()?></th>
+				<th><?php echo $msg['product_sku'];?></th>
+				<th style="width: 12%"><img  src="<?php echo $mediaUrl."catalog/product/".$productDetails['small_image'];?>" /></th>
+				<th><?php echo $msg['quantity'];?></th>
+				<th><?php echo $price;?></th>
+				<th><?php echo $msg['msg'];?></th>
+
+					<th><a href="<?php echo $this->getUrl('marketplace/customer/requiremessageboxview?msg_id='.$msg['entity_id'])?>"><?php echo 'View More';?></a></th>
+			</tr>
+		<?php $i++;endforeach;?>
+	</table>
+	<?php else:
+	echo $msgs;
+	endif;
+?>
+<style>
+	.customer_message tr.message-tr th {font-weight:normal !important}
+</style>
+
+<script type="text/javascript">
+	function checksearch() {
+		var srachquery = document.getElementById('searchtext').value;
+		if(srachquery === "")
+		{
+			alert('Search By Sku / Municipality / Province / Product Name / Seller Name.....')
+			return false;
+		}
+		return true;
+	}
+
+</script>

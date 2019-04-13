@@ -1,0 +1,53 @@
+Bakery id	Bakery name	Bakery location	Pickup / Delivery or both	City
+ 	 	 	 	 
+SELECT mu.seller_id as "Bakery id",mu.shop_title as "Bakery name",bpl.store_locality_area as "Bakery location	",bpl.store_locality_area as "Locality Area",bpl.is_delivery_active,bpl.is_pickup_active,bpl.is_grab_active,
+(select name from bakeway_cities  as bc where mu.store_city = bc.id ) as "City"
+FROM marketplace_userdata as mu
+left join bakeway_partner_locations as bpl on mu.seller_id = bpl.seller_id
+where mu.is_live_ready = 1 
+
+----------------------------------------------------------------------------------------------------------------
+Fetch records for Bakeway Orders CRM
+
+SELECT o.entity_id                            AS 'Order Id', 
+       o.increment_id                         AS 'Increment Id', 
+       o.customer_email                       AS 'Email', 
+       a.telephone                            AS 'Mobile', 
+       i.custom_message                       AS 'Occasion Name', 
+       Cast(o.created_at AS date)             AS 'Order Created Date', 
+       Cast(o.created_at AS time)             AS 'Order Created Date Time', 
+       Cast(o.delivery_time AS date)          AS 'Order Delivery Date', 
+       Cast(o.delivery_time AS time)          AS 'Order Delivery Date Time', 
+       (SELECT Group_concat(firstname, "", lastname) 
+        FROM   sales_order_address AS a 
+        WHERE  a.address_type = "billing" 
+               AND a.parent_id = o.entity_id) AS "Sender Name", 
+       (SELECT Group_concat(firstname, "", lastname) 
+        FROM   sales_order_address AS a 
+        WHERE  a.address_type = "shipping" 
+               AND a.parent_id = o.entity_id) AS "Receiver Name", 
+       c.dob                                  AS 'Dob' 
+       
+FROM   `sales_order` AS o
+       LEFT JOIN sales_order_item AS i 
+         ON o.entity_id = i.order_id 
+       LEFT JOIN sales_order_address AS a 
+         ON o.entity_id = a.parent_id 
+       LEFT JOIN customer_entity AS c 
+         ON c.entity_id = o.customer_id 
+       where o.created_at between "2018-02-01 00:00:01" to  "2018-03-31 23:59:59"
+       GROUP  BY o.entity_id
+----------------------------------------------------------------------------------------------------------------
+
+# mytop --prompt -d bakeway_26_11_2018
+Password:
+
+ query_cache_limit            | 1048576  |
+| query_cache_min_res_unit     | 4096     |
+| query_cache_size             | 16777216 |
+| query_cache_type             | ON       |
+| query_cache_wlock_invalidate
+
+
+----------------------------------------------------------------------------------------------------------------
+

@@ -1,0 +1,327 @@
+<home>
+	<section>
+		<name><![CDATA[block17]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[full-width-boxed]]></class>
+		<background><![CDATA[]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[1]]></fullwidth>
+		<padding_top><![CDATA[]]></padding_top>
+		<padding_bottom><![CDATA[]]></padding_bottom>
+		<block_position><![CDATA[1]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block18]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[]]></class>
+		<background><![CDATA[]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[0]]></fullwidth>
+		<padding_top><![CDATA[60]]></padding_top>
+		<padding_bottom><![CDATA[]]></padding_bottom>
+		<block_position><![CDATA[2]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block19]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[column-padding-5]]></class>
+		<background><![CDATA[]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[0]]></fullwidth>
+		<padding_top><![CDATA[]]></padding_top>
+		<padding_bottom><![CDATA[]]></padding_bottom>
+		<block_position><![CDATA[3]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block20]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[]]></class>
+		<background><![CDATA[]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[0]]></fullwidth>
+		<padding_top><![CDATA[55]]></padding_top>
+		<padding_bottom><![CDATA[]]></padding_bottom>
+		<block_position><![CDATA[4]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block21]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[full-width-boxed]]></class>
+		<background><![CDATA[]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[1]]></fullwidth>
+		<padding_top><![CDATA[50]]></padding_top>
+		<padding_bottom><![CDATA[60]]></padding_bottom>
+		<block_position><![CDATA[5]]></block_position>
+	</section>
+	<section>
+		<name><![CDATA[block22]]></name>
+		<theme_name><![CDATA[]]></theme_name>
+		<block_cols><![CDATA[12]]></block_cols>
+		<tablet_cols><![CDATA[["12"]]]></tablet_cols>
+		<mobile_cols><![CDATA[["12"]]]></mobile_cols>
+		<block_class><![CDATA[[""]]]></block_class>
+		<class><![CDATA[]]></class>
+		<background><![CDATA[]]></background>
+		<background_image><![CDATA[]]></background_image>
+		<background_repeat><![CDATA[0]]></background_repeat>
+		<background_cover><![CDATA[0]]></background_cover>
+		<parallax><![CDATA[0]]></parallax>
+		<fullwidth><![CDATA[0]]></fullwidth>
+		<padding_top><![CDATA[]]></padding_top>
+		<padding_bottom><![CDATA[30]]></padding_bottom>
+		<block_position><![CDATA[6]]></block_position>
+	</section>
+	<block>
+		<block_name><![CDATA[block17-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[2]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12 hidden-xs]]></class>
+		<block_content><![CDATA[<div style="height: 60px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block18-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[<div class="content-heading">
+<h3 class="title">Featured Collections</h3>
+<div class="block-note">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  <br>Excepteur sint occaecat cupidatat non proident..</div>
+</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block20-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[0]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12 hidden-xs]]></class>
+		<block_content><![CDATA[<div style="height: 60px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block21-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[0]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12 hidden-xs]]></class>
+		<block_content><![CDATA[<div style="height: 60px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block21-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[2]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12 hidden-xs]]></class>
+		<block_content><![CDATA[<div style="height: 60px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block22-0]]></block_name>
+		<type><![CDATA[latest_posts]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"title":"From Our Blog","additional_content":"","animation":"","animation_delay":"","post_category":[""],"number_of_posts":"3","items":"3","template":"default.phtml","show_thumbnail":"1","show_short_content":"1","limit_characters_short_content":"150","number_row":"1","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","view_as":0,"autoplay":0,"stop_auto":0,"navigation":0,"pagination":0}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12]]></class>
+		<block_content><![CDATA[{{widget type="MGS\Blog\Block\Widget\Latest" mgs_panel_title="From Our Blog" post_category="" number_of_posts="3" items="3" show_thumbnail="1" mgs_panel_note="" template="widget/default.phtml" show_short_content="1" limit_characters_short_content="150"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block22-0]]></block_name>
+		<type><![CDATA[static]]></type>
+		<position><![CDATA[2]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":""}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[col-xs-12 hidden-xs]]></class>
+		<block_content><![CDATA[<div style="height: 100px;">&nbsp;</div>]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block17-0]]></block_name>
+		<type><![CDATA[owl_banner]]></type>
+		<position><![CDATA[3]]></position>
+		<setting><![CDATA[{"block_link":"","animation":"","animation_delay":"","removeimg":["",""],"html_slider":"<div data-text-position=\"middle\" data-text-animate=\"zoomIn\" class=\"item zoomIn\"><a style=\"background-image:url(http:\/\/xxx.local\/unero225\/pub\/media\/wysiwyg\/slider\/s3.jpg)\" class=\"item-image\" href=\"\"><img class=\"img-responsive\" src=\"http:\/\/xxx.local\/unero225\/pub\/media\/wysiwyg\/slider\/s3.jpg\" alt=\"\"><\/a><div class=\"container slide-text middle\"><div class=\"inner-text\"><div class=\"white text-center\">\r\n<h3>UNERO<\/h3>\r\n<p>Fashion &amp; Furniture<\/p>\r\n<\/div><\/div><\/div><\/div><div data-text-position=\"middle\" data-text-animate=\"zoomIn\" class=\"item zoomIn\"><a style=\"background-image:url(http:\/\/xxx.local\/unero225\/pub\/media\/wysiwyg\/slider\/s9.jpg)\" class=\"item-image\" href=\"\"><img class=\"img-responsive\" src=\"http:\/\/xxx.local\/unero225\/pub\/media\/wysiwyg\/slider\/s9.jpg\" alt=\"\"><\/a><div class=\"container slide-text middle\"><div class=\"inner-text\"><div class=\"white text-center\">\r\n<h3>UNERO<\/h3>\r\n<p>Fashion &amp; Furniture<\/p>\r\n<\/div><\/div><\/div><\/div>","offset":"","effect":"1","speed":"","navtemple":"1","loop":"1","fullscreen":0,"autoplay":0,"stop_auto":0,"navigation":0,"pagination":0,"fullheight":0}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[]]></class>
+		<block_content><![CDATA[{{block class="MGS\Mpanel\Block\Widget\OwlCarousel" fullscreen="0" autoplay="0" stop_auto="0" navigation="0" offset="" fullheight="0" pagination="0" loop="1" speed="" html_slider="&lt;div data-text-position=&quot;middle&quot; data-text-animate=&quot;zoomIn&quot; class=&quot;item zoomIn&quot;&gt;&lt;a style=&quot;background-image:url(http://xxx.local/unero225/pub/media/wysiwyg/slider/s3.jpg)&quot; class=&quot;item-image&quot; href=&quot;&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://xxx.local/unero225/pub/media/wysiwyg/slider/s3.jpg&quot; alt=&quot;&quot;&gt;&lt;/a&gt;&lt;div class=&quot;container slide-text middle&quot;&gt;&lt;div class=&quot;inner-text&quot;&gt;&lt;div class=&quot;white text-center&quot;&gt;
+&lt;h3&gt;UNERO&lt;/h3&gt;
+&lt;p&gt;Fashion &amp;amp; Furniture&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div data-text-position=&quot;middle&quot; data-text-animate=&quot;zoomIn&quot; class=&quot;item zoomIn&quot;&gt;&lt;a style=&quot;background-image:url(http://xxx.local/unero225/pub/media/wysiwyg/slider/s9.jpg)&quot; class=&quot;item-image&quot; href=&quot;&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://xxx.local/unero225/pub/media/wysiwyg/slider/s9.jpg&quot; alt=&quot;&quot;&gt;&lt;/a&gt;&lt;div class=&quot;container slide-text middle&quot;&gt;&lt;div class=&quot;inner-text&quot;&gt;&lt;div class=&quot;white text-center&quot;&gt;
+&lt;h3&gt;UNERO&lt;/h3&gt;
+&lt;p&gt;Fashion &amp;amp; Furniture&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" navtemple="1" effect="1" template="widget/owl_slider.phtml"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block20-0]]></block_name>
+		<type><![CDATA[category_products]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"title":"Popular Products","additional_content":"","animation":"","animation_delay":"","limit":"8","perrow":"4","numbercol":"1","percol":"","template":"grid.phtml","ratio":"1","loadmore":"1","number_row":"1","category_id":["5","12","19","20"],"use_tabs":"1","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","use_slider":0,"autoplay":0,"stop_auto":0,"navigation":0,"pagination":0}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[]]></class>
+		<block_content><![CDATA[{{block class="MGS\Mpanel\Block\Products\Category" mgs_panel_title="Popular Products" mgs_panel_note="" limit="8" ratio="1" category_ids="5,12,19,20" use_slider="0" loadmore="1" template="products/category_products/category-tabs.phtml" perrow="4"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block21-0]]></block_name>
+		<type><![CDATA[promo_banner]]></type>
+		<position><![CDATA[3]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":"","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","banner_id":"drak-image"}]]></setting>
+		<col><![CDATA[12]]></col>
+		<class><![CDATA[]]></class>
+		<block_content><![CDATA[{{widget type="MGS\Promobanners\Block\Widget\Banner" banner_id="drak-image" template="banner.phtml"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block19-0]]></block_name>
+		<type><![CDATA[promo_banner]]></type>
+		<position><![CDATA[3]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":"","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","banner_id":"drak1"}]]></setting>
+		<col><![CDATA[8]]></col>
+		<class><![CDATA[col-sm-12 col-xs-12 margin-bottom10]]></class>
+		<block_content><![CDATA[{{widget type="MGS\Promobanners\Block\Widget\Banner" banner_id="drak1" template="banner.phtml"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block19-0]]></block_name>
+		<type><![CDATA[promo_banner]]></type>
+		<position><![CDATA[1]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":"","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","banner_id":"dark2"}]]></setting>
+		<col><![CDATA[4]]></col>
+		<class><![CDATA[col-sm-6 col-xs-12 margin-bottom10]]></class>
+		<block_content><![CDATA[{{widget type="MGS\Promobanners\Block\Widget\Banner" banner_id="dark2" template="banner.phtml"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block19-0]]></block_name>
+		<type><![CDATA[promo_banner]]></type>
+		<position><![CDATA[2]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":"","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","banner_id":"dark3"}]]></setting>
+		<col><![CDATA[4]]></col>
+		<class><![CDATA[col-sm-6 col-xs-12 margin-bottom10]]></class>
+		<block_content><![CDATA[{{widget type="MGS\Promobanners\Block\Widget\Banner" banner_id="dark3" template="banner.phtml"}}]]></block_content>
+	</block>
+	<block>
+		<block_name><![CDATA[block19-0]]></block_name>
+		<type><![CDATA[promo_banner]]></type>
+		<position><![CDATA[0]]></position>
+		<setting><![CDATA[{"animation":"","animation_delay":"","text_colour":"","link_colour":"","link_hover_colour":"","button_colour":"","button_hover_colour":"","button_text_colour":"","button_text_hover_colour":"","button_border_colour":"","button_border_hover_colour":"","banner_id":"dark4"}]]></setting>
+		<col><![CDATA[8]]></col>
+		<class><![CDATA[col-sm-12 col-xs-12 margin-bottom10]]></class>
+		<block_content><![CDATA[{{widget type="MGS\Promobanners\Block\Widget\Banner" banner_id="dark4" template="banner.phtml"}}]]></block_content>
+	</block>
+	<promo_banner>
+		<item>
+			<title><![CDATA[Unero Dark Image Banner]]></title>
+			<filename><![CDATA[/z/z/zz.jpg]]></filename>
+			<url><![CDATA[]]></url>
+			<button><![CDATA[]]></button>
+			<text_align><![CDATA[middle-center]]></text_align>
+			<content><![CDATA[<div class="box text-center">
+<h3>NEW ARRIVALS</h3>
+<a href="#">Vew More</a>
+</div>]]></content>
+			<effect><![CDATA[]]></effect>
+			<custom_class><![CDATA[]]></custom_class>
+			<status><![CDATA[1]]></status>
+			<identifier><![CDATA[drak-image]]></identifier>
+		</item>
+		<item>
+			<title><![CDATA[Banner Dark 1]]></title>
+			<filename><![CDATA[/p/1/p1.jpg]]></filename>
+			<url><![CDATA[]]></url>
+			<button><![CDATA[]]></button>
+			<text_align><![CDATA[top-left]]></text_align>
+			<content><![CDATA[<h3>New Collection</h3>
+<a href="#">Shop Now</a>]]></content>
+			<effect><![CDATA[]]></effect>
+			<custom_class><![CDATA[]]></custom_class>
+			<status><![CDATA[1]]></status>
+			<identifier><![CDATA[drak1]]></identifier>
+		</item>
+		<item>
+			<title><![CDATA[Banner Dark 2]]></title>
+			<filename><![CDATA[/p/5/p5.jpg]]></filename>
+			<url><![CDATA[]]></url>
+			<button><![CDATA[]]></button>
+			<text_align><![CDATA[top-left]]></text_align>
+			<content><![CDATA[<h3>Simple Watch</h3>
+<a href="#">Shop Now</a>]]></content>
+			<effect><![CDATA[]]></effect>
+			<custom_class><![CDATA[]]></custom_class>
+			<status><![CDATA[1]]></status>
+			<identifier><![CDATA[dark2]]></identifier>
+		</item>
+		<item>
+			<title><![CDATA[Banner Dark 3]]></title>
+			<filename><![CDATA[/x/x/xx3_1.jpg]]></filename>
+			<url><![CDATA[]]></url>
+			<button><![CDATA[]]></button>
+			<text_align><![CDATA[top-left]]></text_align>
+			<content><![CDATA[<h3>Classic Watch</h3>
+<a href="#">Shop Now</a>]]></content>
+			<effect><![CDATA[]]></effect>
+			<custom_class><![CDATA[]]></custom_class>
+			<status><![CDATA[1]]></status>
+			<identifier><![CDATA[dark3]]></identifier>
+		</item>
+		<item>
+			<title><![CDATA[Banner Dark 4]]></title>
+			<filename><![CDATA[/b/7/b7.jpg]]></filename>
+			<url><![CDATA[]]></url>
+			<button><![CDATA[]]></button>
+			<text_align><![CDATA[top-left]]></text_align>
+			<content><![CDATA[<h3>Smart Watch</h3>
+<a href="#">Shop Now</a>]]></content>
+			<effect><![CDATA[]]></effect>
+			<custom_class><![CDATA[]]></custom_class>
+			<status><![CDATA[1]]></status>
+			<identifier><![CDATA[dark4]]></identifier>
+		</item>
+	</promo_banner>
+	<theme_setting>
+		<general>
+			<dark>1</dark>
+			<footer>footer_1</footer>
+			<footer_parallax>1</footer_parallax>
+			<header>header_4</header>
+			<layout>wide</layout>
+		</general>
+		<custom_style>
+			<style></style>
+		</custom_style>
+	</theme_setting>
+
+</home>

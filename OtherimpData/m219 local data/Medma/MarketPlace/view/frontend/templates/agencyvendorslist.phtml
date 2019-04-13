@@ -1,0 +1,135 @@
+
+<?php
+$flag = false;
+$objectManager =  \Magento\Framework\App\ObjectManager::getInstance(); 
+$agencyId = "";
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+
+if($customerSession->isLoggedIn()){
+
+$customerData = $customerSession->getCustomer()->getData();  
+$agencyId = $customerData['entity_id'];
+
+}
+
+if(!empty($agencyId)){
+	$agencySeller = $this->helper("Medma\MarketPlace\Helper\Data")->getAgencyVendors($agencyId);
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+	$mediaUrl =  $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+	if(count($agencySeller) > 0){
+$i=1;
+?>
+<table class="customer_message" style="width:100%">
+<tr>
+			<th><?php echo __('Sr. No.')?></th>
+			<th><?php echo __('Vendor Name')?></th>
+			<th><?php echo __('Rating')?></th>
+			<th><?php echo __('Files')?></th>
+		</tr>
+<?php
+foreach($agencySeller as $agencySellerProfiles){
+ ?>
+
+
+		
+		<tbody>
+			<tr>
+			<th><?php echo $i;?></th>
+			<th><?php echo $agencySellerProfiles['shop_name']?></th>
+			<th><?php 
+if(isset($agencySellerProfiles['agency_rating']))
+{
+echo $agencySellerProfiles['agency_rating'];	
+}else{
+ echo "NA";
+}
+
+			?></th>
+			<th><?php 
+if(isset($agencySellerProfiles['vendor_rating_file']))
+{
+			?>
+			<a href="<?php echo $mediaUrl."/quotefile/".$agencySellerProfiles['vendor_rating_file']?>" target="blank"> <?php echo $agencySellerProfiles['vendor_rating_file']; ?>
+<?php }else{
+           echo "NA";
+}
+		  		?></th>
+	
+<?php if(isset($agencySellerProfiles['vendor_rating_file']))
+{ ?>
+			<th><span onClick="giveRatingtoSeller(this.id)" id="<?php echo $agencySellerProfiles['entity_id']?>" class="<?php echo "clickrating_".$agencySellerProfiles['entity_id']?>"><a> <span><?php echo __('Give Rating')?></span></a></span></th>
+<?php } ?>			
+			<th style="display: none">
+				<span class="sellerdetails<?php echo $agencySellerProfiles['entity_id']?>">
+					<form method="post" action="<?php echo $this->getUrl('marketplace/agency/rating')?>">
+                              <input type="hidden" value="<?php echo $agencySellerProfiles['entity_id']?>" name="vendorId">
+                               <div>
+                               	1 Star <input type="radio" value="1" name="rating">
+                               	2 Star <input type="radio" value="2" name="rating">
+                               	3 Star <input type="radio" value="3" name="rating">
+                               	4 Star <input type="radio" value="4" name="rating">
+                               	5 Star <input type="radio" value="5" name="rating">
+                               </div>
+                               <div>
+                               	
+                               	<div class="actions" style="margin-top: 23px;">
+                <button class="action subscribe primary" title="Subscribe" type="submit">
+                    <span>Submit Rating</span>
+                </button>
+            </div>
+                               </div>
+					</form>
+				</span>
+
+			</th>
+
+		</tr>
+
+		</tbody>
+		
+	
+<?php $i++;} ?>
+
+
+</table><?php } ?>
+<?php } else { ?>
+<span><?php echo __("No Records Found.")?></span>
+<?php } ?>	
+
+<script>
+
+function giveRatingtoSeller(id){
+	require(
+		[
+			'jquery',
+			'Magento_Ui/js/modal/modal'
+		],
+		function(
+			$,
+			modal
+		) {
+			var options = {
+				type: 'popup',
+				responsive: true,
+				innerScroll: true,
+				title: 'Rating Form',
+				buttons: [{
+					text: $.mage.__('Continue'),
+					class: '',
+					click: function () {
+						this.closeModal();
+					}
+				}]
+			};
+
+			var popup = modal(options, $('.sellerdetails'+id));
+			$('.modal-footer').hide();
+			
+				$(".sellerdetails"+id).modal("openModal");
+			
+
+		}
+	);
+}
+</script>

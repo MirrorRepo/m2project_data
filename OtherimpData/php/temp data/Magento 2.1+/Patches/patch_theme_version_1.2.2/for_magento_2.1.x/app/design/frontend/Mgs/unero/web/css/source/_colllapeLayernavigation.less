@@ -1,0 +1,28 @@
+.block.filter .block-content.filter-content .filter-options-item {
+    .filter-options-title {
+        position: relative;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        margin-bottom: 0;
+        &:after {
+            content: "\f107";
+            font-family: "FontAweSome";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            font-size: 20px;
+            transform: translateY(-50%);
+        }
+    }
+    .filter-options-content {
+        padding-top: 30px;
+    }
+    &.active {
+        .filter-options-title:after {
+            content: "\f106";
+        }
+    }
+}

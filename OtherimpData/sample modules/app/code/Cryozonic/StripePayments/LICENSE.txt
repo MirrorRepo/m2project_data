@@ -1,0 +1,56 @@
+# Single Use / Single Domain License (SUSDL)
+
+## Terminology
+
+Terminology
+
+A Store refers to a Magento store as configured from the merchant's Magento installation from the admin area, under System > Manage Stores, and is configured to use a single Magento Root Category.
+
+A Product refers to any software created by Cryozonic Ltd, a UK registered company with registration number 07753199 (thereafter refered to as Cryozonic).
+
+A Domain Name, thereafter refered to as the Domain, refers to a Top Level Domain (TLD). For example, if your website is http://www.proteinbars.com/shop/, then your licensed Domain is proteinbars.com. Any subdomains of the Domain, for example uk.proteinbars.com or it.proteinbars.com which target different language markets but are used as part of the same Store are included in the Domain license. Furthermore, any country code TLDs (ccTLDs) with the same name as the Domain, for example www.proteinbars.co.uk (United Kingdom) or www.proteinbars.com.au (Australia) and which also point to the same Store for the sole purpose of segmenting the market by language are also included in the Domain license.
+
+A Production Domain or Live Domain refers to a Domain Name that is publicly available online and is used by a merchant to accept orders from its customers and charge their cards for those orders.
+
+A Development Domain, Testing Domain or Staging Domain refers to any other hosted Magento setup that is not a Production Domain and is primarily used by the merchant's developers to develop the Production Domain.
+
+## Agreement
+
+This License is entered by Cryozonic to govern the usage or redistribution of Cryozonic's software (the Product(s)). This is a legal agreement between you (either an individual or a legal entity) and Cryozonic for the Product(s).
+
+By purchasing, installing, or otherwise using the Product(s), you acknowledge that you have read this License and agree to be bound by the terms of this Agreement. If you do not agree to the terms of this License, do not install or use the Product(s).
+
+The Agreement becomes effective at the moment when you acquire the Product(s) from our site or receive it through email or on data medium or by any other means. Cryozonic reserves the right to make reasonable changes to the terms of this license agreement and impose its clauses at any given time.
+
+All parts of the Product(s) including, but not limited to algorithms, PHP code, Javascript code or CSS code, texts, images and designs are licensed according to this license, unless otherwise stated.
+
+## Grants and Limitations of License
+
+The SUSDL grants you a non-exclusive and non-transferrable right to use the Product(s) subject to the following conditions:
+
+* You have been granted this license explicitly by the copyright holder.
+* You are granted one single use of the Product(s) on one single domain.
+* You may use the Product(s) for your own purposes or for a client, anyhow, use of the Product(s) is limited to one domain only.
+* Use on multiple domains, requires you to obtain one SUSDL for each domain or subdomain you wish to use the Product(s) on.
+* You must not directly or indirectly license, sub-license, rent, lend, sell, resell, provide for free, reproduce or distribute by any means the Product(s).
+* You are allowed to customize the Product(s) to fit with your using purpose.
+* The same applies to derivative works based on the Product(s).
+
+The same applies to works based on reverse-engineered versions of this Product(s).
+
+Derivative works based on the Product(s) includes descriptions of the algorithms and methods implemented.
+
+* You must not create derivative works based on the Product(s).
+* You must not reverse-engineer the Product(s).
+* You must not incorporate the Product(s) in any work created for resale.
+* You must not use the Product(s) to provide services similar to those provided by the Product(s).
+
+## Termination
+
+Without prejudice to any other rights, Cryozonic may terminate this License at any time if you fail to comply with the terms and conditions of this License. In such event, it constitutes a breach of the agreement, and your license to use the program is revoked and you must destroy all copies of Cryozonic products in your possession.
+
+After being notified of termination of your license, if you continue to use the Product(s), you hereby agree to accept an injunction to prevent you from its further use and to pay all costs (including but not limited to reasonable attorney fees) to enforce our revocation of your license and any damages suffered by Cryozonic because of your misuse of the Software. We are not bound to return you the amount spent for purchase of the Software for the termination of this License.
+
+## Limitation of Liability
+
+To the maximum extent permitted by applicable law, in no event will Cryozonic Ltd (LICENSOR) or its suppliers be liable for any damages, whatsoever, whether direct, indirect, special, incidental, or consequential damages, whether arising under contract, tort (including negligence), strict liability, breach of warranty, misrepresentation, or otherwise, including without limitation, damages for loss of business profits, business interruption, loss of business information, or other pecuniary loss, arising out of the use of or inability to use the Product(s), or arising out of this agreement, even if the LICENSOR or its representatives has been advised of the possibility of such damages.

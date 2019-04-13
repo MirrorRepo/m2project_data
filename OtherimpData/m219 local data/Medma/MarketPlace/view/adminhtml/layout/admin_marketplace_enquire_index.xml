@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+    	<title>Manage Enquiries</title>
+    </head>
+    <body>
+       <referenceBlock name="page.title">
+    	    <action method="setPageTitle">
+    	        <argument name="pageTitle" xsi:type="string">Enquiries Manager</argument>
+    	    </action>
+    	</referenceBlock>
+        <referenceContainer name="content">
+            <block class="Medma\MarketPlace\Block\Adminhtml\Enquire" name="enquire_listing"/>
+        </referenceContainer>
+        <referenceContainer name="admin.grid.grid.view">
+            <block class="Magento\Framework\View\Element\Text\ListText" name="grid.bottom.links">
+                <block class="Magento\Catalog\Block\Adminhtml\Rss\Grid\Link" name="grid.rss.link"/>
+            </block>
+        </referenceContainer>
+        
+    </body>
+</page>

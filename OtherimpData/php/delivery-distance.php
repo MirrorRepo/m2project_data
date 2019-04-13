@@ -1,0 +1,65 @@
+<br>
+<br>
+<?php
+
+if(isset($_POST['sl']) && isset($_POST['slo']) && isset($_POST['dl'])  && isset($_POST['dlo']) ){
+
+    $latitude = $_POST['sl'];;
+    $longitude  = $_POST['slo'];
+    $latitudeb = $_POST['dl'];
+    $longitudeb = $_POST['dlo'];
+
+    $key = 'AIzaSyBnmIAsQPKi_xvyKfRcBeYtkXTUezEmsT8';
+
+    $_matrix = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" . $latitude . "," . $longitude . "&destinations=" . $latitudeb . "," . $longitudeb . "&key=" . $key;
+    /*
+     * this may be change in future
+     */
+
+    if(isset($latitudeb) && isset($longitudeb)){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $_matrix);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $response = json_decode($response, true);
+
+        if(isset($response['rows'][0]['elements'][0]['distance']['value'])){
+            $_resobj = $response['rows'][0]['elements'][0]['distance']['value'];
+        }else {
+            $_resobj = "";
+            throw new Exception("Distance is not available for this area", 1);
+        }
+
+        $_res = $_resobj / 1000;
+
+        echo 'Yh Distance is <font style = color:green>'. round($_res, 1)." KM</font>";
+    }
+}
+?>
+<br>
+<br>
+<br>
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+
+    Source Lat : <input type="text" name="sl" placeholder="User latitude">
+    <br>
+    <br>
+    Source Long:  <input type="text" name="slo" placeholder="User longitude">
+
+    <br>
+    <br>
+
+    Destination Lat: <input type="text" name="dl" placeholder="Bakery latitude">
+    <br>
+    <br>
+    Destination Long: <input type="text" name="dlo" placeholder="Bakery longitude">
+    <br>
+    <br>
+
+    <input type="submit" name="submit" value="Calculate Distance">
+</form>

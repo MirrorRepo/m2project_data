@@ -1,0 +1,118 @@
+// CONTACT PAGE
+.contact-box-wrapper {
+    border: 1px solid #d9d9d9;
+    padding: 50px;
+    .icon {
+        color: #c00;
+        font-size: 30px;
+        line-height: 1;
+    }
+    .title {
+        color: #000;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 1;
+        margin: 25px 0 20px;
+    }
+}
+
+// 404 PAGE
+.cms-noroute-index {
+    .page-main {
+        padding: 200px 0 300px;
+        min-height: unset;
+    }
+    .page-title {
+        font-size: 30px;
+        font-weight: 400;
+        margin: 0 0 40px;
+        span {
+            display: block;
+            font-size: 72px;
+            color: #c00;
+            margin-bottom: 40px;
+            padding-left: 50px;
+        }
+    }
+    .page-content {
+        a {
+            color: #c00;
+        }
+        .top-search-mini .form-search {
+            position: relative;
+            padding: 5px 20px;
+            border: 1px solid #d9d9d9;
+            color: #000;
+            max-width: 370px;
+            margin: 40px auto 0;
+            .input-text {
+                padding: 0;
+                border: none;
+            }
+            .btn-search {
+                top: 2px;
+                width: 60px;
+                height: 50px;
+                background: transparent;
+                position: absolute;
+                right: 0;
+                border: 0;
+                z-index: 10;
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+/* About us */
+.about-us{
+	img{ min-width: 100%; }
+	h2,h3,h4,h5{ font-weight: 400; }
+	h4{ margin-bottom: 30px; }
+	.title{
+		text-align: center;
+		margin-bottom: 100px;
+		margin-top: 50px;
+	}
+	.block-text{
+		margin: 100px 200px;
+		h3{ margin-bottom: 40px; }
+		> div{ margin-bottom: 69px; }
+		li{
+			padding: 3px 0;
+			a{
+				color: #999;
+				&:hover{
+                    color: #000;
+                }
+			}
+		}
+	}
+	.table > tbody > tr > td{
+		padding: 8px 0 8px 8px;
+		border: 0;
+		color: #000;
+	}
+	@media (max-width: 1199px) {
+		.block-text{ margin:100px; }
+	}
+	@media (max-width: 991px) {
+		.title{
+			margin-top: 30px;
+			margin-bottom: 50px;
+		}
+		h4 {
+            margin-bottom: 20px; 
+        }
+		.block-text{
+			margin: 50px 0;
+			h3{ 
+                margin-bottom: 30px; 
+            }
+			> div{ 
+                margin-bottom: 50px; 
+            }
+		}
+		ul{ margin-bottom: 20px; }
+	}
+}

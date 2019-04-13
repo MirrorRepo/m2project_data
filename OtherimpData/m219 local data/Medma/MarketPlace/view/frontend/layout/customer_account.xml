@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * Copyright © 2016 Medma. All rights reserved.
+ * 
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="marketplace-favourite" after="-">
+                <arguments>
+                    <argument name="path" xsi:type="string">marketplace/favourite/index</argument>
+                    <argument name="label" xsi:type="string">My Favourite Sellers</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="messagebox" after="marketplace-favourite">
+                <arguments>
+                    <argument name="path" xsi:type="string">marketplace/customer/index</argument>
+                    <argument name="label" xsi:type="string">Message Box</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="requiremessagebox" after="messagebox">
+                <arguments>
+                    <argument name="path" xsi:type="string">marketplace/customer/requiremessageindex</argument>
+                    <argument name="label" xsi:type="string">My Enquiry</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="areaofoperation" after="requiremessagebox">
+                <arguments>
+                    <argument name="path" xsi:type="string">marketplace/customer/areaofoperation</argument>
+                    <argument name="label" xsi:type="string">My Areas of Operations</argument>
+                </arguments>
+            </block>
+
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="requirements" after="areaofoperation">
+            <arguments>
+                <argument name="path" xsi:type="string">marketplace/vendor/requirements</argument>
+                <argument name="label" xsi:type="string">Featured Requirements</argument>
+            </arguments>
+            </block>
+
+              <!-- <block class="Magento\Framework\View\Element\Html\Link\Current" name="custom-link" after="-">
+                <arguments>
+                    <argument name="path" xsi:type="string">marketplace/customer/showlist</argument>
+                    <argument name="label" xsi:type="string">Show List</argument>
+                </arguments>
+            </block>-->
+        </referenceBlock>
+    </body>
+</page>

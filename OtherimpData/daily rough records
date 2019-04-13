@@ -1,0 +1,715 @@
+/var/www/html/bakeway/app/code/Bakeway/CommissionLog/etc/events.xml:
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+tables name
+1.marketplace_saleslist
+2.sales_order
+3.marketplace_orders
+4.markeplace_transcation
+ 
+
+
+-do the order	
+
+
+-Webkul\Marketplace\Observer\SalesOrderSaveCommitAfterObserver  when complete the order order cpprostatus get updated to 1.
+
+-got the collection of order did 7 order of two seller 
+
+-next in controller save action fetch seller id of associated order.
+
+-check the amout for one seller 640 SELECT *  FROM `marketplace_saleslist` WHERE `seller_id` = 640 AND `created_at` > '2018-08-17 23:10:38'
+
+-delivery rate is coming from marketplace_orders table
+
+-call this function generateOutwordExcelSheet($array) while generating outward file.
+same time it updates transcation table and generates   [seller_trans_id] => tr-KTIhUXVYbOD
+            [bakeway_trans_id] => tr-vTiMKPlhdNs
+  same time call updatePayoutsTransactions this method set transcation nuber 2 and also create invoice number.          
+            
+- sales_id was not coming proper
+
+
+Array
+(
+    [seller_trans_id] => tr-ZjrtURLPGcU
+    [bakeway_trans_id] => tr-ALPSqMlc51q
+    [seller_amount] => 1021.172
+    [bakeway_amount] => 195.138
+    [sales_list_ids] => Array
+        (
+            [0] => 9595
+            [1] => 9597
+            [2] => 9599
+        )
+
+)
+SELECT `main_table`.* FROM `marketplace_saleslist` AS `main_table` WHERE (`main_table`.`entity_id` IN('9595', '9597', '9599')) 
+AND (`order_id` != 0) AND (`paid_status` = '0') AND (`cpprostatus` != 0)
+Array
+(
+    [seller_trans_id] => tr-MnQMN8tFV5q
+    [bakeway_trans_id] => tr-BAWafkWQSQo
+    [seller_amount] => 1196.7592
+    [bakeway_amount] => 588.2208000000001
+    [sales_list_ids] => Array
+        (
+            [0] => 9601
+            [1] => 9603
+            [2] => 9605
+            [3] => 9607
+        )
+BKWYADMIN-1192:
+)
+SELECT `main_table`.* FROM `marketplace_saleslist` AS `main_table` WHERE (`main_table`.`entity_id` IN('9601', '9603', '9605', '9607')) 
+AND (`order_id` != 0) AND (`paid_status` = '0') AND (`cpprostatus` != 0)         
+
+ here trans_id also get add on saleslist table as per order id and paid status 0
+ 
+ -Now we click to invoice and saleslist table order row update with paid status 1
+
+
+
+SELECT `main_table`.`customer_email`, `main_table`.`customer_firstname`, `main_table`.`customer_lastname`, `main_table`.`customer_is_guest`,
+ `main_table`.`created_at`, `main_table`.`updated_at`, `main_table`.`grab_delivery_flag`, `mp_sl`.`seller_id`, `mp_sl`.`order_id`, `mp_sl`.`paid_status`,
+  `mp_sl`.`cpprostatus`, `mp_sl`.`total_amount`, `mp_sl`.`actual_seller_amount`, `mp_sl`.`total_commission`, `mp_sl`.`magerealorder_id`,
+   `mp_sl`.`commission_rate`, `mp_sl`.`commission_tax_details`, `mp_sl`.`commission_incl_tax`, `mp_sl`.`is_shipping`, `mp_sl`.`total_tax`, 
+   `mp_sl`.`trans_id`, `mp_order`.`payment_gateway_fee`, `mp_order`.`delivery_fee`, `mp_order`.`tcs_amount`, `mp_order`.`convenience_fee_incl_tax`, 
+   `mp_order`.`coupon_amount`, `mp_order`.`tax_paid_by_bakeway`, `mp_seller`.`store_owner_bank_account_number`, `mp_seller`.`store_owner_bank_ifsc`, 
+   `mp_seller`.`store_owner_bank_registered_name`, `mp_seller`.`store_owner_mobile_no`, `mp_seller`.`store_owner_email` FROM `sales_order` 
+   AS `main_table` INNER JOIN `marketplace_saleslist` AS `mp_sl` ON main_table.entity_id=mp_sl.order_id INNER JOIN `marketplace_orders` AS `mp_order` 
+   ON main_table.entity_id=mp_order.order_id LEFT JOIN `marketplace_userdata` AS `mp_seller` ON mp_sl.seller_id=mp_seller.seller_id
+    WHERE (`main_table`.`updated_at` <= '2018-08-16 20:46:18') AND (mp_sl.paid_status=0) AND (mp_sl.cpprostatus=1) AND (mp_sl.trans_id=0) 
+    AND (mp_sl.parent_item_id IS NULL) GROUP BY `main_table`.`entity_id`
+   
+   
+   '2018-08-17 12:50:56''
+   
+----------------------------------------------------------------------------------------------------------------------------------------
+ 
+20 aug sharing order list with complete order status list.
+
+ [core]
+        repositoryformatversion = 0
+        fileMode = false
+        bare = false
+        logallrefupdates = true
+[remote "origin"]
+        #url = https://bitbucket.org/nikhilkhankhoje/bakeway
+        url = git@bitbucket.org:nikhilkhankhoje/bakeway.git
+        #url = https://bitbucket.org/relfor-manish/bakeway
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+[user]
+        name = Manish Khot
+        email = manish@relfor.com
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+entity_id  increment order id
+6951 :     000008245
+7193 :     000008487
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+select so.increment_id,so.created_at,so.delivery_time,sosh.created_at as complete_at from sales_order as so left join sales_order_status_history as sosh on sosh.parent_id = so.entity_id
+where sosh.created_at between "2018-08-19 00:00:00" and  "2018-08-19 23:59:00" and sosh.status= "complete" order by so.increment_id;
+
+select status,created_at,updated_at from sales_order where status = "complete" and "created_at" > '2018-08-03 23:59:59'
+ 
+ 
+Proper number of order count:
+sosh : select so.increment_id,so.created_at,so.delivery_time,sosh.created_at as complete_at from sales_order as so left join sales_order_status_history as sosh on sosh.parent_id = so.entity_id
+where sosh.created_at between "2018-08-02 00:00:00" and  "2018-08-18 23:59:00" and sosh.status= "complete";
+
+
+so : select increment_id,updated_at ,delivery_time from sales_order where updated_at between "2018-08-28 00:00:00" and  "2018-08-28 23:59:00" and status= "complete";
+ 
+ 
+Delete trans. key records:
+delete from bakeway_payouts_transaction where created_at between "2018-08-03" and "2018-08-20";
+delete from marketplace_sellertransaction where created_at between "2018-08-03" and "2018-08-20";
+ 
+payout orders :
+SELECT `main_table`.`entity_id`, 
+       `main_table`.`customer_email`, 
+       `main_table`.`customer_firstname`, 
+       `main_table`.`customer_lastname`, 
+       `main_table`.`customer_is_guest`, 
+       `main_table`.`created_at`, 
+       `main_table`.`updated_at`, 
+       `main_table`.`grab_delivery_flag`, 
+       `mp_sl`.`entity_id`, 
+       `mp_sl`.`seller_id`, 
+       `mp_sl`.`order_id`, 
+       `mp_sl`.`paid_status`, 
+       `mp_sl`.`cpprostatus`, 
+       `mp_sl`.`total_amount`, 
+       `mp_sl`.`actual_seller_amount`, 
+       `mp_sl`.`total_commission`, 
+       `mp_sl`.`magerealorder_id`, 
+       `mp_sl`.`commission_rate`, 
+       `mp_sl`.`commission_tax_details`, 
+       `mp_sl`.`commission_incl_tax`, 
+       `mp_sl`.`is_shipping`, 
+       `mp_sl`.`total_tax`, 
+       `mp_sl`.`trans_id`, 
+       `mp_order`.`payment_gateway_fee`, 
+       `mp_order`.`delivery_fee`, 
+       `mp_order`.`tcs_amount`, 
+       `mp_order`.`convenience_fee_incl_tax`, 
+       `mp_order`.`coupon_amount`, 
+       `mp_order`.`tax_paid_by_bakeway`, 
+       `mp_seller`.`store_owner_bank_account_number`, 
+       `mp_seller`.`store_owner_bank_ifsc`, 
+       `mp_seller`.`store_owner_bank_registered_name`, 
+       `mp_seller`.`store_owner_mobile_no`, 
+       `mp_seller`.`store_owner_email` 
+FROM   `sales_order` AS `main_table` 
+       INNER JOIN `marketplace_saleslist` AS `mp_sl` 
+               ON main_table.entity_id = mp_sl.order_id 
+       INNER JOIN `marketplace_orders` AS `mp_order` 
+               ON main_table.entity_id = mp_order.order_id 
+       LEFT JOIN `marketplace_userdata` AS `mp_seller` 
+              ON mp_sl.seller_id = mp_seller.seller_id 
+WHERE  ( `main_table`.`updated_at` >= '2018-08-02' ) 
+       AND ( `main_table`.`updated_at` <= '2018-08-20' ) 
+       AND ( mp_sl.paid_status = 0 ) 
+       AND ( mp_sl.cpprostatus = 1 ) 
+       AND ( mp_sl.trans_id = 0 ) 
+       AND ( mp_sl.parent_item_id IS NULL ) 
+GROUP  BY `main_table`.`entity_id`; 
+
+
+ 
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 22-08-2018
+BKWYADMIN-1049 : payouts helper files commits
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 23-08-2018
+
+"000007931","000008257","000008540","000008568","000008606"
+
+seller id : 784 
+
+000007947, 000008609, 000009289
+
+select * from marketplace_saleslist where entity_id in (9463,9462,8970,8511)
+
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2297/bkwyadmin-1049-update-group-by-columns-in/diff
+BKWYADMIN-1049  :update group by columns in payput collection query
+BKWYADMIN-1050 : https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2298/bkwyadmin-1050-increased-char-length-prod/diff
+
+delete from  marketplace_sellertransaction where created_at between "2018-08-04" and "2018-08-21";
+delete from  bakeway_payouts_transaction where created_at between "2018-08-04" and "2018-08-21";
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Date : 30-08-2018
+BKWYADMIN-981 : IGST on Commission for Bangalore
+done on qa.
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2337/bkwyadmin-981-adding-function-to-helper/diff
+
+
+BKWYADMIN-1063 : GRab Webhook API to add entry on complete to Sales orders status History Table
+			/*
+             * BKWYADMIN-1063
+             * update sales order status history table
+             */
+             $orderObject->addStatusToHistory($orderObject->getStatus(), 'Order status changed.');
+             $orderObject->save();
+             
+----------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
+For Seller ID : 682
+Order No : 7931, 8257, 8540, 8568, 8606
+
+For Seller ID : 3289
+Order No : 8781, 8798, 8802  : cpprostatus  is 0 but in sales order table status is complete.
+
+For Seller ID : 3408
+Order No : 7963, 8065, 8358, 8546, 8612, 9117  
+
+
+Date : 04-09-2018
+BKWYADMIN-1072: adding store unique field to details api
+
+For Seller ID : 861 
+Invoice Date : 03.09.2018
+Order NO L 	
+
+SELECT * FROM `marketplace_saleslist` where magerealorder_id  in(000009695,000008889,000008188)
+---------------------------------------------------------------------------------------------------------------------------------------
+
+mg_magento2-2.0
+
+setup:install --base-url=http://127.0.0.1/magento2-2.0 --db-host=localhost --db-name=mg_magento2-2.0 --db-user=root --db-password=root --admin-firstname=admin --admin-lastname=admin --admin-email=admin@admin.com --admin-user=admin --admin-password=admin123 --language=en_US --currency=USD --timezone=America/Chicago --use-rewrites=1
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 04-09-2018
+
+
+BKWYADMIN-1029 : Handling of Suspected Fraud Cases.  done
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2331/bkwyadmin-1029-added-condition-to-check-if/diff
+
+BKWYADMIN-1072 : Add store unique name field to partner detail api.
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2332/bkwyadmin-1072-adding-store-unique-field/diff
+
+BKWYADMIN-1063 : GRab Webhook API to add entry on complete to Sales orders status History Table : will do
+https://bitbucket.org/kushdaharwal/bakeway-local-kush/commits/c3caef3bad9bea14839b013f83208a11de637f5c
+
+BKWYADMIN-1068 : Feeds Download Refinement
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2333/bkwyadmin-1068-removing-html-snippets-in/diff
+
+BKWYADMIN-1017 : City Automatically changes to Pune
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2334/bkwyadmin-1017-resolve-city-toggle-issue/diff
+
+BKWYADMIN-1041 : Order Details Report Enhancements
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2336/bkwyadmin-1041-order-details-report/diff
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 07-09-2018
+
+BKWYADMIN-1074 : Order id repeating in the invoice
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 10-09-2018
+
+BKWYADMIN-1074: order id is repeating in invoice
+
+BKWYADMIN-1077 : Order confirmation Email Enhancement
+
+BKWYADMIN-1079: SMS Text Update
+
+BKWYADMIN-1018 : Optimising Create Order payAPI
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 12-09-2018
+
+BKWYADMIN-1078 : Manage Product Data crashes when Seller name Filter or Filter combination is applied
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 17-09-2018
+
+-checked the outward files downloading issue.
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 18-09-2018
+
+BKWYADMIN-1078 : Manage Product Data crashes when Seller name Filter or Filter combination is applied
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2363/bkwyadmin-1078-manage-product-data-crashes/diff
+
+BKWYADMIN-1027
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2364/bkwyadmin-1027-master-add-igst-column-in/diff
+
+BKWYADMIN-1052  : Update query to fetch and optimize export functionality
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2342/bkwyadmin-1052-update-query-to-fetch-and/diff
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 19-09-2018
+BKWYADMIN-1067 : Location is not getting added in URL for new seller
+https://bakeway.atlassian.net/browse/BKWYADMIN-1067
+
+pick_up
+getPickupStatus
+setPickupStatus
+BKWYADMIN-1024: https://bakeway.atlassian.net/browse/BKWYADMIN-1024
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 20-09-2018
+
+BKWYADMIN-1024: https://bakeway.atlassian.net/browse/BKWYADMIN-1024
+catalog_pickup
+1. add columns 
+2. adding columns to code.
+
+BKWYADMIN-1100: https://bakeway.atlassian.net/browse/BKWYADMIN-1100
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 20-09-2018
+-Manage Catalogue Store wise instead of Global
+BKWYADMIN-1096 : https://bakeway.atlassian.net/browse/BKWYADMIN-1096
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 24-09-2018
+BKWYADMIN-1100: https://bakeway.atlassian.net/browse/BKWYADMIN-1100
+BKWYADMIN-1103: https://bakeway.atlassian.net/browse/BKWYADMIN-1103
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 25-09-2018
+
+$sql = "ALTER TABLE `bakeway_store_catalog` CHANGE `product_id` `product_id` VARCHAR(255) NULL DEFAULT NULL COMMENT \'Product Id\';";
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Date : 26-09-2018
+
+-BKWYADMIN-1100 : Approving any bakery is enabling all mapped product irrespective to it's previous status
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2407/bkwyadmin-1100-seller-approve-and/diff
+-BKWYADMIN-1101 :Disable product in catalog remains approved in manage product data tab
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2408/bkwyadmin-1101-when-product-get-disable-it/diff
+-BKWYADMIN-1105: Store headline is not mandatory while adding new store address under seller
+-BKWYADMIN-1106 : Incorrect alert message if store address is not field while adding new store address in seller tab- 
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 04-10-2018
+ BKWYADMIN-1096 : https://bakeway.atlassian.net/browse/BKWYADMIN-1096
+ 
+ app/code/Bakeway/Partnerlocations/view/adminhtml/templates/tab/view/personal_info.phtml
++10 -3 M app/code/Bakeway/StoreCatalog/Setup/InstallSchema.php
++2 -2 M app/code/Bakeway/StoreCatalog/Setup/UpgradeSchema.php
++1 -1 M app/code/Bakeway/StoreCatalog/etc/module.xml
++2 -1 M app/code/Bakeway/Vendorapi/Api/VendorProductRepositoryInterface.php
+
+changes file :
+ Bakeway\StoreCatalog\Helper\Data.php
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 05-10-2018
+
+ALTER TABLE  `bakeway_store_catalog` CHANGE  `status`  `status` INT( 10 ) UNSIGNED NULL DEFAULT NULL COMMENT  'Status';
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Date : 09-10-2018
+
+BKWYADMIN-1130 : added acl for gst and non gst
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2448/bkwyadmin-1130-added-acl-for-gst-and-non/diff
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 10-10-2018
+34358
+
+34246
+
+SELECT bpl.seller_id, mp.mageproduct_id, bpl.store_unique_name
+FROM bakeway_partner_locations AS bpl
+LEFT JOIN marketplace_product AS mp ON bpl.seller_id = mp.seller_id
+LEFT JOIN catalog_product_entity AS cpe ON mp.mageproduct_id = cpe.entity_id
+LEFT JOIN catalog_product_entity_int AS cpei ON mp.mageproduct_id = cpei.entity_id
+WHERE bpl.seller_id =913
+AND cpe.type_id
+IN (
+"configurable",  "simple"
+)
+AND cpei.attribute_id =99
+AND cpei.value =4
+GROUP BY mp.mageproduct_id, bpl.store_unique_name
+LIMIT 0 , 30
+
+anita.rao@aegonlife.comeQuote Number 518100726942
+                $product = $this->productFactory->create()->load($productId);
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 11-10-2018
+BKWYADMIN-1096: update expection message
+BKWYADMIN-1119: adding non operational week days check to quote
+BKWYADMIN-1119: changed days spelling
+
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2458/bkwyadmin-1119-code-for-non-operational/diff
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2459/bkwyadmin-1096-updated-expection-message/diff
+
+BKWYADMIN-1129:store feed addition
+BKWYADMIN-1096: storecatalog helper function added
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Date : 17-10-2018
+BKWYADMIN-1096 : store catalog
+BKWYADMIN-1129 : 
+
+
+	modified:   app/code/Bakeway/Vendorapi/Model/Resource/VendorOrderRepository.php
+	modified:   app/code/Webkul/Marketplace/Observer/SalesOrderPlaceAfterObserver.php
+	
+	
+
+app/code/Bakeway/CustomAttributes/Helper/Data.php :  done (allready moved to prod in last deploy)
+
+
+app/code/Bakeway/GrabIntigration/Helper/Data.php :  done 
+
+
+app/code/Bakeway/HomeDeliveryshipping/Observer/Homedelivery.php : done
+app/code/Bakeway/HomeDeliveryshipping/Observer/StoreDelivery.php :  done
+app/code/Bakeway/HomeDeliveryshipping/etc/adminhtml/system.xml :  done
+
+
+
+app/code/Bakeway/Import/Controller/Adminhtml/Export/Save.php : done
+
+app/code/Bakeway/PartnerWebapi/Model/SearchPartnerRepository.php :  done pa
+
+app/code/Bakeway/ProductApi/Api/CatalogSeoRepositoryInterface.php : done
+app/code/Bakeway/ProductApi/Model/CatalogSeoRepository.php : done
+app/code/Bakeway/ProductApi/Model/CategoryProductRepository.php : done 
+app/code/Bakeway/ProductApi/Model/VendorProductRepository.php : done
+
+
+app/code/Bakeway/Vendorapi/Model/Resource/VendorProductRepository.php :  done
+app/code/Bakeway/Vendorapi/Api/VendorProductRepositoryInterface.php : done
+
+
+
+app/design/frontend/Smartwave/porto/Webkul_Marketplace/templates/account/navigation.phtml : 
+app/code/Bakeway/Partnerlocations/view/adminhtml/templates/tab/view/personal_info.phtml : done
+
+
+
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2531/bkwyadmin-1096-pushing-store-catalouge/diff
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+BKWYADMIN-1096 Product available check for nearest stores & implemented logic for checking 3 nearest stores instead of current first only
+BKWYADMIN-1096: update for removing standalone bakery disabled product from feed and check disable product for stand alone bakery
+
+  
+      
+        
+        //tmpooooooooooooooooo
+        
+         $collection->load();
+        $collection = $this->addBakewayUrlRewrite($collection);
+        $filteredProdIds = $collection->getColumnValues('entity_id');
+
+        /* Refining the result */
+        $products = array();
+        $result = array();
+
+        $catalogSyncCollection = $this->catalogSyncCollection
+            ->addFieldToFilter('product_id', ['in' => $filteredProdIds]);
+        $syncedCatalog = [];
+        foreach ($catalogSyncCollection as $catalogSync) {
+            $productId = $catalogSync->getData('product_id');
+            $syncedCatalog[$productId] = $catalogSync;
+        }
+
+        $businessNamesArr = [];
+        $mageProdIdOfDisabledProduct = [];
+        $storeProdCollection->addFieldToFilter('mageproduct_id', ['in' => $filteredProdIds]);
+        foreach ($storeProdCollection as $storeProd) {
+            $sellerId = $storeProd->getData('seller_id');
+            $mageProdId = $storeProd->getData('mageproduct_id');
+            $businessNamesArr[$mageProdId]['business_name'] = $storeProd->getData('business_name');
+            $businessNamesArr[$mageProdId]['is_conglomerate'] = $storeProd->getData('is_conglomerate');
+            $businessNamesArr[$mageProdId]['store_unique_name'] = $storeDetailsArr[$sellerId]['unique_name'];
+            $businessNamesArr[$mageProdId]['store_locality_area'] = $storeDetailsArr[$sellerId]['locality'];
+            $businessNamesArr[$mageProdId]['seller_id'] = $sellerId;
+            $businessNamesArr[$mageProdId]['store_id'] = $storeDetailsArr[$sellerId]['store_id'];
+           /** 
+            * calcuation for seller store unique name stores products status 
+            */
+            $storeCatalougeFlag = "";
+            $storeId = $storeDetailsArr[$sellerId]['store_id'];
+            $productStatusofStoreCatalouge = $this->storecatalogHelper->getSellerStoreProduct($storeId,$sellerId,false,false,$storeProd->getData('mageproduct_id'));
+
+            $storeCatalougeFlag = $productStatusofStoreCatalouge->getData('entity_id');
+            $storeCatalougeStatus = "0";
+            if(empty($storeCatalougeFlag)){
+             
+               $mageProdIdOfDisabledProduct[] = $storeProd->getData('mageproduct_id');  
+            }
+            
+        }
+
+ ----------------------------------------------------------------------       
+  Hanldling product enable or disable status on all-pune case
+  
+-- Request URL: https://partner.bakeway.com/rest/V1/partners/913/stores?city=pune&lat=18.5463286&long=73.9033139&single=true
+  in case of single store
+  -single : true
+  
+(2) Request URL: https://partner.bakeway.com/rest/V1/partners/913/stores?city=pune&lat=&long=&single=false
+
+	0: {id: "476", seller_id: "913", store_unique_name: "viman-nagar", store_locality_area: "Viman nagar",…}
+	1: {id: "477", seller_id: "913", store_unique_name: "aundh", store_locality_area: "Aundh",…}
+	2: {id: "478", seller_id: "913", store_unique_name: "kharadi", store_locality_area: "Kharadi",…}
+	3: {id: "479", seller_id: "913", store_unique_name: "kalyani-nagar", store_locality_area: "Kalyani Nagar",…}
+	4: {id: "480", seller_id: "913", store_unique_name: "karve-nagar", store_locality_area: "karve nagar",…}
+-single : false
+
+166748246	
+
+
+671
+-----------------------------------
+zoho crm email password
+Indiaindia1!
+
+
+{latitude: 18.5463286, longtitude: 73.90331390000006, sku: "913-40510"}
+-----------------------------------
+
+Task A:
+====================
+We need to add customized shipping invoice
+When a new order is received, besides issuing the normal invoice, the system will also issue another invoice with a few changes:
+
+
+
+We have added these fields for product properties (already done):
+custom name
+materials
+use
+HS code
+Battery type
+
+
+In the new invoice replace the product name with:
+custom name [\n]
+materials[\n]
+use[\n]
+Battery type [if value is not null]
+
+
+If Battery type is not null, add a warning at the bottom of the invoice with some warning text (text will be given later). This text will include he battery type inside.
+
+
+(if possible) In bundle products - remove the bundle product title, leaving only the actual products in the bundle
+
+
+The work will be done on a test server, then copied to the main
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-Cart items with message
+-check multi product 
+
+
+143: 20
+
+144 : 14
+
+146: 8
+
+913-34331
+
+Orher seller: 
+640-1799
+
+----------------------------------------------------------------------------------------------------------------------------------------
+date 2-11-2018
+
+Add to cart cherry pic
+https://bakeway.atlassian.net/browse/BKWYADMIN-1157 :-Multiple Product add to cart for the same seller.
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2546/bkwyadmin-1157-multiple-product-add-to/diff
+
+https://bakeway.atlassian.net/browse/BKWYADMIN-1160 : -send catagory_id key for quote items details object
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2547/bkwyadmin-1160-add-category-id-extension/diff
+
+https://bakeway.atlassian.net/browse/BKWYADMIN-1158 : Message on the Cake & Card to be moved below cake in small font in new Order emails
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2548/bkwyadmin-1158-change-email-for-add-to/diff
+
+app/code/Bakeway/ProductApi/Model/VendorDeliveryChragesRepository.php
+----------------------------------------------------------------------------------------------------------------------------------------
+date 5-11-2018
+
+1.check grab case weight of cake item
+----------------------------------------------------------------------------------------------------------------------------------------
+date 08-11-2018
+
+app/code/Bakeway/CustomAttributes/Plugin/QuoteRepository.php
+app/code/Bakeway/CustomAttributes/Setup/UpgradeSchema.php
+app/code/Bakeway/CustomAttributes/etc/module.xml
+app/code/Bakeway/HomeDeliveryshipping/Observer/Homedelivery.php
+app/code/Bakeway/HomeDeliveryshipping/Observer/StoreDelivery.php
+app/code/Bakeway/StoreCatalog/Helper/Data.php
+----------------------------------------------------------------------------------------------------------------------------------------
+date 20-11-2018
+
+https://bakeway.atlassian.net/browse/BKWYADMIN-1182
+Send email notification to marketing sales team while changing the inventory at store level from backend/vendor dashboard
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2590/bkwyadmin-1182-inventory-email-alert/diff
+
+----------------------------------------------------------------------------------------------------------------------------------------
+date 22-11-2018
+BKWYADMIN-1192: update email header logo
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2589/bkwyadmin-1192-update-email-header-logo/diff
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+date 29-11-2018
+
+bweb-1331: resolved google signup errpr
+
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2600/bweb-1331-resolved-google-signup-errpr/diff
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+date 03-12-2018
+
+https://qapartner.bakeway.com/atrribute-import/import/attribute
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+zoho task
+app/code/Bakeway/CustomerWebapi/Model/CustomerAccountRepository.php
+app/code/Webkul/Marketplace/Observer/SalesOrderSaveCommitAfterObserver.php
+app/code/Webkul/Marketplace/Controller/Adminhtml/Seller/MassDisapprove.php
+
+BKWYADMIN-1166: magento2 zoho sync module and customized fiels
+
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2778/bkwyadmin-1166-magento2-zoho-sync-module/diff
+
+-------------------------------------------------------------------------------------------
+
+BKWYADMIN-1169: cron for pending orders
+
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2779/bkwyadmin-1169-cron-for-pending-orders/diff
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+New tickets
+
+Prod Pull pending
+
+BKWYADMIN-1216 : TCS Implementation in Order Calculation
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2847/bkwyadmin-1216-tcs-implementation-in-order/diff
+----------------------------------------------------------------------------------------------------------------------------------------
+BKWYADMIN-1199 : Share a list of categories supported by Bakery to frontend
+
+app/code/Bakeway/Import/Controller/Import/Attribute.php
+app/code/Bakeway/PartnerWebapi/Model/SearchPartnerRepository.php
+app/code/Bakeway/StoreCatalog/Controller/Adminhtml/Index/Submit.php
+app/code/Bakeway/StoreCatalog/Controller/Catalog/Submit.php
+app/code/Bakeway/StoreCatalog/Helper/Data.php
+app/code/Bakeway/StoreCatalog/Model/ResourceModel/Storecatalogcategory.php
+app/code/Bakeway/StoreCatalog/Model/ResourceModel/Storecatalogcategory/Collection.php
+app/code/Bakeway/StoreCatalog/Model/Storecatalogcategory.php
+app/code/Bakeway/StoreCatalog/Setup/UpgradeSchema.php
+app/code/Bakeway/StoreCatalog/etc/module.xml
+app/code/Bakeway/StoreCatalog/view/adminhtml/templates/customer/index.phtml
+app/code/Bakeway/StoreCatalog/view/frontend/templates/store/catalog/index.phtml
+app/code/Bakeway/StoreCatalog/view/frontend/web/css/catalouge.css
+
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2846/bkwyadmin-1199-share-a-list-of-categories/diff
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+BKWYADMIN-1202 : Stop Order Payment
+no need to create pr for it.
+BKWYADMIN-1203: Admin should be able to change orders to any state
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2848/bkwyadmin-1203-admin-should-be-able-to/diff
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+PR pending
+BKWYADMIN-1226: Automated report required by marketing team for Active Inventory & Outlets
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Product are not showing in cakes tab if seller is temporarily disabled
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2905/bkwyadmin-1243-remove-conflict-from/diff
+
+https://bitbucket.org/nikhilkhankhoje/bakeway/pull-requests/2901/bkwyadmin-1243-reoslved-browser-issue/diff
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+

@@ -1,0 +1,249 @@
+/* Footer Style */
+.cms-index-index .footer {
+    margin-top: 0 !important;
+}
+.footer {
+    margin-top: 130px;
+	.middle-footer {
+		padding-top: 90px;
+		background-color: #f2f2f2;
+		padding-bottom: 30px;
+	}
+	.bottom-footer {
+		padding: 0 0 43px;
+		color: #999;
+		background-color: #f2f2f2;
+		font-size: 13px;
+		.footer-separator {
+			border-top: 1px solid #e1e1e1;
+			padding-bottom: 50px;
+		}
+	}
+	.menu {
+		text-align: right;
+		li {
+			display: inline-block;
+			padding: 0 20px;
+			margin-bottom: 0;
+			&:first-child {
+				padding-left: 0;
+			}
+			&:last-child {
+				padding-right: 0;
+			}
+			a {
+				color: #999;
+				display: block;
+				position: relative;
+				&:hover {
+					color: #000;
+				}
+			}
+		}
+	}
+	.socials {
+		overflow: hidden;
+		float: right;
+		margin-top: 10px;
+		a {
+			font-size: 14px;
+			color: #ccc;
+			padding-left: 30px;
+			padding-bottom: 10px;
+			display: inline-block;
+			&:first-child {
+				padding-left: 0;
+			}
+			&:hover {
+				color: #000;
+			}
+		}
+	}
+	.block.newsletter {
+		.form-group {
+			margin: 0;
+		}
+		label {
+			float: left;
+			font-size: 14px;
+			font-weight: 600;
+			color: #000;
+			margin-bottom: 0;
+			margin-top: 5px;
+			width: 30%;
+			text-align: left;
+		}
+		.form.subscribe {
+			float: left;
+			width: 70%;
+			padding-left: 10px;
+			position: relative;
+			input[type="email"] {
+				border-color: transparent;
+				background-color: transparent;
+				width: 100%;
+				padding: 5px 10px 10px;
+				border-bottom: 1px solid #ccc;
+			}
+			.action.subscribe {
+				background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+				border: medium none;
+				box-shadow: none;
+				font-size: 18px;
+				font-weight: 300;
+				height: 38px;
+				padding: 0;
+				position: absolute;
+				right: 0;
+				top: 0;
+				z-index: 1;
+				span{
+					line-height: 38px;
+					vertical-align: top;
+				}
+			}
+		}
+	}
+}
+
+.footer5{
+	.socials{
+		margin-top: 0;
+		@media (max-width: 991px){
+			text-align: center;
+		}
+	}
+	.footer-container{
+		padding: 40px 115px 30px ;
+		@media (max-width: 767px){
+			footer5 .footer-container {
+				padding: 30px 15px;
+			}
+		}
+	}
+}
+.footer3{
+	.block li{
+		display: inline-block;
+		+li{margin-left: 30px}
+		a{
+			color: #999;
+			&:hover{color: #000}
+		}
+	}
+	.block-socials{
+		text-align: right;
+		color: #000;
+	}
+	.socials{
+		margin-top: 0;
+		margin-left: 55px;
+	}
+	.logo{
+		text-align: center;
+		address{margin-top: 30px}
+	}
+	.footer-container{
+		padding-top: 140px;
+		padding-bottom: 120px;
+	}
+}
+.footer4{
+	text-align: center;
+	.socials{
+		float:none;
+		a{font-size: 24px;}
+	}
+	.footer-container{
+		padding: 68px 0;
+	}
+	.container > div + div{margin-top: 66px}
+	.title{	
+		color: #000;
+		margin-bottom: 40px;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+}
+.footer2{
+	color: #000;
+	.block-socials{
+		text-align: right;
+	}
+	.middle-footer{
+		padding: 100px;		
+	}
+	ul.block li a{
+		color: #000;
+		&:hover{color: #c00}
+	}
+	.socials{
+		margin-top: 3px;
+		a{
+			font-size: 14px;
+			width: 25px;
+			height: 25px;
+			line-height: 27px;
+			text-align: center;
+			border-radius: 5px;
+			background-color: #ccc;
+			color: #fff;
+			margin-left: 20px;
+			padding-left: 0;
+			i:before{
+				width: 25px;
+				text-align: center;
+				display: inline-block;
+				line-height: 27px;
+			}
+			&:hover{
+				background-color: #c00;
+				color: #fff;
+			}
+		}
+	}
+}
+
+/* FOOTER PARALLAX */
+.filter-active {
+    main {
+        position: static;
+    }
+    footer {
+        opacity: 0;
+    }
+}
+
+main {
+    z-index: 4;
+    position: relative;
+    background-color: #fff;
+}
+
+footer.active {
+    position: relative;
+    z-index: 3;
+}
+
+.footer-parallax {
+    main {
+        padding-bottom: 130px;
+    }
+    &.cms-index-index main {
+        padding-bottom: 0;
+    }
+    .footer {
+        margin: 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        &.active {
+            z-index: 3;
+        }
+    }
+    &.boxed-full:not(.panel-popup) .main-wrapper {
+        margin-bottom: 0;
+    }
+}

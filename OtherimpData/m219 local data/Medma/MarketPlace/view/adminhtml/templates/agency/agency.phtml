@@ -1,0 +1,90 @@
+<form method="post" name="agencyassigned" action="<?php echo $this->getUrl("admin_marketplace/vendor/agencysave")?>">
+<span><h2>Agency List</h2></span>
+
+<div class="clear"></div>
+<div>
+<?php $vendorId = $block->getVendorId();
+if(!empty($vendorId)) {
+	$btnflag =  false;
+?>
+<input type="hidden" id="curr_seller" name="curr_seller" value="<?php echo $vendorId ;?>">
+<select id="age_name" name="age_name" class="select admin__control-select">
+     <?php $allAgencies = $this->helper("Medma\MarketPlace\Helper\Data")->getAllRatingAgency();?>
+     <?php  $details = $this->helper("Medma\MarketPlace\Helper\Data")->getProfile($vendorId);
+
+      if(!empty($details->getData('latitude'))){
+
+      $objectManager =  \Magento\Framework\App\ObjectManager::getInstance(); 
+
+      $allAgencies = $this->helper("Medma\MarketPlace\Helper\Data")->getAllCustProfile();
+
+      if(count($allAgencies)){
+
+	     foreach($allAgencies as $customerEntity)
+	       {
+	          $customerID = $customerEntity['entity_id'];
+	          
+	          $customerObj = $objectManager->create('Magento\Customer\Model\Customer')->load($customerID);
+
+	          $agencyProvience = $customerObj['age_area_of_pro'];
+	      
+	          if(!empty($agencyProvience))
+	          {
+	             $proviArray = explode(',',$agencyProvience);
+
+	             if(in_array($details->getData('latitude'), $proviArray)){
+
+	              $btnflag = true;
+	                echo "<option value=".$customerObj['entity_id'].">".$customerObj['firstname']." ".$customerObj['lastname']."</option>"; 
+	             }else{
+	             	$btnflag = false;
+	             	echo "<option>Sorry, Agency is not avaliable</option>"; 
+	             }
+	        
+	          }
+	                    
+	          
+
+	       }
+   } 
+}else{
+
+	echo "There are No Provinces for seller.";
+} 
+     ?>
+ 
+</select>
+</br>
+</br>
+<?php if($btnflag === true){?>
+<button onclick="saveagency()" type="button"><span class="ui-button-text">
+    <span>Submit</span>
+</span></button>
+<?php } ?>
+</div>
+	
+</form>
+<?php } else { ?>
+<?php echo __("No Record Found.") ?>
+<?php } ?>
+<script type="text/javascript">
+		    function saveagency(){
+				var seller_id =  document.getElementById('curr_seller').value;
+				var agency_id =  document.getElementById('age_name').value;
+				jQuery.ajax({
+				method:'post',	
+				data:{
+				'seller_id':seller_id,
+				'agency_id':agency_id},	
+				url: "<?php echo $this->getUrl('admin_marketplace/vendor/agencysave');?>",
+				success:function(data) {
+				jQuery('#addloader').css('display','none');
+				location.reload();
+				//location.reload();
+				//alert('success');
+				},
+				});
+
+	  
+	   }
+</script>
