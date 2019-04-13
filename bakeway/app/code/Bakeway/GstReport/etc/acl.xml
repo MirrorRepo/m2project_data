@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                 <resource id="Magento_Reports::report" title="Reports" translate="title" sortOrder="170">
+                    <resource id="Magento_Reports::report_marketing" title="Marketing" translate="title" sortOrder="100">
+                        <resource id="Bakeway_GstReport::manage_gstreports" title="GST Reports" translate="title" sortOrder="300">
+                            <resource id="Bakeway_GstReport::manage_gstreports_registered"  sortOrder="221" title="Registered Reports" />
+                            <resource id="Bakeway_GstReport::manage_gstreports_unregistered"  sortOrder="222" title="Unregistered Reports" />                        
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

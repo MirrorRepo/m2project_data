@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left"
+      xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/framework/View/Layout/etc/page_configuration.xsd">
+     <head>
+        <css src="Bakeway_StoreCatalog/css/catalouge.css"/>
+       <!-- <link src="Bakeway_StoreCatalog/js/catalouge.js"/>-->
+     </head>
+    <update handle="customer_account"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Bakeway\StoreCatalog\Block\Storecatalog\Index" name="store_catalog_index"
+                   cacheable="false" template="store/catalog/index.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>

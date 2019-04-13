@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <tags_search_terms>
+            <search_terms>
+                <search_terms_product>1</search_terms_product>
+                <search_terms_flavours>1</search_terms_flavours>
+                <search_terms_cats>1</search_terms_cats>
+                <search_terms_bakery>1</search_terms_bakery>
+                <search_product_limit>10</search_product_limit>
+            </search_terms>
+        </tags_search_terms>
+    </default>
+</config>

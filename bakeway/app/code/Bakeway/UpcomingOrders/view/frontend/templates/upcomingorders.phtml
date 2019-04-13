@@ -1,0 +1,252 @@
+<?php 
+
+
+
+/** @var $block \Bakeway\UpcomingOrders\Block\View\View.php */
+
+$helper = $this->_objectManager->create('Webkul\Marketplace\Helper\Data');
+$orderHelper = $this->helper('Webkul\Marketplace\Helper\Orders');
+$payoutHelper = $this->helper('Bakeway\PayoutsCalculation\Helper\Data');
+$paramData = $this->getRequest()->getParams();
+
+$filterOrderStatus = 'bakeway_partner_accepted';
+$filterStoreLocation = '';
+$filterIsDelivery = '';
+$filterIsPickup='';
+
+
+
+if(isset($paramData['storelocation'])){
+    $filterStoreLocation = $paramData['storelocation'] != ""?$paramData['storelocation']:"";
+}
+
+if(isset($paramData['is_delivery'])){
+
+ 	$filterIsDelivery = $paramData['is_delivery'] != ""?$paramData['is_delivery']:"";
+}
+
+ if(isset($paramData['is_pickup'])){
+ 
+	$filterIsPickup = $paramData['is_pickup'] != ""?$paramData['is_pickup']:"";
+}
+
+?>
+
+
+<div class="wk-mp-design">
+	<fieldset class="fieldset info wk-mp-fieldset">
+		<legend class="legend">
+			<span><?php echo __('My Upcoming Orders') ?></span>
+			
+		</legend>			
+		<div class="grid">
+			<div class="hor-scroll" >
+				<form action="<?php echo $block->getCurrentUrl();?>" method="post">
+					<table cellspacing="0" class="border wk-mp-list-table">
+
+					    <thead>
+					        <tr id="wk-mp-tr-heading">
+					            <th><span><?php echo __('Delivery Type') ?></span></th>
+					           
+					            <th><span><?php echo __('Store Location') ?></span></th>
+					            <th><span>&nbsp;</span></th>
+					        </tr>
+					    </thead>
+					    <tbody class="wk-mp-body">
+					    	<tr>
+					    		<td>
+					    			<input class="delivery"  type="checkbox" name="is_delivery" value="home" <?php if(isset($paramData['is_delivery'])) echo 'checked="checked"'?> />Delivery&nbsp;&nbsp;&nbsp;
+									
+
+									<input class="delivery"  type="checkbox" name="is_pickup" value="pickup" <?php if(isset($paramData['is_pickup'])) echo 'checked="checked"'?> />Pickup&nbsp;&nbsp;&nbsp;
+								</td>
+					    		<td>
+					    			<select name="storelocation" class="input-text">
+				    					 
+				    					<?php
+
+				    					 $id = $block->getCustomerId(); 
+				    					$storelocations = $block->getStoreLocations($id);
+
+				    					if((count($storelocations) != 1))
+				    					{?>
+				    						<option value="0"><?php echo __('All') ?></option>
+				    					<?php foreach ($storelocations as $storelocation) {
+				    						?>
+				    						<option value="<?php echo $storelocation['store_unique_name']?>" <?php if($filterStoreLocation == $storelocation['store_unique_name']) echo 'selected="selected"'?>>
+						    					<?php echo __($storelocation['store_locality_area']) ?>
+						    				</option>
+				    						<?php
+				    					}
+				    					} 
+				    					?>
+					    			</select> 
+					    		</td>
+					    		<td class="wk-mp-td-last">
+					    			<button class="button" title="Save" id="save-btn" type="submit">
+										<span><span><span><?php echo __('Submit') ?></span></span></span>
+									</button>
+					    		</td>
+					    	</tr>
+					    </tbody>
+					</table>
+				</form>
+
+
+				<?php 
+				if(count($block->getAllSalesOrder())==0){ ?>		
+					<div class="fieldset wk-mp-fieldset">
+						<div class="wk-emptymsg">
+							<?php echo __('No Order Available') ?>
+						</div>
+					</div>
+					<?php 
+				} else
+				{ ?>
+
+
+
+			<div style="overflow-y: scroll;height: 380px;">
+			    <table cellspacing="0" class="border wk-mp-list-table" >
+
+				    <thead>
+					        <tr id="wk-mp-tr-heading">
+					            <th width="20%"><span><?php $date1=date("Y-m-d"); echo __($date1); ?></span></th>
+					           
+					            <th width="20%"><span><?php echo __(date("Y-m-d", strtotime($date1 ." +1 day") )) ?></span></th>
+
+					            <th width="20%"><span><?php echo __(date("Y-m-d", strtotime($date1 ." +2 day") )) ?></span></th>
+
+					            <th width="20%"><span><?php echo __(date("Y-m-d", strtotime($date1 ." +3 day") )) ?></span></th>
+
+					            <th width="20%"><span><?php echo __(date("Y-m-d", strtotime($date1 ." +4 day") )) ?></span></th>
+							</tr>
+				    </thead>
+				 
+				 	<tbody>
+
+						<?php 
+						
+						$date2 = date("Y-m-d", strtotime($date1 ." +1 day") );
+						$date3 = date("Y-m-d", strtotime($date1 ." +2 day") );
+						$date4 = date("Y-m-d", strtotime($date1 ." +3 day") );
+						$date5 = date("Y-m-d", strtotime($date1 ." +4 day") );
+								
+						$dateArray = Array($date1 ,$date2, $date3, $date4, $date5);
+
+						foreach($dateArray as $date)
+						{?>
+							
+
+							<td style="border: 2">
+
+
+							<?php 
+							foreach ($block->getAllSalesOrder() as $key=>$res ) 
+							{	
+
+								  $dt = new DateTime($key);
+								  $dtt = $dt->format('Y-m-d');
+
+
+
+								  if($dtt == $date)
+								  {
+								  	
+								  	$order = $block->getMainOrder($res['order_id']);
+									$state=$order->getState();
+									$status=$order->getStatus();
+									$name=$order->getCustomerName();
+									$tracking=$orderHelper->getOrderinfo($res['order_id']);
+									if($tracking->getIsCanceled()){
+									$state='canceled';
+									$status='Canceled';
+										}?><div class="wk-orderbox">
+							<div style="padding:7px 7px 0px 7px;">
+								<div class="wk-orderbox-content1">
+									<div class="wk-orderbox-details">
+										<div class="color">
+											<span class="wk-ordertitle-label"><?php echo __('Order') ?></span> <strong>#<?php echo $res['magerealorder_id']; ?></strong>
+										</div>
+										<label for="name" class="wk-dash-label">
+												<div class="status <?php echo strtolower($state); ?>"><?php if($status == "bakeway_partner_accepted") echo"ACCEPTED"; ?> </div>
+										</label> 
+
+										<div class="name">
+											<?php echo $block->getpronamebyorder($res['order_id']); ?>
+										</div>
+
+										
+										<a href="<?php echo $block->getUrl('marketplace/order/view', ['id'=>$res['order_id'], '_secure' => $this->getRequest()->isSecure() ,'page_type' => 'upcorder'])?>">
+												<button class="button" title="<?php echo __('View Order') ?>" type="button">
+													<span><span><span><?php echo __('View Order') ?></span></span></span>
+												</button>
+											</a>
+									</div>
+									
+								</div>
+								<div class="wk-orderbox-content2">
+									<div class="wk-orderbox-details">
+										<?php if ($helper->getSellerProfileDisplayFlag()) { ?>
+											<span class="wk-title-label"><?php echo __('Customer: ');?></span>
+											<span class="wk-label"><?php echo $name;?></span>&nbsp;&nbsp;
+										<?php } ?>
+										<br>
+										<span class="wk-title-label"><?php echo __('Date: ');?></span>
+										<span class="wk-label"><?php echo $block->formatDate($res['created_at'])?></span>
+									
+										<br>
+										<span class="wk-title-label"><?php echo __('Order Total');?></span>
+										<span class="wk-label">
+											<strong>
+												<?php 
+												$orderPrice = $block->getPricebyorder($res['order_id']);
+												$orderPrice = $payoutHelper->getVendorAmountInclAll($res['order_id'], $orderPrice);
+												echo $order->formatPrice($block->getOrderedPricebyorder($order, $orderPrice));
+												?>
+											</strong>
+										</span>
+										</div>
+								</div>
+							</div>
+						</div>
+							<?php	}
+
+							}?>
+						</td>
+					<?php }?>
+					   
+					</tbody>
+				</table>
+			</div>
+						<div class="wk-clear"></div>
+						<?php
+					} 	?>
+					
+			</div>
+		</div>	
+		<?php if ($block->getPagerHtml()): ?>
+	        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+	    <?php endif ?>	
+	</fieldset>
+</div>
+
+
+<div class="buttons-set">
+	<p class="back-link">
+		<a href="javascript:;" onclick="javascript: window.history.back();" class="left">&laquo; <?php echo __('Back') ?></a>
+	</p>
+</div>
+
+
+						
+
+					
+					
+ <!--<script type="text/x-magento-init">
+	{
+		"*" : {
+			"sellerOrderHistory" : {}
+		}
+	}
+</script>-->

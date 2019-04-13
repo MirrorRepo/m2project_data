@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Bakeway
+ * @package   Bakeway_PartnerMobileWebApi
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../vendor/magento/framework/ObjectManager/etc/config.xsd">
+    <preference for="BakewayMobile\PartnerMobileApi\Api\MobilePartnerInterface" type="BakewayMobile\PartnerMobileApi\Model\MobilePartnerRepository" />
+</config>

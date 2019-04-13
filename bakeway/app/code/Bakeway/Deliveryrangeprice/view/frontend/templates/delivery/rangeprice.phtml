@@ -1,0 +1,772 @@
+<style>
+    #data_table tr td {
+        width: 5%;
+    }
+    .legend {
+        color: #08c;
+        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.2;
+        border-bottom: none;
+    }
+    .legend span {
+        margin-right: 4.5px;
+    }
+    .fieldset > .field, .fieldset > .fields > .field {
+        width: 45%;
+        float: left;
+        margin: 0% 5% 18px 0%;
+    }    
+</style>
+
+<?php
+/**
+ * {{controller}} {{action}} template
+ *
+ * @var $block \Bakeway\Deliveryrangeprice\Block\Delivery\Rangeprice
+ */
+//echo $block->hello;
+?>
+<style>
+.free-shipping-div .table-wrapper tbody tr:first-child{color: green;font-weight: bold;  font-size: 18px;}
+</style>
+
+<?php
+
+$helper = $this->helper('Bakeway\Deliveryrangeprice\Helper\Data');
+$grabhelper = $this->helper('Bakeway\GrabIntigration\Helper\Data');
+
+$requestStoreid = "";
+if (isset($_GET['store_id'])) {
+    $requestStoreid = $_GET['store_id'];
+}
+$blockObj= $block->getLayout()->createBlock('Bakeway\StoreCatalog\Block\Storecatalog\Index');
+$sellerStores = $blockObj->getSellerData();
+$sellerId = $this->getCustomerId();
+$arrayCounter = 0;
+$storeCatalogHelper = $this->helper("Bakeway\StoreCatalog\Helper\Data");
+
+if ($sellerStores === false) {
+    echo "No, Store Definded!!!";
+    return;
+}
+
+if (empty($helper->autoDeliveryChage($block->getCustomerId()))) {
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $objectManager->create('Bakeway\Deliveryrangeprice\Model\VendorDeliveryRepository')->updateDelivery($block->getCustomerId(), false);
+}
+?>
+<?php  $_DeliveryValue = $block->getDeliveryvalue($block->getCustomerId()); ?>
+<?php  $grabValue  = $block->getGrabvalue($block->getCustomerId()); ?>
+<?php  $grabSellerFlag = false; ?>
+
+<div id="delivery-loader" style="display: none;"><img
+        src="<?php echo $block->getViewFileUrl('Bakeway_Deliveryrangeprice::images/ajaxloder.gif'); ?>"></div>
+<input type="hidden" name="seller_id" id="seller_id" value="<?php echo $block->getCustomerId(); ?>"/>
+<input type="hidden" name="seller_email" id="seller_email"
+       value="<?php echo $block->getSellerEmail($block->getCustomerId()); ?>"/>
+<input type="hidden" name="updated_time" id="updated_time" value="<?php echo $helper->getDateTime(); ?>"/>
+<input type="hidden" name="countcc" id="countcc" value=""/>
+
+    <?php 
+    if (count($sellerStores) > 0) 
+    {
+    ?>
+    <div class="col-sm-12 col-xs-12">
+        <div class="field required">
+            <div class="control col-sm-12 col-xs-12">
+                <div class="control col-sm-9 col-xs-9">
+                    <div class="control col-sm-3 col-xs-3">
+                        <label class="label">
+                            <h5><?php echo __("Select Store:") ?></h5>
+                        </label>
+                    </div>
+                    <div class="control col-sm-7 col-xs-7">
+                        <select id="storedd_catalog" name="set" class="required-entry" aria-required="true">
+                            <?php foreach ($sellerStores as $sellerStore) {
+                                if($requestStoreid == "" && $arrayCounter == 0) :
+                                    $requestStoreid = $sellerStore['id'];
+                                    $arrayCounter = 1;
+                                endif;
+                            ?>
+                            <option value="<?php echo $sellerStore['id'] ?>" <?php if ($requestStoreid == $sellerStore['id']) { ?> selected="selected" <?php } ?>  >
+                                <?php echo ucfirst(strtolower($sellerStore['store_headline'])). " " . ucfirst(strtolower($sellerStore['store_locality_area'])); ?>
+                            </option>
+                            <?php } ?> 
+                        </select>
+                    </div>
+                </div>
+                <input type="hidden" name="store_id" id="store_id" value="<?php echo $requestStoreid; ?>"/>
+                <?php 
+                $seller = array('sellerId' => $sellerId, 'storeId' => $requestStoreid);
+                $redirect = $this->getUrl('deliveryrangeprice/delivery/new', array('_current' => false,'_use_rewrite' => true, '_query' => $seller)); ?>
+                <div class="control col-sm-3 col-xs-3">
+                    <button type="submit" title="Save" id="add" class="button add" onclick="add_row();" value="Add Row">
+                        <span><span><span>Add New Record</span></span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <br/><br/><br/>
+    <div class="clear"></div>
+    <div class="left-delivery-div">
+        <div id="wrapper">
+            <table class="border wk-mp-list-table" cellspacing=0 id="data_table_default">
+                <tr>
+                    <th style="width: 14%;">From kms</th>
+                    <th style="width: 14%;"> To Kms</th>
+                    <th style="width: 14%;">Normal Price</th>
+                    <th style="width: 14%;">Midnight Price</th>
+                    <th style="width: 14%;">Morning Price</th>
+                    <th style="width: 25%;">Status</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </table>
+            <table class="border wk-mp-list-table" cellspacing=0 id="data_table">
+            <?php 
+                $i = 0;
+                if ($block->getSellerData($requestStoreid)):
+                    foreach ($block->getSellerData($requestStoreid) as $_sellerdata): ?>
+                            <input type="hidden" name="row_id<?php echo $i; ?>" id="row_id<?php echo $i; ?>"
+                                   value="<?php /* @escapeNotVerified */ echo $_sellerdata['id'] ?>">
+                            <tr id="row<?php echo $i; ?>">
+                                <td id="name_row<?php echo $i; ?>"><?php /* @escapeNotVerified */ echo $_sellerdata['from_kms'] ?></td>
+                                <td id="country_row<?php echo $i; ?>"><?php /* @escapeNotVerified */ echo $_sellerdata['to_kms'] ?></td>
+                                <td id="normal_row<?php echo $i; ?>"><?php /* @escapeNotVerified */ echo $_sellerdata['delivery_price'] ?></td>
+                                <td id="midnight_row<?php echo $i; ?>"><?php /* @escapeNotVerified */ echo $_sellerdata['midnight_price'] ?></td>
+                                <td id="morning_row<?php echo $i; ?>"><?php /* @escapeNotVerified */ echo $_sellerdata['morning_price'] ?></td>
+                                <td><select id="status_row<?php echo $i; ?>" disabled=true>
+                                        <?php
+                                        $_selectalued = $_selectalue = "";
+                                        if ($_sellerdata['is_active'] == 1):
+                                            $_selectalue = "selected";
+                                        else:
+                                            $_selectalued = "selected";
+                                        endif;
+                                        ?>
+                                        <option val="0" <?php echo $_selectalued; ?> >Disable</option>
+                                        <option val="1" <?php echo $_selectalue; ?> >Enable</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="submit" id="edit_button<?php echo $i; ?>" title="Edit" class="button edit" onclick="edit_row(<?php echo $i; ?>);">
+                                        <span><span><span>Edit</span></span></span>
+                                    </button>
+
+                                    <button type="submit" style="display:none" title="Update" class="button editsave" id="editsave<?php echo $i; ?>" onclick="editsave_row(<?php echo $i; ?>,<?php echo $_sellerdata['id'] ?>);">
+                                        <span><span><span>Update</span></span></span>
+                                    </button>
+
+                                    <button type="submit" title="Save" class="button delete" id="delete_button<?php echo $i; ?>"
+                                            onclick="delete_row(<?php echo $i; ?>,<?php /* @escapeNotVerified */ echo $_sellerdata['id'] ?>);">
+                                        <span><span><span>Delete</span></span></span>
+                                    </button>
+
+                                    <button type="submit" style="display:none" title="Cancel" class="button cancel" id="cancelrow<?php echo $i; ?>" onclick="cancelrow_without_edit(<?php echo $i; ?>);">
+                                        <span><span><span>Cancel</span></span></span>
+                                    </button>
+                                </td>
+                            </tr>
+                    <?php
+                    $i++;
+                    endforeach;
+                endif;
+                ?>
+            </table>
+        </div>
+        <div class="clear" style="margin-top: 50px;"></div>
+        <?php 
+            $data = $helper->getDeliveryDetails($sellerId,$requestStoreid);
+            
+            $data["size_threshold"];
+            $data["free_delivery_threshold"];
+
+            $freeDelEnableStatus = $delEnableStatus = $midDelEnableStatus = $mornDelEnableStatus = $freeDelDisableStatus = $delDisableStatus = $midDelDisableStatus = $mornDelDisableStatus = '';
+
+            if($data["is_delivery_active"])
+                $delEnableStatus = 'selected="selected"';
+            else
+                $delDisableStatus = 'selected="selected"';
+
+            if($data["is_midnight_active"])
+                $midDelEnableStatus = 'selected="selected"';
+            else
+                $midDelDisableStatus = 'selected="selected"';
+
+            if($data["is_morning_active"])
+                $mornDelEnableStatus = 'selected="selected"';
+            else
+                $mornDelDisableStatus = 'selected="selected"';
+
+            if($data["is_free_delivery_active"])
+                $freeDelEnableStatus = 'selected="selected"';
+            else
+                $freeDelDisableStatus = 'selected="selected"';
+
+        ?>
+        <div class="entry-edit form-inline">
+           
+           <form id="edit_form" action="<?php echo $this->getUrl('deliveryrangeprice/delivery/save', ['_secure' => true]); ?>" method="post" enctype="multipart/form-data" novalidate="novalidate">
+            <input type="hidden" name="storeid" id="storeid" value="<?php echo $requestStoreid; ?>"/>
+            <input type="hidden" name="updatedTime" id="updatedTime" value="<?php echo $helper->getDateTime(); ?>"/>
+            <div id="grid_record_main_section_content" style="" data-ui-id="locations-edit-edit-tabs-tab-content-main-section" aria-labelledby="grid_record_main_section" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false">
+                 <div class="entry-edit form-inline">
+                    <fieldset class="fieldset " id="page_delivery_fieldset">
+                        <div class="control col-sm-12 col-xs-12">
+                            <div class="control col-sm-9 col-xs-9">
+                                <legend class="legend">
+                                   <span>Store Delivery Information</span>
+                                </legend>
+                            </div>
+                            <div class="control col-sm-3 col-xs-3">
+                                <button style="float: right;" type="submit" title="Save" id="save_delivery" class="button add" value="Save">
+                                    <span><span><span>Save Delivery Info</span></span></span>
+                                </button>
+                            </div>
+                        </div>
+                       <br>
+                       <div class="field field-is_delivery_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-delivery-active">
+                          <label class="label" for="page_is_delivery_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-delivery-active-label"><span>Delivery On/Off</span></label>
+                          <div class="control">
+                             <select required="required" id="page_is_delivery_active" name="is_delivery_active" title="Delivery On/Off" class=" select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-delivery-active">
+                                <option value="1" <?php echo $delEnableStatus; ?> >Enabled</option>
+                                <option value="0" <?php echo $delDisableStatus; ?> >Disabled</option>
+                             </select>
+                          </div>
+                       </div>
+                       
+                       <div class="field field-is_midnight_active " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-midnight-active">
+                          <label class="label" for="page_is_midnight_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-midnight-active-label"><span>Midnight Delivery On/Off</span></label>
+                          <div class="control">
+                             <select required="required" id="page_is_midnight_active" name="is_midnight_active" title="Midnight Delivery On/Off" class=" select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-midnight-active">
+                                <option value="1" <?php echo $midDelEnableStatus; ?> >Enabled</option>
+                                <option value="0" <?php echo $midDelDisableStatus; ?> >Disabled</option>
+                             </select>
+                          </div>
+                       </div>
+
+                       <div class="field field-is_morning_active " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-morning-active">
+                          <label class="label" for="page_is_morning_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-morning-active-label"><span>Morning Delivery On/Off</span></label>
+                          <div class="control">
+                             <select required="required" id="page_is_morning_active" name="is_morning_active" title="Morning Delivery On/Off" class=" select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-morning-active">
+                                <option value="1" <?php echo $mornDelEnableStatus; ?> >Enabled</option>
+                                <option value="0" <?php echo $mornDelDisableStatus; ?> >Disabled</option>
+                             </select>
+                          </div>
+                       </div> 
+
+                       <div class="field field-is_free_delivery_active " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-free-delivery-active">
+                          <label class="label" for="page_is_free_delivery_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-free-delivery-active-label"><span>Free Delivery On/Off</span></label>
+                          <div class="control">
+                             <select required="required" id="page_is_free_delivery_active" name="is_free_delivery_active" title="Free Delivery On/Off" class=" select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-free-delivery-active">
+                                <option value="1" <?php echo $freeDelEnableStatus; ?> >Enabled</option>
+                                <option value="0" <?php echo $freeDelDisableStatus; ?> >Disabled</option>
+                             </select>
+                          </div>
+                       </div>
+                       <div class="field field-free_delivery_threshold " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-free-delivery-threshold">
+                          <label class="label" for="page_free_delivery_threshold" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-free-delivery-threshold-label"><span>Free Delivery Threshold</span></label>
+                          <div class="control">
+                             <input id="page_free_delivery_threshold" name="free_delivery_threshold" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-free-delivery-threshold" value='<?php echo $data["free_delivery_threshold"]; ?>' title="Free Delivery Threshold" type="text" class=" input-text">                            
+                          </div>
+                       </div>
+                       <div class="field field-size_threshold " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-size-threshold">
+                          <label class="label" for="page_size_threshold" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-size-threshold-label"><span>Size Threshold</span></label>
+                          <div class="control">
+                             <input id="page_size_threshold" name="size_threshold" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-size-threshold" value='<?php echo $data["size_threshold"]; ?>' title="Size Threshold" type="text" class=" input-text">                            
+                          </div>
+                       </div>
+                    </fieldset>
+                 </div>
+              </div>
+           </form>
+        </div>
+    </div>
+    <?php
+    }
+    else
+    {
+        echo "Sorry, No Store Found!!!";
+    }
+    ?>
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/confirm'
+    ],
+            function ($, confirmationdelivery) {                
+            });
+<?php if ($block->getSellerData($requestStoreid) == 0): ?>
+        for (var j = 0; j <= 4; j++) {
+            document.getElementById("add").onclick();
+            document.getElementById("name_row" + j).placeholder = 3 * j;
+            document.getElementById("country_row" + j).placeholder = 3 * (j + 1);
+            document.getElementById("normal_row" + j).placeholder = 0;
+        }
+<?php endif; ?>
+    function cancelrow_without_edit(no) 
+    {
+        var name = document.getElementById("name_row" + no);
+        var country = document.getElementById("country_row" + no);
+        var normalDel = document.getElementById("normal_row" + no);
+        var midnightDel = document.getElementById("midnight_row" + no);
+        var morningDel = document.getElementById("morning_row" + no);
+        var status = document.getElementById("status_row" + no);
+        status.disabled = true;
+        var update_fkms_val_e = document.getElementById("name_text" + no).value;
+        var update_tkms_val_e = document.getElementById("country_text" + no).value;
+        var update_price_val_e = document.getElementById("normalDel_text" + no).value;
+        var update_midnight_price_val_e = document.getElementById("midnightDel_text" + no).value;
+        var update_morning_price_val_e = document.getElementById("morningDel_text" + no).value;
+        var update_status_val_e = document.getElementById("status_row" + no).value;
+        var checkedit_status = checkedit_stats_disable = "";
+        if (update_status_val_e == 'Enable') {
+            var checkedit_status = "selected = selected";
+        } else {
+            var checkedit_stats_disable = "selected = selected";
+        }
+
+        name.innerHTML = "<td id='name_row" + no + "'>" + update_fkms_val_e + "</td>";
+        country.innerHTML = "<td type='text' id='country_row" + no + "'>" + update_tkms_val_e + "</td>";
+        normalDel.innerHTML = "<td type='text' id='normal_row" + no + "'>" + update_price_val_e + "</td>";
+        midnightDel.innerHTML = "<td type='text' id='midnight_row" + no + "'>" + update_midnight_price_val_e + "</td>";
+        morningDel.innerHTML = "<td type='text' id='morning_row" + no + "'>" + update_morning_price_val_e + "</td>";
+        status.innerHTML = "<select name='is_active' id='status_row" + no + "'><option val='1' " + checkedit_status + ">Enable</option><option val='0' " + checkedit_stats_disable + ">Disable</option></select>";
+        document.getElementById("edit_button" + no).style.display = "block";
+        document.getElementById("editsave" + no).style.display = "none";
+        document.getElementById("delete_button" + no).style.display = "block";
+        document.getElementById("cancelrow" + no).style.display = "none";
+
+
+    }
+
+    function cancel_row(no)
+    {
+        document.getElementById("row" + no + "").outerHTML = "";
+    }
+
+    function editsave_row(no, rowid) 
+    {
+        document.getElementById("edit_button" + no).style.display = "none";
+        //var row_id = document.getElementById("row_id"+no).value;
+        var row_id = rowid;
+
+        var seller_id = document.getElementById("seller_id").value;
+        var updated_time = document.getElementById("updated_time").value;
+
+        var update_fkms_val_s = document.getElementById("name_text" + no).value;
+        var update_tkms_val_s = document.getElementById("country_text" + no).value;
+        var update_price_val_s = document.getElementById("normalDel_text" + no).value;
+        var update_midnight_price_val_e = document.getElementById("midnightDel_text" + no).value;
+        var update_morning_price_val_e = document.getElementById("morningDel_text" + no).value;
+        var update_status_val_s = document.getElementById("status_row" + no).value;
+        /*validation*/
+        var fkmsf = document.getElementById("name_text" + no);
+        var tkmsf = document.getElementById("country_text" + no);
+        var pricef = document.getElementById("normalDel_text" + no);
+        var midnightPricef = document.getElementById("midnightDel_text" + no);
+        var morningPricef = document.getElementById("morningDel_text" + no);
+        var fkms_val_s = document.getElementById("name_text" + no).value;
+        var tkms_val_S = document.getElementById("country_text" + no).value;
+        var price_val_S = document.getElementById("normalDel_text" + no).value;
+        var midnightPrice_val_S = document.getElementById("midnightDel_text" + no).value;
+        var morningPrice_val_S = document.getElementById("morningDel_text" + no).value;
+        if (fkms_val_s == "" && tkms_val_S == "" && price_val_S == "")
+        {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            return false;
+        }
+        else if (fkms_val_s != "" && tkms_val_S == "" && price_val_S == "")
+        {
+            tkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            fkmsf.removeAttribute("style");
+            return false;
+        }
+        else if (fkms_val_s == "" && tkms_val_S != "" && price_val_S == "")
+        {
+            fkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            tkmsf.removeAttribute("style");
+            return false;
+        }
+        else if (fkms_val_s == "" && tkms_val_S == "" && price_val_S != "")
+        {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.style.border = "1px solid red";
+            pricef.removeAttribute("style");
+            return false;
+        }
+        else if (fkms_val_s != "" && tkms_val_S != "" && price_val_S == "")
+        {
+            fkmsf.removeAttribute("style");
+            tkmsf.removeAttribute("style");
+            pricef.style.border = "1px solid red";
+            return false;
+        }
+        else if (fkms_val_s != "" && tkms_val_S == "" && price_val_S != "")
+        {
+            fkmsf.removeAttribute("style");
+            tkmsf.style.border = "1px solid red";
+            pricef.removeAttribute("style");
+            return false;
+        }
+        else if (fkms_val_s == "" && tkms_val_S != "" && price_val_S != "")
+        {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.removeAttribute("style");
+            pricef.removeAttribute("style");
+            return false;
+        }
+        else if (fkms_val_s != "" && tkms_val_S != "" && price_val_S != "")
+        {
+            document.getElementById("delivery-loader").style.display = "block";
+            /*ajax*/
+            require(['jquery', 'jquery/ui'], function ($) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "<?php echo $this->getUrl('deliveryrangeprice/delivery/editsave', ['_secure' => true]); ?>", //Relative or absolute path to response.php file
+                    data: {
+                        "delivery_id": row_id,
+                        "from_kms": update_fkms_val_s,
+                        "to_kms": update_tkms_val_s,
+                        "delivery_price": update_price_val_s,
+                        "midnight_price": midnightPrice_val_S,
+                        "morning_price": morningPrice_val_S,
+                        "is_active": update_status_val_s,
+                        "updated_time": updated_time
+                    },
+                    success: function (data)
+                    {
+                        var checkedit_status = checkedit_stats_disable = "";
+                        if (update_status_val_s == 'Enable') {
+                            var checkedit_status = "selected = selected";
+                        } else {
+                            var checkedit_stats_disable = "selected = selected";
+                        }
+                        document.getElementById("status_row" + no).disabled = true;
+                        document.getElementById("name_row" + no).innerHTML = update_fkms_val_s;
+                        document.getElementById("country_row" + no).innerHTML = update_tkms_val_s;
+                        document.getElementById("normal_row" + no).innerHTML = update_price_val_s;
+                        document.getElementById("midnight_row" + no).innerHTML = midnightPrice_val_S;
+                        document.getElementById("morning_row" + no).innerHTML = morningPrice_val_S;
+                        document.getElementById("status_row" + no).innerHTML = "<select name='is_active' id='status_row" + no + "'><option val='1' " + checkedit_status + " >Enable</option><option val='0' " + checkedit_stats_disable + ">Disable</option></select>";
+                        document.getElementById("delivery-loader").style.display = "none";
+                        document.getElementById("edit_button" + no).style.display = "block";
+                        document.getElementById("editsave" + no).style.display = "none";
+                        document.getElementById("delete_button" + no).style.display = "block";
+                        document.getElementById("cancelrow" + no).style.display = "none";
+
+                    }
+                });
+            });
+            /*ajax*/
+        }
+
+
+    }
+
+    require(['jquery', 'jquery/ui'], function ($) 
+    {
+        var delForm = $("#edit_form");
+        delForm.submit(function(e)
+        {
+            e.preventDefault();
+            $("#delivery-loader").show();
+
+            var seller_id = $("#seller_id").val();
+            var updated_time = $("#updatedTime").val();
+            var delUrl = delForm.attr('action');
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: delUrl,
+                data: delForm.serialize(),
+                success: function (data)
+                {
+                    $("#delivery-loader").hide();
+                    if(data.message != "")
+                        alert(data.message);
+                },
+                error: function (request, status, error) 
+                {
+                    alert(request.responseText);
+                }                
+            });
+        });
+    });
+
+    function edit_row(no)
+    {
+        document.getElementById("edit_button" + no).style.display = "none";
+        document.getElementById("editsave" + no).style.display = "block";
+        document.getElementById("delete_button" + no).style.display = "none";
+        document.getElementById("cancelrow" + no).style.display = "block";
+
+        var name = document.getElementById("name_row" + no);
+        var country = document.getElementById("country_row" + no);
+        var normalDel = document.getElementById("normal_row" + no);
+        var midnightDel = document.getElementById("midnight_row" + no);
+        var morningDel = document.getElementById("morning_row" + no);
+        var status = document.getElementById("status_row" + no);
+        var row_id = document.getElementById("row_id" + no);
+        var seller_id = document.getElementById("seller_id").value;
+        status.removeAttribute("disabled");
+
+        var update_status_val_s_edit = document.getElementById("status_row" + no).value;
+        var checkedit_status = checkedit_stats_disable = "";
+        if (update_status_val_s_edit == 'Enable') {
+            var checkedit_status = "selected = selected";
+        } else {
+            var checkedit_stats_disable = "selected = selected";
+        }
+        var name_data = name.innerHTML;
+        var country_data = country.innerHTML;
+        var normalDel_data = normalDel.innerHTML;
+        var midnightDel_data = midnightDel.innerHTML;
+        var morningDel_data = morningDel.innerHTML;
+        var status_data = status.innerHTML;
+
+        name.innerHTML = "<input type='number'  id='name_text" + no + "' value='" + name_data + "'>";
+        country.innerHTML = "<input type='number' id='country_text" + no + "' value='" + country_data + "'>";
+        normalDel.innerHTML = "<input type='number' id='normalDel_text" + no + "' value='" + normalDel_data + "'>";
+        midnightDel.innerHTML = "<input type='number' id='midnightDel_text" + no + "' value='" + midnightDel_data + "'>";
+        morningDel.innerHTML = "<input type='number' id='morningDel_text" + no + "' value='" + morningDel_data + "'>";
+        status.innerHTML = "<select name='is_active' id='status_row" + no + "'><option val='1' " + checkedit_status + ">Enable</option><option val='0' " + checkedit_stats_disable + ">Disable</option></select>";
+    }
+
+    function save_row(no) 
+    {
+        var fkms_val_s = document.getElementById("name_row" + no).value;
+        var tkms_val_S = document.getElementById("country_row" + no).value;
+        var price_val_S = document.getElementById("normal_row" + no).value;
+        var midnightPrice_val_S = document.getElementById("midnight_row" + no).value;
+        var morningPrice_val_S = document.getElementById("morning_row" + no).value;
+        var status_val_s = document.getElementById("status_row" + no).value;
+        var seller_id = document.getElementById("seller_id").value;
+        var store_id = document.getElementById("store_id").value;
+        var seller_email = document.getElementById("seller_email").value;
+
+        var fkmsf = document.getElementById("name_row" + no);
+        var tkmsf = document.getElementById("country_row" + no);
+        var pricef = document.getElementById("normal_row" + no);
+        var midnightPricef = document.getElementById("midnight_row" + no);
+        var morningPricef = document.getElementById("morning_row" + no);
+
+        if (fkms_val_s == "" && tkms_val_S == "" && price_val_S == "")
+        {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            return false;
+        }
+        else if (fkms_val_s != "" && tkms_val_S == "" && price_val_S == "") 
+        {
+            tkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            fkmsf.removeAttribute("style");
+            return false;
+        }
+        else if (fkms_val_s == "" && tkms_val_S != "" && price_val_S == "")
+        {
+            fkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            tkmsf.removeAttribute("style");
+            return false;
+        }
+        else if (fkms_val_s == "" && tkms_val_S == "" && price_val_S != "")
+        {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.style.border = "1px solid red";
+            pricef.removeAttribute("style");
+            return false;
+        }
+        else if (fkms_val_s != "" && tkms_val_S != "" && price_val_S == "")
+        {
+            fkmsf.removeAttribute("style");
+            tkmsf.removeAttribute("style");
+            pricef.style.border = "1px solid red";
+            return false;
+        }
+        else if (fkms_val_s != "" && tkms_val_S == "" && price_val_S != "")
+        {
+            fkmsf.removeAttribute("style");
+            tkmsf.style.border = "1px solid red";
+            pricef.removeAttribute("style");
+            return false;
+        }
+        else if (fkms_val_s == "" && tkms_val_S != "" && price_val_S != "")
+        {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.removeAttribute("style");
+            pricef.removeAttribute("style");
+            return false;
+        }
+        else if (fkms_val_s != "" && tkms_val_S != "" && price_val_S != "")
+        {
+
+            fkmsf.removeAttribute("style");
+            tkmsf.removeAttribute("style");
+            pricef.removeAttribute("style");
+
+            document.getElementById("delivery-loader").style.display = "block";
+            /*ajax*/
+            require(['jquery', 'jquery/ui'], function ($) {
+                document.getElementById("delivery-loader").style.display = "block";
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "<?php echo $this->getUrl('deliveryrangeprice/delivery/rangepriceajax', ['_secure' => true]); ?>", //Relative or absolute path to response.php file
+                    data: {
+                        "seller_id": seller_id,
+                        "store_id": store_id,
+                        "from_kms": fkms_val_s,
+                        "to_kms": tkms_val_S,
+                        "delivery_price": price_val_S,
+                        "midnight_price": midnightPrice_val_S,
+                        "morning_price": morningPrice_val_S,
+                        "is_active": status_val_s,
+                        "email": seller_email
+                    },
+                    success: function (data) 
+                    {
+                        var update_status_val_s_edit = data.status;
+                        var checkedit_status = checkedit_stats_disable = "";
+                        if (update_status_val_s_edit == 1)
+                        {
+                            var checkedit_status = "selected = selected";
+                        } 
+                        else
+                        {
+                            var checkedit_stats_disable = "selected = selected";
+                        }
+
+                        var htmlr = "<tr id='row" + no + "'><td id='name_row" + no + "'>" + data.fkms + "</td><td id='country_row" + no + "' >" + data.tkms + "</td><td id='normal_row" + no + "'>" + data.price + "</td><td id='midnight_row" + no + "'>" + data.midnightPrice + "</td><td id='morning_row" + no + "'>" + data.morningPrice + "</td><td><select name='is_active' id='status_row" + no + "' ><option val='1' " + checkedit_status + ">Enable</option><option val='0' " + checkedit_stats_disable + ">Disable</option></select></td><td><button type='submit' id='edit_button" + no + "' value='Edit' class='button edit' onclick='edit_row(" + no + ")'><span><span><span>Edit</span></span></span></button> <button style='display:none;'  type='submit' id='editsave" + no + "' value='Update' class='button editsave' onclick='editsave_row(" + no + "," + data.id + ")'><span><span><span>Update</span></span></span></button><button  type='submit' id='delete_button" + no + "' value='Delete' class='button delete' onclick='delete_row(" + no + "," + data.id + ")'><span><span><span>Delete</span></span></span></button><button  style='display:none;' type='submit' id='cancelrow" + no + "' value='Delete' class='button cancel' onclick='cancelrow_without_edit(" + no + "," + data.id + ")'><span><span><span>Cancel</span></span></span></button></td></tr>";
+                        document.getElementById("row" + no).innerHTML = htmlr;
+                        document.getElementById("delivery-loader").style.display = "none";
+                        document.getElementById("status_row" + no).disabled = true;
+
+                    <?php if (!empty($block->getSellerData($requestStoreid))) 
+                          { ?>
+                            var cc_count = '<?php echo count($block->getSellerData($requestStoreid)); ?>';
+                            document.getElementById("countcc").value = cc_count;
+                    <?php } 
+                    else 
+                    { 
+                        ?>
+                        document.getElementById("countcc").value = "";
+                    <?php } ?>
+                        location.reload();
+                    }
+                });
+            });
+            /*ajax*/
+        } else {
+            return true;
+        }
+
+
+    }
+
+    function delete_row(no, rowid)
+    {
+        var rowid = rowid;
+        var confirmcheck = "Are you sure you want to delete this record?";
+        /*confirm box widget */
+        require([
+            'jquery',
+            'Magento_Ui/js/modal/confirm'
+        ],
+                function ($, confirmation)
+                {
+                    // event.preventDefault();
+                    confirmation({
+                        title: 'Delete record',
+                        content: confirmcheck,
+                        actions: {
+                            confirm: function ()
+                            {
+                                var seller_email = document.getElementById("seller_email").value;
+                                /*ajax*/
+                                require(['jquery', 'jquery/ui'], function ($)
+                                {
+                                    document.getElementById("delivery-loader").style.display = "block";
+                                    $.ajax({
+                                        type: "POST",
+                                        dataType: "json",
+                                        url: "<?php echo $this->getUrl('deliveryrangeprice/delivery/delete', ['_secure' => true]); ?>", //Relative or absolute path to response.php file
+                                        data: {"id": rowid, "email": seller_email},
+                                        success: function (data)
+                                        {
+                                            /*
+                                             var resmsg = data.savedsuccess;
+                                             $(".opmsgdisplay_delivery").append("<div >"+resmsg+"</div>");
+                                             */
+                                            //document.getElementById("row"+no+"").outerHTML="";
+                                            var row = document.getElementById("row" + no);
+                                            row.parentNode.removeChild(row);
+                                            document.getElementById("delivery-loader").style.display = "none";
+                                            location.reload();
+                                        }
+                                    });
+                                });
+                                /*ajax*/
+                            },
+                            cancel: function ()
+                            {
+                            },
+                            always: function ()
+                            {
+                            }
+                        }
+                    });
+                    return false;
+                });
+
+        /*confirm box widget */
+
+    }
+
+    function add_row()
+    {
+        var table = document.getElementById("data_table");
+        var table_len = (table.rows.length);
+        if (table_len <= 7)
+        {
+            var row = table.insertRow(table_len).outerHTML =
+                    "<tr id='row" + table_len + "'><td><input id='name_row" + table_len + "' type='number' name='from_kms' ></td><td><input  id='country_row" + table_len + "' type='number' name='to_kms'></td><td><input type='number' name='delivery_price' id='normal_row" + table_len + "'></td><td><input type='number' name='midnight_price' id='midnight_row" + table_len + "'></td><td><input type='number' name='morning_price' id='morning_row" + table_len + "'></td><td><select name='is_active' id='status_row" + table_len + "'><option  selected='selected' val='1'>Enable</option><option val='0'>Disable</option></select></td><td><button  type='submit' id='save_button" + table_len + "' value='Save' class='save' onclick='save_row(" + table_len + ")'><span><span><span>Submit</span></span></span></button><button type='submit' id='cancel" + table_len + "' value='Canecl' class='cancel' onclick='cancel_row(" + table_len + ")'><span><span><span>Cancel</span></span></span></button> </td></tr>";
+        } else {
+
+            alert("Please delete some record you have reached maximum limit to enter record!");
+        }
+
+    }
+</script>
+
+<script type="text/javascript">
+    var seller_id = "<?php echo $sellerId ?>";
+    var controller_url = "<?php echo $this->getUrl('deliveryrangeprice/delivery/rangeprice', ['_secure' => true]); ?>";
+    var catalouge_select_url = "<?php echo $this->getUrl('store/catalog/select', ['_secure' => true]); ?>";
+
+    jQuery("#storedd_catalog").change(function ()
+    {
+        var locality_id = jQuery("#storedd_catalog").val();
+        if (seller_id != null && locality_id != null) 
+        {
+            window.location.href = (controller_url + "?store_id=" + locality_id);
+        }
+        else
+        {
+            alert("Sorry! No Store Found");
+        }
+
+    });
+</script>

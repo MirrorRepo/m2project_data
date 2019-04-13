@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Bakeway
+*
+* @category  Bakeway
+* @package   Bakeway_VendorNotification
+* @author    Bakeway
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="bakewaysettings" translate="label" sortOrder="20">
+            <label>Bakeway</label>
+        </tab>
+        <section id="vendor_app_settings" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Vendor Settings</label>
+            <tab>bakewaysettings</tab>
+            <resource>Bakeway_VendorNotification::config</resource>
+	
+            <group id="bakeway_product_inventory_setting" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Store Product Enable or Disable Alert</label>
+                <field id="email_status" sortOrder="220" translate="label" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+
+                <field id="receiver_email" sortOrder="240" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Receiver Email</label>
+                    <comment>(,) seperated email id</comment>
+                </field>
+                                
+                <field id="product_enable_disable_email_template" translate="label comment" type="select" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Seller Complete Order Status Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>

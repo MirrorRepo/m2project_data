@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <!-- payment-group -->
+        </section>
+        <section id="carriers" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+            <!-- carrier-group -->
+        </section>
+
+        <section id="catalog_feed" translate="label" type="text" sortOrder="1500" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <class>separator-top</class>
+            <label>Catalog Feed Api Setting</label>
+            <tab>bakewaysettings</tab>
+            <resource>Bakeway_OrderstatusEmail::orderstatusEmail_configuration</resource>
+
+            <group id="catalog_feed" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1"  showInStore="1">
+                <field id="status" translate="label comment" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Elable or Disable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="token" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Access Token</label>
+                </field>
+            </group>
+        </section>
+ 
+        <section id="productfeed" translate="label" type="text" sortOrder="201" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <class>separator-top</class>
+            <label>Product Feed Settings</label>
+            <tab>bakewaysettings</tab>
+            <resource>Bakeway_Import::Import_configuration</resource>
+            <group id="setfeed" translate="label" type="text" sortOrder="310" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <field id="sku" translate="label comment" type="text" sortOrder="1" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Test Bakery Product's Sku</label>
+                    <comment>add multiple sku (,) seperated</comment>
+                </field>
+                <field id="weight" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Minimum Weight Limit</label>
+                </field>
+                <field id="minprice" translate="label comment" type="text" sortOrder="4" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Minimum Product Price</label>
+                </field>
+                <field id="maxprice" translate="label comment" type="text" sortOrder="5" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Maximum Product Price</label>
+                </field>
+                <!--  <field id="aoit" translate="label comment" type="text" sortOrder="3" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Advance order Intimation time in minute</label>
+                </field> -->
+            </group>
+        </section>
+
+    </system>
+</config>

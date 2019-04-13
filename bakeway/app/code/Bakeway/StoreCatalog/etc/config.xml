@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <vendor_app_settings>
+            <bakeway_product_inventory_setting>
+                 <email_status>1</email_status>
+                 <product_enable_disable_email_template>vendor_app_settings_bakeway_product_inventory_setting_product_enable_disable_email_template</product_enable_disable_email_template>
+            </bakeway_product_inventory_setting>
+        </vendor_app_settings>
+      </default>
+</config>

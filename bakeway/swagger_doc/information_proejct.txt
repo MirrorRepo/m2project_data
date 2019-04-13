@@ -1,0 +1,77 @@
+user : ubuntu
+http://52.66.82.242/bakeway/
+------------------------------------------------
+on staging server
+sudo -i 
+
+git pull origin staging
+chmod -R 777 var
+------------------------------------------------
+
+-create branch with task id 
+-take git pull there and also take git pull on dev
+ or git push origin new branch
+-git status
+-git commit and git push 
+-git merge with dev if needs
+
+-do commit
+-git checkout dev
+-git pull origin dev
+-git checkout new branch
+-git merge dev
+-git push origin new branch
+ctrl + x
+
+
+when first time 
+git checkout -b dev 
+------------------------------------------------
+git reset --hard <SOME-COMMIT> then Git will:
+
+git remote set-url origin git@bitbucket.org:relfor-manish/bakeway.git
+------------------------------------------------
+dev server
+
+http://52.66.82.242/bakeway/backend
+
+------------------------------------------------
+
+php magento -dmemory_limit=-1 setup:di:compile
+
+------------------------------------------------
+admin/relfor!1
+ak@bw.com/akash@123
+------------------------------------------------
+Presentation of conflicts
+
+When you open a file with merge conflicts in your favourite text editor or IDE and scroll through it, you will quickly 
+notice special markers <<<<<<<, ======= and >>>>>> in it:
+
+ public PrintingFileVisitor() {
+        prefix = new StringBuffer();
+        fileCount = 0;
+<<<<<<< HEAD
+        dirCount = 0;
+=======
+        allCount = 0;
+>>>>>>> src-branch
+    }
+
+after remove comment <<<<
+-add add filename
+-git commit -m 
+
+git commit -i my_filename
+
+-git merge --abort 
+
+-do git rm or git add file name
+-------------------------------------------------------------------
+
+kratombee.com/admin_f091
+clyde/Bw1.0#XX~aT{
+
+BKMBVENDOR-83
+
+sku :

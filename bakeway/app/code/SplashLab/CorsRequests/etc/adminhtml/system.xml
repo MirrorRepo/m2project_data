@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="web">
+            <resource>SplashLab_CorsRequests::config</resource>
+            <group id="corsRequests" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>CORS Requests Configuration</label>
+                <field id="allowStarAtStart" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Allow Star</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enables * Access when no other access is found for errorneous requests</comment>
+                </field>
+                <field id="origin_url" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>CORS Origin Url</label>
+                    <comment>*, or fully qualified URLs without trailing '/' (slash) (e.g. https://bakeway.com)
+                    </comment>
+                </field>
+                <field id="mobile_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>CORS Mobile Origin Url</label>
+                    <comment>fully qualified URLs without trailing '/' (slash) (e.g. https://m.bakeway.com)
+                    </comment>
+                </field>
+                <field id="mobile_ip" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>CORS Mobile Origin Ip Address</label>
+                    <comment>IP Address from where the node server calls (e.g. 13.126.253.92)
+                    </comment>
+                </field>
+                <field id="allow_credentials" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>CORS Allow Credentials</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enables Access-Control-Allow-Credentials response header to pass cookies</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

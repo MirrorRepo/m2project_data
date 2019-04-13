@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left"
+      xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">UpcomingOrders</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+
+            <block class="Bakeway\UpcomingOrders\Block\View\View" name="upcoming_orders" cacheable="false" template="upcomingorders.phtml" />
+        </referenceContainer>
+    </body>
+</page>

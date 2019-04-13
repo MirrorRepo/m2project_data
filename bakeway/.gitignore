@@ -1,0 +1,10 @@
+/var/*
+/pub/media/*
+/pub/static/*
+/app/code/Magento/*
+app/etc/config.php
+/dev/tests/*
+app/etc/env.php
+/nbproject/private/
+/app/code/Bakeway/ProductApi/nbproject/private/
+/app/code/Webkul/Marketplace/nbproject/private/

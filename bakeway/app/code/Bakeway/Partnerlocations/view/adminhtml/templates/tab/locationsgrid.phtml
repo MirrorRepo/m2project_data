@@ -1,0 +1,787 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cityHelper = $objectManager->create('\Bakeway\Cities\Helper\Data');
+?>
+<?php $city = $cityHelper->getCitiesOptionArray(); ?>
+
+<button title="DD NEW ADDRESS" id="add-location-add" class="button add location"  onClick ="addrecordPopup();" value="Add Row">
+    <span><span><span>ADD NEW ADDRESS</span></span></span>
+</button>
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form>
+            <fieldset class="gllpLatlonPicker" style="border:none;">
+                <input type="text" class="gllpSearchField">
+                <input type="button" class="gllpSearchButton" value="search">
+                <div class="gllpMap" style="width: 500px; height: 250px;">Google Maps</div>
+                <input type="hidden" class="gllpLatitude" value="20"/>
+                <input type="hidden" class="gllpLongitude" value="20"/>
+                <input type="hidden" class="gllpZoom" value="3"/>
+                <input type="button" class="gllpUpdateButton" value="update map" style="display:none;">
+                <input type="button" class="setLatLon" value="Set Lat/Lon">
+            </fieldset>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<div id="location_popup_content" style="display: none">
+    <div class="entry-edit form-inline">
+        <fieldset class="fieldset admin__fieldset " id="page_base_fieldset">
+            <input id="seller_id" name="seller_id" value="<?php echo $block->getCustomerId(); ?>" type="hidden">
+            <div class="admin__field field field-city_id ">
+                <label class="label admin__field-label" for="tab_city_id"><span>City</span><span style="color: indianred;">*</span></label>
+                <div class="admin__field-control control">
+                    <select id="tab_city_id" name="city_id" title="City" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-active">
+                        <?php
+                        foreach ($city as $cityData) {
+                            echo "<option value=" . $cityData['value'] . ">" . $cityData['label'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="admin__field field field-city_id suburb-main-div" style="display: none;">
+                <label class="label admin__field-label" for="tab_city_id"><span>Suburb</span><span style="color: indianred;">*</span></label>
+                <div class="admin__field-control control">
+                    <select style="display: none;" id="sub_loc_id" name="sub_loc_id" title="Suburb" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-active">
+                    </select>
+                </div>
+            </div>
+            <div class="admin__field field field-meta_description " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-meta-description">
+                <label class="label admin__field-label" for="page_meta_description" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-meta-description-label"><span>Meta Description</span></label>
+                <div class="admin__field-control control">
+                    <textarea id="tab_meta_description" name="store_locality_meta_description" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-meta-description"  title="Meta Description" class="required-entry input-text admin__control-text"></textarea>
+                </div>
+            </div>
+            <div class="admin__field field field-store_latitude " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-store-latitude">
+                <label class="label admin__field-label" for="page_store_latitude" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-store-latitude-label"><span>Store Latitude</span><span style="color: indianred;">*</span></label>
+                <div class="admin__field-control control">
+                    <input id="tab_store_latitude" name="store_latitude" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-store-latitude"  title="Store Latitude" class="required-entry input-text admin__control-text" type="text">                            </div>
+            </div>
+
+            <div class="admin__field field field-store_longitude " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-store-longitude">
+                <label class="label admin__field-label" for="page_store_longitude" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-store-longitude-label"><span>Store Longitude</span><span style="color: indianred;">*</span></label>
+                <div class="admin__field-control control">
+                    <input id="page_store_longitude" name="store_longitude" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-store-longitude"  title="Store Longitude" class="required-entry input-text admin__control-text" type="text">                            </div>
+            </div>
+
+            <div class="admin__field field field-store_locality_area " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-store-locality-area">
+                <label class="label admin__field-label" for="page_store_locality_area" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-store-locality-area-label"><span>Locality</span><span style="color: indianred;">*</span></label>
+                <div class="admin__field-control control">
+                    <input id="page_store_locality_area" name="store_locality_area" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-store-locality-area"  title="Locality" class="required-entry input-text admin__control-text" type="text">                            </div>
+            </div>
+
+            <div class="admin__field field field-store_street_address " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-store-street-address">
+                <label class="label admin__field-label" for="page_store_street_address" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-store-street-address-label"><span>Store Address</span><span style="color: indianred;">*</span></label>
+                <div class="admin__field-control control">
+                    <input id="page_store_street_address" name="store_street_address" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-store-street-address" title="Store Address" class="required-entry input-text admin__control-text" type="text">                            </div>
+            </div>
+
+            <div class="admin__field field field-store_headline " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-store-headline">
+                <label class="label admin__field-label" for="page_store_headline" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-store-headline-label"><span>Store Headline</span><span style="color: indianred;">*</span></label>
+                <div class="admin__field-control control">
+                    <input id="page_store_headline" name="store_headline" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-store-headline"  title="Store Headline" class="required-entry input-text admin__control-text" type="text">                            </div>
+            </div>
+
+            <div class="admin__field field field-is_active " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-active">
+                <label class="label admin__field-label" for="page_is_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-active-label"><span>GRAB'S Status</span><span style="color: indianred;">*</span></label>
+                <div class="admin__field-control control">
+                    <select id="is_grab_active" name="is_grab_active" title="Status" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-active">
+                        <option value="1" selected="selected">Enabled</option>
+                        <option value="0">Disabled</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="admin__field field field-is_active " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-active">
+                <label class="label admin__field-label" for="page_is_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-active-label"><span>Status</span><span style="color: indianred;">*</span></label>
+                <div class="admin__field-control control">
+                    <select id="page_is_active" name="is_active" title="Status" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-active">
+                        <option value="1" selected="selected">Enabled</option>
+                        <option value="0">Disabled</option>
+                    </select>
+                </div>
+            </div>
+
+           <!-- BKWYADMIN-1206 : Is featured? status setting -->
+            <div class="admin__field field field-is_featured " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-featured">
+                <label class="label admin__field-label" for="page_is_featured" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-featured-label"><span>Is Featured?</span></label>
+                <div class="admin__field-control control">
+                   <select id="page_is_featured" name="is_featured" title="Is Featured" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-featured">
+                        <option value="1">Enabled</option>
+                        <option value="0" selected="selected">Disabled</option>
+                    </select>
+                </div>
+            </div>
+           <!-- BKWYADMIN-1206 : Is featured? status setting -->
+            <button title="SUBMIT" id="add-location-add" class="button add location"  onclick="addrecordajax()" value="Add Row">
+                <span><span><span>SUBMIT</span></span></span>
+            </button>
+            <button id="myBtn">Open Map To Select Lat/Lon</button>
+            <!-- <button id="myBtn" style="width: 220px;left: 250px;position: relative; margin:20px;">Open Map To Select Lat/Lon</button> -->
+        </fieldset>
+        <fieldset class="fieldset admin__fieldset " id="page_delivery_fieldset">
+            <legend class="admin__legend legend">
+                <span>Store Delivery Information</span>
+            </legend><br>
+            <div class="messages"></div>
+
+            <div class="admin__field field field-is_delivery_active  with-note" data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-delivery-active">
+               <label class="label admin__field-label" for="page_is_delivery_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-delivery-active-label"><span>Delivery On/Off</span></label>
+               <div class="admin__field-control control">
+                  <select id="page_is_delivery_active" name="is_delivery_active" title="Delivery On/Off" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-delivery-active">
+                     <option value="1" selected="selected">Enabled</option>
+                     <option value="0">Disabled</option>
+                  </select>
+                  <div class="note admin__field-note" id="is_delivery_active-note">Depends on the GRAB status, this option will only be applicable when GRAB is disabled for the store</div>
+               </div>
+            </div>
+            <div class="admin__field field field-is_pickup_active " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-pickup-active">
+               <label class="label admin__field-label" for="page_is_pickup_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-pickup-active-label"><span>Is Pick up available?</span></label>
+               <div class="admin__field-control control">
+                  <select id="page_is_pickup_active" name="is_pickup_active" title="Is Pick up available?" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-pickup-active">
+                     <option value="1" selected="selected">Enabled</option>
+                     <option value="0">Disabled</option>
+                  </select>
+               </div>
+            </div>
+            <div class="admin__field field field-shop_open_timing " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-shop-open-timing">
+               <label class="label admin__field-label" for="page_shop_open_timing" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-shop-open-timing-label"><span>Shop Open Timing</span></label>
+               <div class="admin__field-control control">
+                  <select id="page_shop_open_timing" name="shop_open_timing" data-form-part="" title="Shop Open Timing" class="required-entry select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-shop-open-timing">
+                     <option value="">---Please Select---</option>
+                     <option value="01">01</option>
+                     <option value="02">02</option>
+                     <option value="03">03</option>
+                     <option value="04">04</option>
+                     <option value="05">05</option>
+                     <option value="06">06</option>
+                     <option value="07">07</option>
+                     <option value="08">08</option>
+                     <option value="09">09</option>
+                     <option value="10">10</option>
+                     <option value="11">11</option>
+                     <option value="12">12</option>
+                  </select>
+               </div>
+            </div>
+            <div class="admin__field field field-shop_open_AMPM " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-shop-open-ampm">
+               <label class="label admin__field-label" for="page_shop_open_AMPM" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-shop-open-ampm-label"><span></span></label>
+               <div class="admin__field-control control">
+                  <select id="page_shop_open_AMPM" name="shop_open_AMPM" data-form-part="" class="required-entry select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-shop-open-ampm">
+                     <option value="">---Select Type---</option>
+                     <option value="1">AM</option>
+                     <option value="2">PM</option>
+                  </select>
+               </div>
+            </div>
+            <div class="admin__field field field-shop_close_timing " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-shop-close-timing">
+               <label class="label admin__field-label" for="page_shop_close_timing" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-shop-close-timing-label"><span>Shop Close Timing</span></label>
+               <div class="admin__field-control control">
+                  <select id="page_shop_close_timing" name="shop_close_timing" data-form-part="" title="Shop Close Timing" class="required-entry select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-shop-close-timing">
+                     <option value="">---Please Select---</option>
+                     <option value="01">01</option>
+                     <option value="02">02</option>
+                     <option value="03">03</option>
+                     <option value="04">04</option>
+                     <option value="05">05</option>
+                     <option value="06">06</option>
+                     <option value="07">07</option>
+                     <option value="08">08</option>
+                     <option value="09">09</option>
+                     <option value="10">10</option>
+                     <option value="11">11</option>
+                     <option value="12">12</option>
+                  </select>
+               </div>
+            </div>
+            <div class="admin__field field field-shop_close_AMPM " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-shop-close-ampm">
+               <label class="label admin__field-label" for="page_shop_close_AMPM" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-shop-close-ampm-label"><span></span></label>
+               <div class="admin__field-control control">
+                  <select id="page_shop_close_AMPM" name="shop_close_AMPM" data-form-part="" class="required-entry select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-shop-close-ampm">
+                     <option value="">---Select Type---</option>
+                     <option value="1">AM</option>
+                     <option value="2">PM</option>
+                  </select>
+               </div>
+            </div>            
+            <div class="admin__field field field-regular_delivery_start_time  with-addon" data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-regular-delivery-start-time">
+               <label class="label admin__field-label" for="page_regular_delivery_start_time" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-regular-delivery-start-time-label"><span>Shop Delivery Start Time</span></label>
+               <div class="admin__field-control control">
+                  <div class="admin__field">
+                     <select id="page_regular_delivery_start_time" name="regular_delivery_start_time" data-form-part="" title="Shop Delivery Start Time" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-regular-delivery-start-time">
+                        <option value="" selected="selected">---Please Select---</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                     </select>
+                     <label class="addafter" for="page_regular_delivery_start_time">
+                     <br><label style="width:100%;">
+                     Time in hours.
+                     </label>
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <div class="admin__field field field-regular_delivery_end_time  with-addon" data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-regular-delivery-end-time">
+               <label class="label admin__field-label" for="page_regular_delivery_end_time" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-regular-delivery-end-time-label"><span>Shop Delivery End Time</span></label>
+               <div class="admin__field-control control">
+                  <div class="admin__field">
+                     <select id="page_regular_delivery_end_time" name="regular_delivery_end_time" data-form-part="" title="Shop Delivery End Time" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-regular-delivery-end-time">
+                        <option value="" selected="selected">---Please Select---</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                     </select>
+                     <label class="addafter" for="page_regular_delivery_end_time">
+                     <br><label style="width:100%;">
+                     Time in hours.
+                     </label>
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <div class="admin__field field field-is_midnight_active " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-midnight-active">
+               <label class="label admin__field-label" for="page_is_midnight_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-midnight-active-label"><span>Midnight Delivery On/Off</span></label>
+               <div class="admin__field-control control">
+                  <select id="page_is_midnight_active" name="is_midnight_active" title="Midnight Delivery On/Off" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-midnight-active">
+                     <option value="1" selected="selected">Enabled</option>
+                     <option value="0">Disabled</option>
+                  </select>
+               </div>
+            </div>
+            <div class="admin__field field field-midnight_delivery_start_time  with-addon" data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-midnight-delivery-start-time">
+               <label class="label admin__field-label" for="page_midnight_delivery_start_time" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-midnight-delivery-start-time-label"><span>Midnight Delivery Start Time</span></label>
+               <div class="admin__field-control control">
+                  <div class="admin__field">
+                     <select id="page_midnight_delivery_start_time" name="midnight_delivery_start_time" data-form-part="" title="Midnight Delivery Start Time" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-midnight-delivery-start-time">
+                        <option value="" selected="selected">---Please Select---</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                     </select>
+                     <label class="addafter" for="page_midnight_delivery_start_time">
+                     <br><label style="width:100%;">
+                     Time in hours.
+                     </label>
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <div class="admin__field field field-midnight_delivery_end_time  with-addon" data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-midnight-delivery-end-time">
+               <label class="label admin__field-label" for="page_midnight_delivery_end_time" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-midnight-delivery-end-time-label"><span>Midnight Delivery End Time</span></label>
+               <div class="admin__field-control control">
+                  <div class="admin__field">
+                     <select id="page_midnight_delivery_end_time" name="midnight_delivery_end_time" data-form-part="" title="Midnight Delivery End Time" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-midnight-delivery-end-time">
+                        <option value="" selected="selected">---Please Select---</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                     </select>
+                     <label class="addafter" for="page_midnight_delivery_end_time">
+                     <br><label style="width:100%;">
+                     Time in hours.
+                     </label>
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <div class="admin__field field field-is_morning_active " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-morning-active">
+               <label class="label admin__field-label" for="page_is_morning_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-morning-active-label"><span>Morning Delivery On/Off</span></label>
+               <div class="admin__field-control control">
+                  <select id="page_is_morning_active" name="is_morning_active" title="Morning Delivery On/Off" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-morning-active">
+                     <option value="1" selected="selected">Enabled</option>
+                     <option value="0">Disabled</option>
+                  </select>
+               </div>
+            </div>
+            <div class="admin__field field field-morning_delivery_start_time  with-addon" data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-morning-delivery-start-time">
+               <label class="label admin__field-label" for="page_morning_delivery_start_time" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-morning-delivery-start-time-label"><span>Morning Delivery Start Time</span></label>
+               <div class="admin__field-control control">
+                  <div class="admin__field">
+                     <select id="page_morning_delivery_start_time" name="morning_delivery_start_time" data-form-part="" title="Morning Delivery Start Time" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-morning-delivery-start-time">
+                        <option value="" selected="selected">---Please Select---</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                     </select>
+                     <label class="addafter" for="page_morning_delivery_start_time">
+                     <br><label style="width:100%;">
+                     Time in hours.
+                     </label>
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <div class="admin__field field field-morning_delivery_end_time  with-addon" data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-morning-delivery-end-time">
+               <label class="label admin__field-label" for="page_morning_delivery_end_time" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-morning-delivery-end-time-label"><span>Morning Delivery End Time</span></label>
+               <div class="admin__field-control control">
+                  <div class="admin__field">
+                     <select id="page_morning_delivery_end_time" name="morning_delivery_end_time" data-form-part="" title="Morning Delivery End Time" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-morning-delivery-end-time">
+                        <option value="" selected="selected">---Please Select---</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                     </select>
+                     <label class="addafter" for="page_morning_delivery_end_time">
+                     <br><label style="width:100%;">
+                     Time in hours.
+                     </label>
+                     </label>
+                  </div>
+               </div>
+            </div>
+
+            <div class="admin__field field field-is_free_delivery_active " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-is-free-delivery-active">
+               <label class="label admin__field-label" for="page_is_free_delivery_active" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-free-delivery-active-label"><span>Free Delivery On/Off</span></label>
+               <div class="admin__field-control control">
+                  <select id="page_is_free_delivery_active" name="is_free_delivery_active" title="Free Delivery On/Off" class=" select admin__control-select" data-ui-id="locations-edit-edit-tab-main-fieldset-element-select-is-free-delivery-active">
+                     <option value="1" selected="selected">Enabled</option>
+                     <option value="0">Disabled</option>
+                  </select>
+               </div>
+            </div>
+
+            <div class="admin__field field field-free_delivery_threshold " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-free-delivery-threshold">
+               <label class="label admin__field-label" for="page_free_delivery_threshold" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-free-delivery-threshold-label"><span>Free Delivery Threshold</span></label>
+               <div class="admin__field-control control">
+                  <input id="page_free_delivery_threshold" name="free_delivery_threshold" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-free-delivery-threshold" value="" title="Free Delivery Threshold" class=" input-text admin__control-text" type="text">                            
+               </div>
+            </div>
+            <div class="admin__field field field-size_threshold " data-ui-id="locations-edit-edit-tab-main-fieldset-element-form-field-size-threshold">
+               <label class="label admin__field-label" for="page_size_threshold" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-size-threshold-label"><span>Size Threshold</span></label>
+               <div class="admin__field-control control">
+                  <input id="page_size_threshold" name="size_threshold" data-ui-id="locations-edit-edit-tab-main-fieldset-element-text-size-threshold" value="" title="Size Threshold" class=" input-text admin__control-text" type="text">                            
+               </div>
+            </div>
+            
+            <button title="SUBMIT" style="width: 230px;left: 280px;position: relative; margin:20px; padding: 10px" id="add-location-add" class="button add location"  onclick="addrecordajax()" value="Add Row">
+                <span><span><span>SUBMIT</span></span></span>
+            </button>
+        </fieldset>        
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+    function addrecordPopup() {
+        require(
+                [
+                    'jquery',
+                    'Magento_Ui/js/modal/modal'
+                ],
+                function ($,
+                        modal) {
+                    var options = {
+                        type: 'popup',
+                        responsive: true,
+                        innerScroll: true,
+                        title: 'New Address',
+
+                    };
+
+                    var popup = modal(options, $('#location_popup_content'));
+
+                    $('#location_popup_content').modal(options).modal('openModal');
+                    $('.modal-footer').hide();
+
+                }
+        );
+    }
+    /**suburb list**/
+    jQuery("#tab_city_id").change(function () {
+
+        var city_id = document.getElementById('tab_city_id').value;
+        new Ajax.Request('<?php
+                        echo $this->getUrl('partnerlocations/locations/suburblist',
+                                ['_secure' => true]);
+                        ?>', {
+            method: 'post',
+            dataType: "json",
+            parameters: {
+                city_id: city_id,
+            },
+            onSuccess: function (transport) {
+                if (transport.responseJSON.length == 0) {
+                    jQuery("#sub_loc_id,.suburb-main-div").hide();
+                } else {
+                    jQuery("#sub_loc_id,.suburb-main-div").show();
+                    var suburbHtml = '<select id="sub_loc_id" name="sub_loc_id" title="Suburb" class=" select admin__control-select"><option value="">---Please Select---</option>' + transport.responseJSON + '</select>';
+                    jQuery('#sub_loc_id').replaceWith(suburbHtml);
+                }
+            }
+        });
+
+    });
+    var seller_id = city_id = store_latitude = store_longitude = store_locality_area = store_street_address = store_headline = is_active = "";
+
+
+
+    function addrecordajax() {
+        var seller_id = document.getElementById('seller_id').value;
+        var city_id = document.getElementById('tab_city_id').value;
+        var sub_loc_id = document.getElementById('sub_loc_id').value;
+        var store_latitude = document.getElementById('tab_store_latitude').value;
+        var store_longitude = document.getElementById('page_store_longitude').value;
+        var store_locality_area = document.getElementById('page_store_locality_area').value;
+        var store_street_address = document.getElementById('page_store_street_address').value;
+        var store_headline = document.getElementById('page_store_headline').value;
+        var is_active = document.getElementById('page_is_active').value;
+        var is_grab_active = document.getElementById('is_grab_active').value;
+        var is_delivery_active = document.getElementById('page_is_delivery_active').value;
+        var is_pickup_active = document.getElementById('page_is_pickup_active').value;
+        var shop_open_timing = document.getElementById('page_shop_open_timing').value;
+        var shop_open_AMPM = document.getElementById('page_shop_open_AMPM').value;
+        var shop_close_timing = document.getElementById('page_shop_close_timing').value;
+        var shop_close_AMPM = document.getElementById('page_shop_close_AMPM').value;
+        var regular_delivery_start_time = document.getElementById('page_regular_delivery_start_time').value;
+        var regular_delivery_end_time = document.getElementById('page_regular_delivery_end_time').value;
+        var is_midnight_active = document.getElementById('page_is_midnight_active').value;
+        var midnight_delivery_start_time = document.getElementById('page_midnight_delivery_start_time').value;
+        var midnight_delivery_end_time = document.getElementById('page_midnight_delivery_end_time').value;
+        var is_morning_active = document.getElementById('page_is_morning_active').value;
+        var morning_delivery_start_time = document.getElementById('page_morning_delivery_start_time').value;
+        var morning_delivery_end_time = document.getElementById('page_morning_delivery_end_time').value;
+        var is_free_delivery_active = document.getElementById('page_is_free_delivery_active').value;
+        var free_delivery_threshold = document.getElementById('page_free_delivery_threshold').value;
+        var size_threshold = document.getElementById('page_size_threshold').value;
+        var meta_description = document.getElementById('tab_meta_description').value;
+        /* validation*/
+        if (city_id == "")
+        {
+            alert("City is required Field");
+            return false;
+        }
+        if (sub_loc_id == "")
+        {
+            alert("Suburb is required Field");
+            return false;
+        }
+        if (store_latitude == "")
+        {
+            alert("Store latitude is required Field");
+            return false;
+        }
+
+        if (store_longitude == "")
+        {
+            alert("Store longitude is required Field");
+            return false;
+        }
+
+        if (store_locality_area == "")
+        {
+            alert("Store locality area is required Field");
+            return false;
+        }
+
+        if (store_street_address == "")
+        {
+            alert("Store Address is a required Field");
+            return false;
+        }
+
+        if (store_headline == "")
+        {
+            alert("Store Headline is required Field");
+            return false;            
+        }
+
+        if (is_active == "")
+        {
+            alert("Status is required Field");
+            return false;
+        }
+
+        if (is_delivery_active == "")
+        {
+            alert("Delivery Status is required Field");
+            return false;
+        }
+
+        if (is_pickup_active == "")
+        {
+            alert("Pickup Status is required Field");
+            return false;
+        }
+
+        if (shop_open_timing == "")
+        {
+            alert("Shop Open Timing is required Field");
+            return false;
+        }
+
+        if (shop_open_AMPM == "")
+        {
+            alert("Shop Open AMPM is required Field");
+            return false;
+        }
+
+        if (shop_close_timing == "")
+        {
+            alert("Shop Close Timing is required Field");
+            return false;
+        }
+
+        if (shop_close_AMPM == "")
+        {
+            alert("Shop Close AMPM is required Field");
+            return false;
+        }
+
+        if (regular_delivery_start_time == "")
+        {
+            alert("Regular Delivery Start Time is required Field");
+            return false;
+        }
+
+        if (regular_delivery_end_time == "")
+        {
+            alert("Regular Delivery End Time is required Field");
+            return false;
+        }
+
+        if (is_midnight_active == "")
+        {
+            alert("Midnight Delivery Status is required Field");
+            return false;
+        }
+
+        if(is_midnight_active == "1")
+        {
+             if (midnight_delivery_start_time == "")
+             {
+                alert("Midnight Delivery Start Time is required Field");
+                return false;
+             }
+
+             if (midnight_delivery_end_time == "")
+             {
+                alert("Midnight Delivery End Time is required Field");
+                return false;
+             }
+        }
+
+        if (is_morning_active == "")
+        {
+            alert("Morning Delivery Status is required Field");
+            return false;
+        }
+        
+        if (is_morning_active == "1")
+        {
+             if (morning_delivery_start_time == "")
+             {
+               alert("Morning Delivery Start Time is required Field");
+               return false;
+             }
+
+             if (morning_delivery_end_time == "")
+             {
+                alert("Morning Delivery End Time is required Field");
+                return false;
+             }
+        }
+
+        if (is_free_delivery_active == "")
+        {
+            alert("Free Delivery Status is required Field");
+            return false;
+        }
+
+        if(free_delivery_threshold != "" && isNaN(free_delivery_threshold))
+        {
+            alert("Free Delivery Threshold should be a number.");
+            return false;
+        }
+
+        if(size_threshold != "" && isNaN(size_threshold))
+        {
+            alert("Size Threshold should be a number.");
+            return false;
+        }
+
+        new Ajax.Request('<?php
+                        echo $this->getUrl('partnerlocations/locations/save',
+                                ['_secure' => true]);
+                        ?>', {
+            method: 'post',
+            dataType: "json",
+            parameters: {
+                seller_id: seller_id,
+                city_id: city_id,
+                sub_loc_id: sub_loc_id,
+                store_latitude: store_latitude,
+                store_longitude: store_longitude,
+                store_locality_area: store_locality_area,
+                store_street_address: store_street_address,
+                store_headline: store_headline,
+                is_active: is_active,
+                is_grab_active: is_grab_active,
+                is_delivery_active: is_delivery_active,
+                is_pickup_active: is_pickup_active,
+                shop_open_timing: shop_open_timing,
+                shop_open_AMPM: shop_open_AMPM,
+                shop_close_timing: shop_close_timing,
+                shop_close_AMPM: shop_close_AMPM,
+                regular_delivery_start_time: regular_delivery_start_time,
+                regular_delivery_end_time: regular_delivery_end_time,
+                is_midnight_active: is_midnight_active,
+                midnight_delivery_start_time: midnight_delivery_start_time,
+                midnight_delivery_end_time: midnight_delivery_end_time,
+                is_morning_active: is_morning_active,
+                morning_delivery_start_time: morning_delivery_start_time,
+                morning_delivery_end_time: morning_delivery_end_time,
+                is_free_delivery_active: is_free_delivery_active,
+                free_delivery_threshold: free_delivery_threshold,
+                size_threshold: size_threshold,
+                store_locality_meta_description: meta_description
+            },
+            onSuccess: function (transport) {
+                //location.reload();
+                window.location = "<?php
+                        echo $this->getUrl('customer/index/edit/',
+                                array('id' => $block->getCustomerId(), '_current' => true, 'mode' => 'localtion_save_target'));
+                        ?>"
+            }
+        });
+    }
+
+
+
+
+</script>
+
+<?php echo $block->getChildHtml('gridlocations'); ?>

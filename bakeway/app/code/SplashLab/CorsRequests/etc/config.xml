@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <web>
+            <corsRequests>
+                <allowStarAtStart>1</allowStarAtStart>
+                <origin_url>https://bakeway.com</origin_url>
+                <mobile_url>https://m.bakeway.com</mobile_url>
+                <mobile_ip>13.126.253.92</mobile_ip>
+                <allow_credentials>0</allow_credentials>
+            </corsRequests>
+        </web>
+    </default>
+</config>

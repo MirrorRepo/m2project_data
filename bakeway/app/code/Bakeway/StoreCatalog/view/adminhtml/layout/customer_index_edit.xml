@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+         <css src="Bakeway_StoreCatalog/css/catalouge.css"/>
+         <!--<link src="Bakeway_StoreCatalog/js/catalouge.js"/>-->
+    </head>
+    
+    <body>
+        <referenceBlock name="customer_form">
+            <block class="Bakeway\StoreCatalog\Block\Adminhtml\Customer\Edit\Tab\Storecatalog"
+                   name="customer_edit_tab_storecatalog">
+                <action method="setTabLabel">
+                    <argument name="label" xsi:type="string">Manage Store Catalouge</argument>
+                </action>
+            </block>
+        </referenceBlock> 
+   </body>
+</page>

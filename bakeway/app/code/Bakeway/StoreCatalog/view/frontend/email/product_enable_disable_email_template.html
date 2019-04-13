@@ -1,0 +1,66 @@
+<!--
+/**
+ * Bakeway StoreCatalog.
+ *
+ * @category  Bakeway
+ * @package   Bakeway_StoreCatalog
+ * @author    Bakeway
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<!--@subject {{trans 'inventory has changed for'}} {{var store_headline}} {{var store_locality_area}} . @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var products":"Products",
+"var storeid":"StoreId"
+} @-->
+<!--@styles 
+.email-template{width:700px;color:#555; margin:0 auto;
+ font-family: Roboto, Arial, Helvetica, sans-serif;color: #565656;font-size: 14px;}
+.total-order-table td span,.email-template tr td h3{font-weight:bold;}
+.footer{text-align:center;}
+.total-order-table tr th{font-size: 15px;color: #222;}
+.total-order-table tr td span.price{font-size: 15px;color: #222;font-weight:normal}
+.email-template span.price{font-size: 15px;color: #222;font-weight:bold}
+.email-deliveryaddress{width:700px;}
+.total-order-table tr th{text-align:left}
+.total-order-table tr td{text-align:right}
+.wrapper .header{border-bottom:solid 1px #adadad;}
+.wrapper .header img{margin-bottom:22px}
+.order-emails .price-grand-total span{}
+.order-emails-sender-information tr p{margin-bottom:3px !important}
+@-->
+<body style="background-color: #ececec;padding:10px">
+<div style="width: 700px;padding: 0px 10px 10px 10px;margin: 0 auto;background-color: #fff;">
+<table class="email-template order-emails">
+    <tbody>
+    <tr style="border-bottom:solid 1px #adadad;">
+        <td align="center" height="100" colspan="3">
+            {{template config_path="design/email/header_template"}}
+        </td>
+    </tr>
+
+   <tr style="border-bottom:solid 1px #adadad;">
+        <td align="center">{{trans 'Bakery: ' }} {{var store_headline}}</td>
+    </tr>
+    
+   <tr style="border-bottom:solid 1px #adadad;">
+        <td align="center">{{trans 'Store Locality Area: ' }} {{var store_locality_area}}</td>
+    </tr>
+    
+    
+    <tr style="border-bottom:solid 1px #adadad; width: 40%">
+        <td align="center" height="40" colspan="3" style="color:#15c">
+            <strong>{{var status}}({{var count}}): </strong>  {{var products}}
+        </td>
+    </tr>
+    
+    <tr>
+        <td style="text-align: left!important;font-style: italic!important;color: #000;padding-left: 5px;">{{customVar code=order_completed_before_footer_text}}</td>
+    </tr>
+
+    </tbody>
+</table>
+    </div>
+</body>

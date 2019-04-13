@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="tags_search_terms" translate="label" type="text" sortOrder="900" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <class>separator-top</class>
+            <label>Global Search Setting</label>
+            <tab>bakewaysettings</tab>
+            <resource>bakewayMobile_globalSearch::globalSearch_configuration</resource>
+            <group id="search_terms" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                 <label>Global Search Configuration</label>
+                 <field id="search_terms_product" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Products Search</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                 </field>
+                 
+                 <field id="search_terms_flavours" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Flavours Search</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                 </field>
+                 
+                  <field id="search_terms_cats" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Categories Search</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                 </field>
+                 
+                   <field id="search_terms_bakery" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Bakeries Search</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                
+                 <field id="search_product_limit" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Responded Products Limits</label>
+                </field>
+                
+            </group>
+        </section>
+        
+    </system>
+</config>

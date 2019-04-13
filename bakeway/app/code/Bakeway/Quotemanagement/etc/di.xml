@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../vendor/magento/framework/ObjectManager/etc/config.xsd">
+
+    <!-- Plugin to apply App only coupon -->
+	<type name="Magento\Quote\Model\CouponManagement">
+		<plugin name="bakewayAppOnlyCoupon" type="Bakeway\Quotemanagement\Plugin\CouponManagement" sortOrder="1" disabled="false" />
+	</type>
+    <!-- Plugin to apply App only coupon -->
+
+    <preference for="Bakeway\Quotemanagement\Api\QuotemanagementRepositoryInterface"
+                type="Bakeway\Quotemanagement\Model\QuotemanagementRepository"/>
+    <preference for="Bakeway\Quotemanagement\Api\QuoteOrderManagementRepositoryInterface"
+                type="Bakeway\Quotemanagement\Model\QuoteOrderManagementRepository"/>
+    <preference for="Bakeway\Quotemanagement\Api\CreateOrderManagementRepositoryInterface"
+                type="Bakeway\Quotemanagement\Model\CreateOrderManagementRepository"/>
+    <preference for="Magento\Sales\Model\Config\Source\Order\Status"
+                type="Bakeway\Quotemanagement\Model\Config\Source\Order\Status"/>
+    <preference for="Bakeway\Quotemanagement\Api\ReactivateQuoteManagementRepositoryInterface"
+                type="Bakeway\Quotemanagement\Model\ReactivateQuoteManagementRepository"/>
+
+</config>

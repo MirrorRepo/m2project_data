@@ -1,0 +1,133 @@
+<style>
+    .main-div{
+        float: left;
+        margin-top: 10px;
+    }
+    #manage-delivery, #manage-free-delivery
+    {
+        margin-right: 10px;
+    }
+    #wrapper #data_table tr {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .button.delete {
+        float: left;
+        margin-left: 8px;
+    }
+
+    .button.edit, .button.editsave {
+        float: left;
+        margin-right: 5%;
+    }
+
+    #data_table tr td {
+        width: 14%;
+    }
+
+    #data_table .save {
+        margin-right: 3%;
+    }
+
+    #data_table_default .delivery {
+        margin-left: 45px;
+    }
+
+    #data_table_default select {
+        width: 15%;
+        margin-left: 7px;
+    }
+
+    #delivery-range-main-div {
+    }
+
+    #delivery-range-main-div ul li {
+        list-style: none;
+    }
+
+    #wrapper {
+        margin-top: 32px;
+    }
+
+    .deliveryoption {
+        padding-left: 22px
+    }
+
+
+    .active-delivery-button {
+        color: #fff  !important; background-color: #eb5202 !important;border-color: #eb5202;
+    }
+</style>
+<?php
+$requestStoreid = "";
+if (isset($_GET['store_id'])) {
+    $requestStoreid = $_GET['store_id'];
+}
+
+$blockObj= $block->getLayout()->createBlock('Bakeway\StoreCatalog\Block\Adminhtml\Customer\Edit\Tab\Storecatalog');
+$sellerStores = $blockObj->getSellerData();
+$sellerId = $block->getCustomerId();
+$arrayCounter = 0;
+if($sellerStores === false){
+    echo "No, Store Definded!!!";
+    return;
+}
+?>
+<div id="delivery-loader" style="display: none;"><img
+            src="<?php echo $block->getViewFileUrl('Bakeway_Deliveryrangeprice::images/ajaxloder.gif'); ?>"></div>
+<input type="hidden" name="seller_id" id="seller_id" value="<?php echo $sellerId; ?>"/>
+<input type="hidden" name="seller_email" id="seller_email"
+       value="<?php echo $block->getSellerEmail($sellerId); ?>"/>
+<input type="hidden" name="updated_time" id="updated_time" value="<?php echo date("Y-m-d  h:i:s"); ?>"/>
+<input type="hidden" id="storeUrl" name="storeUrl" value="<?php
+echo $this->getUrl('customer/index/edit/', array('id' => $sellerId, '_current' => true, 'mode' => 'delivery_price_target'));
+?>" />
+
+<div class="control">
+    <legend class="admin__legend legend">
+        <span><?php echo __("Select Store");?></span>
+    </legend>
+    <select id="store_delivery_dd" name="set" class="select admin__control-select" aria-required="true">
+        <?php foreach ($sellerStores as $sellerStore) {
+            if($requestStoreid == "" && $arrayCounter == 0) :
+                $requestStoreid = $sellerStore['id'];
+                $arrayCounter = 1;
+            endif;
+        ?>
+            <option value="<?php echo $sellerStore['id'] ?>" <?php if ($requestStoreid == $sellerStore['id']) { ?> selected="selected" <?php } ?>>
+                <?php echo ucfirst(strtolower($sellerStore['store_headline'])). " " . ucfirst(strtolower($sellerStore['store_locality_area'])); ?>
+            </option>
+        <?php } ?> 
+    </select>
+    <?php 
+    $seller = array('sellerId' => $sellerId, 'storeId' => $requestStoreid);
+    $redirect = $this->getUrl('deliveryrangeprice/delivery/new', array('_current' => false,'_use_rewrite' => true, '_query' => $seller)); ?>
+    <button style="float:right;" title="ADD NEW RECORD" id="add-delivery-fee" class="button add location" onclick="setLocation('<?php echo $redirect; ?>')" value="Add Record">
+        <span><span><span>ADD NEW RECORD</span></span></span>
+    </button>
+</div>
+<div class="main-div">
+    <div class="left-delivery-div">
+    <script>
+        var seller_id = document.getElementById('seller_id').value;
+        require([
+            "jquery",
+            'Magento_Ui/js/modal/confirm'
+
+        ], function($, confirmation){
+
+            jQuery("#store_delivery_dd").change(function () {
+                var locality_id = document.getElementById("store_delivery_dd").value;
+                if (seller_id != null && locality_id != null) {
+                    var storeUrl = jQuery('#storeUrl').val();
+                    var mainUri = storeUrl.split('?')[0];
+                    window.location.href = (mainUri + "?store_id=" + locality_id);
+                }               
+            })
+
+        });
+    </script>
+
+    <?php echo $block->getChildHtml('griddelivery'); ?>
+    </div>
+</div>

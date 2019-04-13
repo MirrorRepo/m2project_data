@@ -1,0 +1,404 @@
+<div class="col-sm-12 col-xs-12">
+    <div class="field required">
+        <?php
+        $requestStoreid = "";
+        if (isset($_GET['store_id'])) {
+            $requestStoreid = $_GET['store_id'];
+        }
+        $sellerStores = $this->getSellerData();
+
+        if ($sellerStores === false) {
+            echo "No, Store Definded!!!";
+            return;
+        }
+
+        $sellerId = $this->getCustomerId();
+        $storeCatalogHelper = $this->helper("Bakeway\StoreCatalog\Helper\Data");
+
+        $catCollection = $storeCatalogHelper->getCategoriesCollection(null);
+
+        $sellerName = "NA";
+        $sellerName = $storeCatalogHelper->getSellerIdBySellerId($sellerId);
+        if (isset($sellerName) && !empty($sellerName)) {
+            $sellerName = $sellerName;
+        }
+        if (count($sellerStores) > 0) {
+            ?>
+            <div class="control col-sm-12 col-xs-12">
+                <div class="control col-sm-9 col-xs-9">
+                    <div class="control col-sm-3 col-xs-3"> <label class="label"><h5><?php echo __("Select Store:") ?></h5></label></div>
+                    <div class="control col-sm-7 col-xs-7">
+                        <select id="storedd_catalog" name="set" class="required-entry" onchange="selectStoreSwitcher()" aria-required="true">
+                            <?php foreach ($sellerStores as $sellerStore) { ?>
+                                <option value="<?php echo $sellerStore['id'] ?>" <?php if ($requestStoreid == $sellerStore['id']) { ?> selected="selected" <?php } ?>  ><?php echo $sellerStore['store_headline'] . " " . $sellerStore['store_locality_area'] ?></option>
+                            <?php } ?>   
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="control col-sm-3 col-xs-3" style="float:right">
+                    <button type="submit" title="Submit"  onClick="submitAction(this.id)" id="save-action" class="button submit-catalog add active-catalog-save" value="Add Row">
+                        <span><span><span>Save</span></span></span>
+                    </button>
+                    <button type="submit" title="Submit"  onClick="document.location.reload(true)" class="button submit-catalog add active-catalog-save" value="Add Row">
+                        <span><span><span>Reset</span></span></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <br/>
+        <br/>
+
+        <br/>
+        <div class="clear"></div>
+
+        <?php
+        $firstStoreCatalog = current($sellerStores);
+
+        if (!empty($requestStoreid)) {
+            $productsIdArray = $storeCatalogHelper->getSellerStoreProduct($requestStoreid, $sellerId);
+            // $disableproductsIdArray = $storeCatalogHelper->getSellerStoreDisaProduct($requestStoreid, $sellerId);
+        } else {
+            $productsIdArray = $storeCatalogHelper->getSellerStoreProduct($firstStoreCatalog['id'], $sellerId);
+        }
+        ?>
+        <div id="store-catalog-box">
+
+
+            <div class="col-sm-6 col-xs-12">
+
+
+                <?php
+                $products = $storeCatalogHelper->getSellerProducts($sellerId);
+
+                if (count($products) > 0) {
+                    ?>
+
+                    <?php
+                    $productCount = [];
+                    foreach ($products as $productkey => $productvalue) {
+                        if (!in_array($productkey, $productsIdArray)) {
+                            $productCount[] = $productkey;
+                            ?>
+                            <?php
+                        }
+                    }
+                    ?>
+
+                    <span><h4><?php echo __('Active Products') ?>
+                            (<?php echo count($productCount); ?>)</h4></span>
+
+                    <ul class="sortable-list" style="overflow-y: scroll;height: 380px;">
+
+
+                        <?php
+                        foreach ($products as $productkey => $productvalue) {
+                            if (!in_array($productkey, $productsIdArray)) {
+                                $productName = $storeCatalogHelper->getProductDetails($productkey);
+                                ?>
+                                <li value="<?php echo $productkey; ?>" class="sortable-item product_<?php echo $productkey; ?>"><?php echo $productName; ?></li>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </ul>
+
+                <?php } else { ?>
+                    <span><h4><?php echo __('Inactive Products') ?></h4></span>
+                    <div class="sortable-list">
+                        <div class="sortable-list column left first">
+
+                            <?php echo "Sorry, no Product Found!!!"; ?>
+                        </div>
+                    </div>   
+                <?php } ?>
+
+            </div>
+
+            <div class="col-sm-6 col-xs-12 selected-products ">
+
+                <?php
+                $storeId = "";
+                $storeId = $firstStoreCatalog['id'];
+                if (!empty($requestStoreid)) {
+                    $storeId = $requestStoreid;
+                }
+
+                $productsIdArrayofInactivePro = $storeCatalogHelper->getSellerStoreProduct($storeId, $sellerId, false, true);
+
+
+
+                if (count($productsIdArrayofInactivePro) > 0) {
+                    ?>
+                    <?php
+                    $disablePro = [];
+                    foreach ($products as $productkey => $productvalue) {
+                        if (in_array($productkey, $productsIdArray)) {
+                            $disablePro[] = $productkey;
+                            ?>
+
+                            <?php
+                        }
+                    }
+                    ?>
+
+                    <span><h4><?php echo __('Inactive') ?>
+                            (<?php echo count($disablePro); ?>)
+                        </h4></span>
+                    <ul class="sortable-list" style="overflow-y: scroll;height: 380px;">
+                        <?php
+                        foreach ($productsIdArrayofInactivePro as $productData) {
+                            $productName = $storeCatalogHelper->getProductDetails($productData['product_id']);
+                            ?>
+                            <li value="<?php echo $productData['product_id'] ?>" class="sortable-item product_<?php echo $productData['product_id'] ?>"><?php echo $productName ?></li>
+                            <?php
+                        }
+                        ?>
+                    </ul>
+
+                <?php } else { ?>
+                    <span><h4><?php echo __('Inactive') ?></h4></span>
+                    <div class="sortable-list">
+                        <div class="sortable-list column left first">
+                            <?php echo "Sorry, no Product Found!!!"; ?>
+                        </div>
+                    </div>   
+                <?php } ?>
+            </div>
+
+
+
+            <div class="clearer">&nbsp;</div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        var seller_id = "<?php echo $sellerId ?>";
+        var seller_name = "<?php echo $sellerName; ?>";
+        var locality_id = document.getElementById("storedd_catalog").value;
+        var catalouge_submit_Url = "<?php echo $this->getUrl('store/catalog/submit', ['_secure' => true]); ?>";
+        var controller_url = "<?php echo $this->getUrl('store/catalog/index', ['_secure' => true]);
+            ?>";
+        var catalouge_select_url = "<?php echo $this->getUrl('store/catalog/select', ['_secure' => true]);
+            ?>";
+        document.getElementById("save-action").disabled = true;
+        /**
+         * getAllSelectedProducts method
+         */
+        function submitAction(value) {
+
+        const listItems = document.querySelectorAll('.selected-products li');
+        productsItemsarray = "";
+        for (let i = 0; i < listItems.length;
+        i++
+                ) {
+        liob = listItems[i];
+        productsItemsarray += listItems[i].value + ",";
+        }
+
+        const listItemsforCats = document.querySelectorAll('.selected-products1 li');
+        categoriesArray = "";
+        for (let i = 0; i < listItemsforCats.length;
+        i++
+                ) {
+        liob = listItemsforCats[i];
+        categoriesArray += listItemsforCats[i].value + ",";
+        }
+
+        const listItemsforActiveCats = document.querySelectorAll('.active-cats .sortable-list1 li');
+        activeCategoriesArray = "";
+        for (let i = 0; i < listItemsforActiveCats.length;
+        i++
+                ) {
+        liob = listItemsforActiveCats[i];
+        activeCategoriesArray += listItemsforActiveCats[i].value + ",";
+        }
+
+
+        var productsIds = productsItemsarray;
+        var categoryIds = categoriesArray;
+        var activeCatsId = activeCategoriesArray;
+        require(['jquery', 'jquery/ui'], function (jQuery) {
+
+        jQuery.ajax({
+        type: "POST",
+                dataType: "json",
+                url: catalouge_submit_Url,
+                data: {seller_id: seller_id, seller_name: seller_name, productsId: productsIds, locality_id: locality_id,
+                        categoryIds: categoryIds, activeCatsId : activeCatsId},
+                showLoader: true,
+                success: function (data) {
+                var resmsg = data.success;
+                if (resmsg === true) {
+                document.location.reload(true);
+                } else if (resmsg === false) {
+                document.location.reload(true);
+                }
+
+                }
+        });
+        return false;
+        });
+        }
+
+        require(['jquery', 'jquery/ui'], function (jQuery)
+        {
+        jQuery("#store-catalog-box .sortable-list, #store-catalog-box .sortable-list1").on('click', 'li', function (e) {
+
+        console.log("Inside click");
+        if (e.ctrlKey || e.metaKey) {
+        console.log(jQuery(this).hasClass('selected'));
+        jQuery(this).toggleClass("selected");
+        if (jQuery(this).hasClass('selected') === true) {
+        //jQuery(this).removeClass("selected");
+        console.log("Inside click 1");
+        } else {
+        console.log("Inside click 2");
+        jQuery(this).addClass("selected");
+        }
+
+        } else {
+        console.log("Inside click 3");
+        jQuery(this).addClass("selected").siblings().removeClass('selected');
+        }
+        }).sortable({
+        connectWith: "#store-catalog-box .sortable-list, #store-catalog-box .sortable-list1",
+                placeholder: 'placeholder',
+                delay: 150, //Needed to prevent accidental drag when trying to select
+                revert: 0,
+                helper: function (e, item) {
+                //Basically, if you grab an unhighlighted item to drag, it will deselect (unhighlight) everything else
+                if (!item.hasClass('selected')) {
+                item.addClass('selected').siblings().removeClass('selected');
+                }
+
+                var elements = item.parent().children('.selected').clone();
+                item.data('multidrag', elements).siblings('.selected').remove();
+                document.getElementById("save-action").disabled = false;
+                var helper = jQuery('<li/>');
+                return helper.append(elements);
+                },
+                stop: function (e, ui) {
+                //Now we access those items that we stored in `item`s data!
+                var elements = ui.item.data('multidrag');
+                ui.item.after(elements).remove();
+                }
+        });
+        });
+        function selectStoreSwitcher() {
+        var locality_id = document.getElementById("storedd_catalog").value;
+        jQuery.ajax(catalouge_select_url, {
+        method: 'post',
+                dataType: "json",
+                data: {
+                locality_id: locality_id, seller_id: seller_id
+                },
+                showLoader: true,
+                success: function (data) {
+                jQuery('#store-catalog-box .sortable-list li').removeClass("selected");
+                if (data.seller_id != null && data.store_id != null) {
+                window.location.href = (controller_url + "?store_id=" + data.store_id);
+                }
+
+                }
+        });
+        }
+
+    </script>  
+
+
+
+    <br>
+
+    <?php if (!empty($catCollection)) { ?>
+
+        <?php
+        if (!empty($requestStoreid)) {
+            $requestStoreid = $requestStoreid;
+        } else {
+            $requestStoreid = $firstStoreCatalog['id'];
+        }
+        $oldCatArray = $activeCatArray = [];
+        $catActiveCollection = $storeCatalogHelper->getSellerStoreActiveCategories($requestStoreid, $sellerId);
+  
+        ?>
+
+        <div id="store-catalog-box">
+
+            <div class="col-sm-6 active-cats" style="width: 40%;float: left; margin-top: 60px;">
+                <span>
+                    <h4>
+                        <?php echo __('Active Categories') ?>
+                        (<?php echo count($catActiveCollection); ?>)
+                    </h4>
+                </span>
+
+                <?php if (count($catActiveCollection) > 0) {
+                            ?>
+                            <ul class="sortable-list1" style="overflow-y: scroll;height: 380px;">
+
+                                <?php
+                                foreach ($catActiveCollection as $cat) {
+
+                                    $activeCatArray[] = $cat['id'];
+                                    ?>
+                                    <li value="<?php echo $cat['id'] ?>" class="sortable-item product_<?php echo $cat['name'] ?>">
+                                        <span style="padding-left:<?php echo $cat['level'] * 3 ?>%">&nbsp;</span>    <?php echo $cat['name'] ?>
+                                    </li>
+                                    <?php
+                                }
+                                ?>                       
+                            </ul>
+
+                        <?php } else { ?>
+                            <div class="column left first sortable-list1">
+                                <?php echo "Sorry, no Categories Found!!!"; ?>
+                            </div>
+                        <?php } ?> 
+            </div>
+
+            <div class="col-sm-6 selected-products1" style="margin-top: 60px;width: 40%;float: left; margin-left: 5%">
+                <span>
+                    <h4>
+                        <?php echo __('Inactive Categories') ?>
+
+                        (<?php
+                        if (count($catCollection) > 0) {
+                            echo count($catCollection) - count($catActiveCollection);
+                        } else {
+                            echo 0;
+                        }
+                        ?>)
+                    </h4>
+                </span>
+                <?php if (count($catCollection) > 0) {
+                    ?>
+                    <ul class="sortable-list1" style="overflow-y: scroll;height: 380px;">
+                        <?php
+                        foreach ($catCollection as $cat) {
+                            if (!in_array($cat['id'], $activeCatArray)) {
+                                ?>
+                                <li value="<?php echo $cat['id'] ?>" class="sortable-item product_<?php echo $cat['name'] ?>">
+                                    <span style="padding-left:<?php echo $cat['level'] * 3 ?>%">&nbsp;</span>    <?php echo $cat['name'] ?>
+                                </li>
+                                <?php
+                            }
+                        }
+                        ?> 
+                    </ul>
+                <?php } else { ?>
+                    <div class="column left first sortable-list1">
+                        <?php echo "Sorry, no Categories Found!!!"; ?>
+                    </div>
+                <?php } ?>    
+            </div>
+        </div>
+
+    <?php }
+    ?>
+<?php } else { ?>
+    <?php echo "Sorry, No Store Found!!!"; ?>
+<?php } ?>

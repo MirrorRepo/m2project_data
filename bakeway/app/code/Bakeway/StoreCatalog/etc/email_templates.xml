@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway StoreCatalog
+ *
+ * @category  Bakeway
+ * @package   Bakeway_StoreCatalog
+ * @author    Bakeway
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="vendor_app_settings_bakeway_product_inventory_setting_product_enable_disable_email_template" label="Store Product Enable or disable email template" file="product_enable_disable_email_template.html" type="html" module="Bakeway_StoreCatalog" area="frontend"/>
+</config>
